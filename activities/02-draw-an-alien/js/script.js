@@ -34,9 +34,30 @@ function setup() {
 
   //Draw body and head
   noStroke();
-  fill(172, 236, 213);
-  ellipse(320,550, 200, 700);
-  ellipse(320,200,400,125);
+  ;
+    //body
+    fill(159,199,185)
+    ellipse(320,550, 200, 700);
+    //head
+    fill(172, 236, 213)
+    ellipse(320,200,400,125)
+
+  //Draw mouth
+  strokeWeight(9)
+  stroke(172, 236, 213)
+  fill(255, 185, 179);
+  ellipse(320,225, 50, 150)
+    //hide 1/2 ellipse
+    noStroke()
+    fill(172, 236, 213);
+    rectMode(CENTER);
+    rect(320,185, 100, 80)
+
+    //Draw nostrils
+    noStroke()
+    fill(133,166,154);
+    ellipse(315,180,7,25);
+    ellipse(325,180,7,25);
 
 
 }
