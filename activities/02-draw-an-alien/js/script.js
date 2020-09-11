@@ -1,6 +1,6 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+02-Draw an alien
+Sarah Hontoy-Major
 
 Here is a description of this template p5 project.
 **************************************************/
@@ -64,7 +64,7 @@ function setup() {
 
 // draw()
 //
-// Description of draw() goes here.
+// Does nothing
 function draw() {
 
 }
