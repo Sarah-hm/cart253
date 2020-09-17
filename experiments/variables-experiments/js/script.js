@@ -4,20 +4,26 @@ Sarah Hontoy-Major
 
 Here is a description of this template p5 project.
 **************************************************/
+let backgroundShade = 0
+let circleX = 250
+let circleY = 250
+let circleSize=25;
 
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(windowWidth, windowHeight)
-  ;
+  createCanvas(500,500);
 }
 
 // draw()
 //
 // Description of draw() goes here.
 function draw() {
-  background (mouseX,mouseY,0);
-  rectMode(CENTER)
-  rect(width/2, height/4,100,100);
+  background(backgroundShade);
+  ellipse (circleX,circleY,circleSize+300)
+  ellipse (circleX,circleY,circleSize+200)
+  ellipse (circleX,circleY,circleSize+100)
+  ellipse (circleX,circleY,circleSize);
+
 }
