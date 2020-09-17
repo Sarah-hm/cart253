@@ -6,10 +6,10 @@ Here is a description of this template p5 project.
 **************************************************/
 let backgroundShade = 0;
 let circle = {
-  x: 0,
+  x: 250,
   y: 250,
-  size: 250,
-  speed: 2
+  size: 100,
+  speed: 1
 }
 // setup()
 //
@@ -21,16 +21,11 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  backgroundShade = backgroundShade + 1
   background(backgroundShade);
+  circle.speed=random(-5,5)
+  circle.y=random (225,255)
   circle.x += circle.speed
   ellipse(circle.x, circle.y, circle.size);
 
-
-  console.log(
-    `circle.x: ${circle.x}`,
-    `circle.size: ${circle.size}`,
-    `circle.speed:${circle.speed}`,
-    `circle.y: ${circle.y}`)
 
 }
