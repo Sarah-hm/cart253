@@ -17,7 +17,7 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background (255,0,0);
+  background (mouseX,mouseY,0);
   rectMode(CENTER)
   rect(width/2, height/4,100,100);
 }
