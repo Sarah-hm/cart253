@@ -1,31 +1,41 @@
 /**************************************************
-variables-experiments
+experiment - variables
 Sarah Hontoy-Major
 
-Here is a description of this template p5 project.
+These are experiments to learn how to work with variables. yay!
 **************************************************/
+//Set variables
+
 let backgroundShade = 0;
 let circle = {
-  x: 250,
+  x: 0,
   y: 250,
   size: 100,
-  speed: 1
+  speed: 1,
+  fill: 255
 }
 // setup()
 //
-// Description of setup() goes here.
+// Set canvas
 function setup() {
   createCanvas(500, 500);
 }
 // draw()
 //
-// Description of draw() goes here.
+// Draw a moving circle
 function draw() {
+  //Set background color
   background(backgroundShade);
-  circle.speed=random(-5,5)
-  circle.y=random (225,255)
-  circle.x += circle.speed
-  ellipse(circle.x, circle.y, circle.size);
 
+  //Set movement
+  circle.x += circle.speed;
+  circle.x = constrain(circle.x, 0, width);
+
+  //Set color
+  circle.fill = map(circle.x, 0, width, 0, 255);
+  fill(circle.fill);
+
+  //set ellipse
+  ellipse(circle.x, circle.y, circle.size);
 
 }
