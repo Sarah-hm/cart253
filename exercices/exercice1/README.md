@@ -1,3 +1,4 @@
-# Template p5 project
+# Exercice 1
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+by Sarah Hontoy-Major
+This is an exercice where we explored shapes, movement, size change, color change, map(), constrain(), and mouse positioning
