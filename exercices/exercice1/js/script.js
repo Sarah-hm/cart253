@@ -2,15 +2,16 @@
 Exercice 1
 Sarah Hontoy-Major
 
-Here is the Exercice 1 I started so freaking late so my bad if it's the bare minimum. I love myself sometimes. Not this time
+Here is the Exercice 1 I started so freaking late oops.
 **************************************************/
+//Created variables for background
 let bg = {
   r: 100,
   g: 100,
   b: 100,
 };
 
-//Setting 3x circle objects (1x red, 1xblue, 1xgreen)
+//Created variables for circles
 let circleR = {
   x: 200,
   y: 250,
@@ -18,9 +19,9 @@ let circleR = {
   GrowthRate: 1,
   speed: 1,
   fill: {
-    r: 255,
-    g: 0,
-    b: 0,
+    r: 246,
+    g: 165,
+    b: 124,
   },
 };
 let circleG = {
@@ -30,9 +31,9 @@ let circleG = {
   sizeRatio: 0.5,
   speed: -1,
   fill: {
-    r: 0,
-    g: 255,
-    b: 0,
+    r: 26,
+    g: 161,
+    b: 140,
   },
 };
 let circleB = {
@@ -42,16 +43,17 @@ let circleB = {
   sizeRatio: 0.25,
   speed: 1,
   fill: {
-    r: 0,
-    g: 0,
-    b: 255,
+    r: 60,
+    g: 177,
+    b: 171,
   },
 };
 
 // setup()
 //
-// Description of setup() goes here.
+// Setting up Window canvas and shapes' starting points
 function setup() {
+  //set canvas
   createCanvas(windowWidth, windowHeight);
 
   //set circles starting point
@@ -63,17 +65,19 @@ function setup() {
 
 // draw()
 //
-// Description of draw() goes here.
+// Background's color changes based on mouse position;
+// 3 circles converge to corner of the window while getting bigger;
+
 function draw() {
+  //Set changing color background based on mouse movement
+  bg.r = map(mouseX, 0, width, 0, 255);
   background(bg.r, bg.g, bg.g);
   noStroke();
 
-  //red circle
-
+  //Set red-ish circle
   //set movement
   circleR.x += circleR.speed;
   circleR.y += circleR.speed;
-
   // constrain to window
   circleR.x = constrain(
     circleR.x,
@@ -88,12 +92,11 @@ function draw() {
   //set Growth
   circleR.size += circleR.GrowthRate;
   circleR.size = constrain(circleR.size, 0, width);
-
   // Set shape
   fill(circleR.fill.r, circleR.fill.g, circleR.fill.b);
   ellipse(circleR.x, circleR.y, circleR.size);
 
-  //green circle
+  //Set green-ish circle
   //set movement
   circleG.x += circleG.speed;
   circleG.y -= circleG.speed;
@@ -114,7 +117,7 @@ function draw() {
   fill(circleG.fill.r, circleG.fill.g, circleG.fill.b);
   ellipse(circleG.x, circleG.y, circleG.size);
 
-  //blue circle
+  //Set blue-ish circle
   //set movement
   circleB.x += circleB.speed;
   circleB.y += circleB.speed;
