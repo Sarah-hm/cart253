@@ -15,6 +15,7 @@ let circleR = {
   x: 200,
   y: 250,
   size: 300,
+  GrowthRate: 1,
   speed: 1,
   fill: {
     r: 255,
@@ -26,6 +27,7 @@ let circleG = {
   x: 500,
   y: 250,
   size: 75,
+  sizeRatio: 0.5,
   speed: -1,
   fill: {
     r: 0,
@@ -37,6 +39,7 @@ let circleB = {
   x: 250,
   y: 500,
   size: 75,
+  sizeRatio: 0.25,
   speed: 1,
   fill: {
     r: 0,
@@ -66,9 +69,26 @@ function draw() {
   noStroke();
 
   //red circle
+
   //set movement
   circleR.x += circleR.speed;
   circleR.y += circleR.speed;
+
+  // constrain to window
+  circleR.x = constrain(
+    circleR.x,
+    0 + circleR.size / 2,
+    width - circleR.size / 2
+  );
+  circleR.y = constrain(
+    circleR.x,
+    0 + circleR.size / 2,
+    width - circleR.size / 2
+  );
+  //set Growth
+  circleR.size += circleR.GrowthRate;
+  circleR.size = constrain(circleR.size, 0, width);
+
   // Set shape
   fill(circleR.fill.r, circleR.fill.g, circleR.fill.b);
   ellipse(circleR.x, circleR.y, circleR.size);
@@ -77,13 +97,41 @@ function draw() {
   //set movement
   circleG.x += circleG.speed;
   circleG.y -= circleG.speed;
+  //constrain to window
+  circleG.x = constrain(
+    circleG.x,
+    0 + circleG.size / 2,
+    width - circleG.size / 2
+  );
+  circleG.y = constrain(
+    circleG.x,
+    0 + circleG.size / 2,
+    width - circleG.size / 2
+  );
+  //set growth
+  circleG.size = circleR.size * circleG.sizeRatio;
   //Set shape
   fill(circleG.fill.r, circleG.fill.g, circleG.fill.b);
   ellipse(circleG.x, circleG.y, circleG.size);
 
   //blue circle
+  //set movement
   circleB.x += circleB.speed;
-  circleB.y -= circleB.speed;
+  circleB.y += circleB.speed;
+  //constrain to window
+  circleB.x = constrain(
+    circleB.x,
+    0 + circleB.size / 2,
+    width - circleB.size / 2
+  );
+  circleB.y = constrain(
+    circleB.x,
+    0 + circleB.size / 2,
+    width - circleB.size / 2
+  );
+  //set Growth
+  //set growth
+  circleB.size = circleR.size * circleB.sizeRatio;
   //Set shape
   fill(circleB.fill.r, circleB.fill.g, circleB.fill.b);
   ellipse(circleB.x, circleB.y, circleB.size);
