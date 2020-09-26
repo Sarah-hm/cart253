@@ -1,7 +1,12 @@
-let caterpillar = {
+let bg = {
+  r: 67,
+  g: 0,
+  b: 0,
+};
+let circle = {
   x: 250,
   y: 250,
-  segmentSize: 300,
+  size: 100,
 };
 
 function setup() {
@@ -9,34 +14,16 @@ function setup() {
 }
 
 function draw() {
-  background(0);
-  noStroke();
-  fill(100, 200, 100);
+  background(bg.r, bg.g, bg.b);
 
-  // WHILE loop example
-  // let x = caterpillar.x;
-  // let numSegments = 50;
-  // let segmentsDrawn = 0;
-  //
-  // while (segmentsDrawn < numSegments) {
-  //   ellipse(x, caterpillar.y, caterpillar.segmentSize);
-  //   x += 7;
-  //   segmentsDrawn++;
-  // }
+  ellipse(circle.x, circle.y, circle.size);
+}
 
-  //FOR loop example
-  //   let x = caterpillar.x;
-  //   let numSegments = 10;
-  //   let segmentsDrawn = 0;
-  // ``
-  //   for (let i = 0; i < numSegments; i++) {
-  //     ellipse(x, caterpillar.y, caterpillar.segmentSize);
-  //     x += 40;
-  //   }
+function mouseWheel() {
+  circle.x = mouseX;
+  circle.y = mouseY;
 
-  for (let size = caterpillar.segmentSize; size > 0; size--) {
-    let currentfill = map(size, 0, caterpillar.segmentSize, 255, 0);
-    fill(currentfill);
-    ellipse(caterpillar.x, caterpillar.y, caterpillar.segmentSize);
-  }
+  bg.r = random(0, 255);
+  bg.g = random(0, 255);
+  bg.b = random(0, 255);
 }
