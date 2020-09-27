@@ -4,6 +4,11 @@ Sarah Hontoy-Major
 
 This is the exercice 02.
 **************************************************/
+let starImage;
+function preload() {
+  starImage = loadImage("assets/images/star.png");
+}
+
 let bg = {
   r: 255,
   b: 230,
@@ -40,6 +45,13 @@ let covid19 = {
     g: 220,
   },
 };
+
+let star = {
+  x: 0,
+  y: 0,
+
+  numCount: 10,
+};
 // setup()
 //
 // Description of setup() goes here.
@@ -59,11 +71,11 @@ function draw() {
 
   //display static
   push();
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < star.numCount; i++) {
     let x = random(0, width);
     let y = random(0, height);
-    stroke(0);
-    point(x, y);
+    scale(0.1);
+    image(starImage, 0, 0);
   }
   pop();
 
