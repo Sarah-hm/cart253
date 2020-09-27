@@ -49,8 +49,8 @@ let covid19 = {
 let star = {
   x: 0,
   y: 0,
-
   numCount: 10,
+  size: 75,
 };
 // setup()
 //
@@ -72,16 +72,14 @@ function draw() {
   //display static
   push();
   for (let i = 0; i < star.numCount; i++) {
-    let x = random(0, width);
-    let y = random(0, height);
+    star.x = random(0, width);
+    star.y = random(0, height);
     scale(0.1);
-    image(starImage, 0, 0);
+    image(starImage, star.x, star.y, star.size, star.size);
   }
   pop();
 
   // set user movement
-  // user.x = mouseX;
-  // user.y = mouseY;
   //set  acceleration
 
   if (mouseX < user.x) {
