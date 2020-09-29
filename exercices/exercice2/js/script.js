@@ -3,6 +3,14 @@ Exercice 2
 Sarah Hontoy-Major
 
 This is the exercice 02.
+
+I have questions about the way my 'user' is behaving. My goal was to have something 'boomerang' around the cursor
+instead of simply following it to add to the complexity of dodging covid19 (like in Pippin's acceleration video).
+However, my 'user' is not behaving quite exactly like this.It will usually find its way to the top of the screen, and
+keep going up until I lose it and it never comes back. What did I do to make that happen, and how can I solve it so it
+behaves in the 'boomerang' way I anticipated.
+
+Thank you!
 **************************************************/
 let starImage;
 function preload() {
@@ -24,7 +32,7 @@ let user = {
   ax: 0,
   ay: 0,
   acceleration: 0.1,
-  maxSpeed: 3,
+  maxSpeed: 4,
   fill: {
     r: 260,
     b: 140,
@@ -49,7 +57,7 @@ let covid19 = {
 let star = {
   x: 0,
   y: 0,
-  numCount: 10,
+  numCount: 5,
   size: 75,
 };
 // setup()
@@ -74,7 +82,6 @@ function draw() {
   for (let i = 0; i < star.numCount; i++) {
     star.x = random(0, width);
     star.y = random(0, height);
-    scale(0.1);
     image(starImage, star.x, star.y, star.size, star.size);
   }
   pop();
