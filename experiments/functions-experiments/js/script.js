@@ -1,23 +1,41 @@
-// Description of setup() goes here.
+let circle = {
+  x: 250,
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+};
+
 function setup() {
   createCanvas(500, 500);
+  reset();
 }
 
 function draw() {
   background(0);
 
-  parallels(100, 100, 45, 1, 100, 1);
-  parallels(45, 40, 15, 2, 20, 6);
-  parallels(433, 217, 2, 7, 3, 20);
-  parallels(2, 456, 33, 1, 300, 30);
+  move();
+
+  let offScreen = circleIsOffScreen();
+  if (offScreen) {
+    reset();
+  }
+
+  ellipse(circle.x, circle.y, circle.size);
 }
 
-function parallels(x, y, numLines, lineWidth, lineHeight, lineSpacing) {
-  for (let i = 0; i < numLines; i++) {
-    noStroke();
-    fill(255);
-    rectMode(CENTER);
-    rect(x, y, lineWidth, lineHeight);
-    x += lineSpacing;
-  }
+function circleIsOffScreen() {
+if
+}
+
+function move() {
+  circle.x = circle.x + circle.vx;
+  circle.y = circle.y + circle.vy;
+}
+
+function reset() {
+  circle.x = 250;
+  circle.y = 250;
+  circle.vx = random(-10, 10);
+  circle.vy = random(-10, 10);
 }
