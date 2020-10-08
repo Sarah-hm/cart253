@@ -1,5 +1,4 @@
 //set variables
-//if (cat.x<20 || cat.x>width-20
 
 let user = {
   x: 0,
@@ -26,7 +25,7 @@ let bg = {
   b: 255,
 };
 
-let state = `title`; // can be simulation, title, gotHim, escaped, almostEscaped
+let state = `simulation`; // can be simulation, title, gotHim, escaped, almostEscaped
 
 // -----------Set basic canvas, and origin of objects (user and cat)-------------
 function setup() {
@@ -42,17 +41,6 @@ function setup() {
 function draw() {
   background(bg.r, bg.g, bg.b);
 
-  //---all functions in simulation state--
-
-  // function simulation() {
-  userMove();
-  catMove();
-  checkOffScreen();
-  // check if in 20px border and overlap? How to simplify that?
-  //   checkOverlap();
-  display();
-  // }
-  // checkState();
   // }
 }
 function setupObjects() {
@@ -93,85 +81,122 @@ function userMove() {
   user.y = user.y + user.vy;
 }
 
-// function checkState() {
-//   if (state === `title`) {
-//     title();
-//   } else if (state === `simulation`) {
-//     simulation();
-//   } else if (state === `gotHim`) {
-//     gotHim();
-//   } else if (state === `almostEscaped`) {
-//     almostEscaped();
-//   } else if (state === `escaped`) {
-//     escaped();
-//   }
-// }
-//
-// function title() {
-//   push();
-//   textSize(30);
-//   fill(200, 100, 100);
-//   textAlign(CENTER, CENTER);
-//   text(
-//     `oh no!
-//     The cat went outside!
-//     You should catch it before he goes too far`,
-//     width / 2,
-//     height / 2
-//   );
-//   pop();
-// }
+// ------ check which states the simulation is in -----
+function checkState() {
+  if (state === `title`) {
+    title();
+  } else if (state === `simulation`) {
+    simulation();
+  } else if (state === `gotHim`) {
+    gotHim();
+  } else if (state === `almostEscaped`) {
+    almostEscaped();
+  } else if (state === `escaped`) {
+    escaped();
+  }
+}
+// ====== create title state =====
+
 //
 function checkOffScreen() {
   //is cat going off canvas;
-  if (cat.x < 0 || cat.x > width || cat.y < 0 || cat.y >> height)
-    state = `espaced`;
+  if (cat.x < 0 || cat.x > width || cat.y < 0 || cat.y > height)
+    state = `escaped`;
 }
-//
-// function gotHim() {
-//   push();
-//   textSize(30);
-//   fill(255, 50, 50);
-//   textAlign(CENTER, CENTER);
-//   text(
-//     `You got him!
-//     Beware...
-//     Until next time!`,
-//     width / 2,
-//     height / 2
-//   );
-//   pop();
-// }
-//
-// function almostEscaped() {
-//   push();
-//   textSize(30);
-//   fill(50, 50, 255);
-//   textAlign(CENTER, CENTER);
-//   text(
-//     `Ouf! Close one!
-//     But you got him!
-//     Until next time... `,
-//     width / 2,
-//     height / 2
-//   );
-//   pop();
-// }
-//
-// function escaped() {
-//   push();
-//   textSize(30);
-//   fill(50, 50, 255);
-//   textAlign(CENTER, CENTER);
-//   text(
-//     `He escaped.
-//     Let's hope he comes back soon `,
-//     width / 2,
-//     height / 2
-//   );
-//   pop();
-// }
-//
+
+function checkOverlap() {
+  let d = dist(user.x, user.y, cat.x, cat.y);
+  let result = d < user.size / 2 + cat.size / 2;
+  return result;
+}
+
+function checkPosition() {
+  if (
+    (checkOverlap(true) && cat.x < 20) ||
+    cat.x > width - 20 ||
+    cat.y < 0 ||
+    cat.y > height - 20
+  ) {
+    state = `almostEscaped`;
+  } else if (checkOverlap(true)) {
+    state = `gotHim`;
+  } else {
+    state = `simulation`;
+  }
+}
+
+function title() {
+  push();
+  textSize(30);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(
+    `oh no!
+    The cat went outside!
+    You should catch it before he goes too far`,
+    width / 2,
+    height / 2
+  );
+  pop();
+}
+
+// ===== create state for when the simulation is running
+
+function simulation() {
+  checkState();
+  userMove();
+  catMove();
+  checkOffScreen();
+  checkOverlap();
+  checkPosition();
+  display();
+}
+
+//====== create state for when they overlap in the middle =====
+function gotHim() {
+  push();
+  textSize(30);
+  fill(255, 50, 50);
+  textAlign(CENTER, CENTER);
+  text(
+    `You got him!
+    Beware...
+    Until next time!`,
+    width / 2,
+    height / 2
+  );
+  pop();
+}
+// ====== state for when they overlap but near the edge of the canvas
+function almostEscaped() {
+  push();
+  textSize(30);
+  fill(50, 50, 255);
+  textAlign(CENTER, CENTER);
+  text(
+    `Ouf! Close one!
+    But you got him!
+    Until next time... `,
+    width / 2,
+    height / 2
+  );
+  pop();
+}
+// ===== state for when the cat escaped :( cue sad moment
+function escaped() {
+  push();
+  textSize(30);
+  fill(50, 50, 255);
+  textAlign(CENTER, CENTER);
+  text(
+    `He escaped.
+    Let's hope he comes back soon `,
+    width / 2,
+    height / 2
+  );
+  pop();
+}
+
 //
 //
 //
