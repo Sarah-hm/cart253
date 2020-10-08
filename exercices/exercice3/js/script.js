@@ -63,6 +63,7 @@ function checkState() {
   }
 }
 
+// ----- Set initial program state -----
 function title() {
   push();
   textSize(30);
@@ -126,13 +127,14 @@ function checkOffScreen() {
     state = `escaped`;
 }
 
-// -----
+// -----check if user and cat are touching; send result-----
 function checkOverlap() {
   let d = dist(user.x, user.y, cat.x, cat.y);
   let result = d < user.size / 2 + cat.size / 2;
   return result;
 }
 
+// ----- receive result; set almostEscaped or gotHim or simulation state------
 function checkPosition() {
   if (
     (checkOverlap(true) && cat.x < 100) ||
@@ -148,7 +150,7 @@ function checkPosition() {
   }
 }
 
-// ===== state for when the cat escaped :( cue sad moment
+// ===== state for when the cat escaped :( cue sad moment ======
 function escaped() {
   push();
   textSize(30);
