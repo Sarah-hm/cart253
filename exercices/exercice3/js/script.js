@@ -7,6 +7,11 @@ let user = {
   vx: 0,
   vy: 0,
   speed: 2,
+  fill: {
+    r: 255,
+    b: 0,
+    g: 0,
+  },
 };
 
 let cat = {
@@ -16,6 +21,11 @@ let cat = {
   vx: 0,
   vy: 0,
   speed: 30,
+  fill: {
+    r: 181,
+    b: 101,
+    g: 29,
+  },
 };
 
 //set background variable
@@ -44,6 +54,7 @@ function setupObjects() {
   //set origin point of user and cat
   user.x = width / 3;
   user.y = height / 2;
+
   cat.x = (2 * width) / 3;
   cat.y = height / 2;
 }
@@ -196,7 +207,10 @@ function gotHim() {
 
 function display() {
   //display circles
+  fill(user.fill.r, user.fill.b, user.fill.g);
   ellipse(user.x, user.y, user.size);
+
+  fill(cat.fill.r, cat.fill.b, cat.fill.g);
   ellipse(cat.x, cat.y, cat.size);
 }
 //
