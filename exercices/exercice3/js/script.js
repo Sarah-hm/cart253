@@ -136,9 +136,9 @@ function checkOverlap() {
 function checkPosition() {
   if (
     (checkOverlap(true) && cat.x < 100) ||
-    cat.x > width - 100 ||
-    cat.y < 100 ||
-    cat.y > height - 100
+    (checkOverlap(true) && cat.x > width - 100) ||
+    (checkOverlap(true) && cat.y < 100) ||
+    (checkOverlap(true) && cat.y > height - 100)
   ) {
     state = `almostEscaped`;
   } else if (checkOverlap(true)) {
