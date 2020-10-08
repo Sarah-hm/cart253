@@ -25,24 +25,21 @@ let bg = {
   b: 255,
 };
 
+// =======Set canvas, original state and position ========
 let state = `title`; // can be simulation, title, gotHim, escaped, almostEscaped
-
-// -----------Set basic canvas, and origin of objects (user and cat)-------------
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
-  //add functions for colours :)
   setupObjects();
 }
 
-// draw()
-//
-// Description of draw() goes here.
+// ======= set background, check state; reacts accordingly  ======
 function draw() {
   background(bg.r, bg.g, bg.b);
   checkState();
 }
 
+//  !!! functions definitions !!!
 function setupObjects() {
   //set origin point of user and cat
   user.x = width / 3;
@@ -51,17 +48,48 @@ function setupObjects() {
   cat.y = height / 2;
 }
 
-function catMove() {
-  //set speed
-  cat.vx = random(-cat.speed, cat.speed);
-  cat.vy = random(-cat.speed, cat.speed);
-
-  //set movement
-  cat.x += cat.vx;
-  cat.y += cat.vy;
+//  ----- function to check which state and react -----
+function checkState() {
+  if (state === `title`) {
+    title();
+  } else if (state === `simulation`) {
+    simulation();
+  } else if (state === `gotHim`) {
+    gotHim();
+  } else if (state === `almostEscaped`) {
+    almostEscaped();
+  } else if (state === `escaped`) {
+    escaped();
+  }
 }
 
-// //set user movement based on arrow input
+function title() {
+  push();
+  textSize(30);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(
+    `oh no!
+    The cat went outside!
+    You should catch him before he goes too far`,
+    width / 2,
+    height / 2
+  );
+  pop();
+}
+
+// ===== create state for when the simulation is running
+
+function simulation() {
+  userMove();
+  catMove();
+  checkOffScreen();
+  checkOverlap();
+  checkPosition();
+  display();
+}
+
+// ===== set user movement based on arrow input ======
 function userMove() {
   if (keyIsDown(LEFT_ARROW)) {
     user.vx = -user.speed;
@@ -81,29 +109,24 @@ function userMove() {
   user.y = user.y + user.vy;
 }
 
-// ------ check which states the simulation is in -----
-function checkState() {
-  if (state === `title`) {
-    title();
-  } else if (state === `simulation`) {
-    simulation();
-  } else if (state === `gotHim`) {
-    gotHim();
-  } else if (state === `almostEscaped`) {
-    almostEscaped();
-  } else if (state === `escaped`) {
-    escaped();
-  }
+//===== set cat movement ======
+function catMove() {
+  //set speed
+  cat.vx = random(-cat.speed, cat.speed);
+  cat.vy = random(-cat.speed, cat.speed);
+  //set movement
+  cat.x += cat.vx;
+  cat.y += cat.vy;
 }
-// ====== create title state =====
 
-//
+//  -----function to check if cat is off the canvas : state is 'escaped' if yes  -----
 function checkOffScreen() {
   //is cat going off canvas;
   if (cat.x < 0 || cat.x > width || cat.y < 0 || cat.y > height)
     state = `escaped`;
 }
 
+// -----
 function checkOverlap() {
   let d = dist(user.x, user.y, cat.x, cat.y);
   let result = d < user.size / 2 + cat.size / 2;
@@ -112,10 +135,10 @@ function checkOverlap() {
 
 function checkPosition() {
   if (
-    (checkOverlap(true) && cat.x < 20) ||
-    cat.x > width - 20 ||
-    cat.y < 0 ||
-    cat.y > height - 20
+    (checkOverlap(true) && cat.x < 100) ||
+    cat.x > width - 100 ||
+    cat.y < 100 ||
+    cat.y > height - 100
   ) {
     state = `almostEscaped`;
   } else if (checkOverlap(true)) {
@@ -125,42 +148,15 @@ function checkPosition() {
   }
 }
 
-function title() {
+// ===== state for when the cat escaped :( cue sad moment
+function escaped() {
   push();
   textSize(30);
-  fill(200, 100, 100);
+  fill(50, 50, 255);
   textAlign(CENTER, CENTER);
   text(
-    `oh no!
-    The cat went outside!
-    You should catch it before he goes too far`,
-    width / 2,
-    height / 2
-  );
-  pop();
-}
-
-// ===== create state for when the simulation is running
-
-function simulation() {
-  userMove();
-  catMove();
-  checkOffScreen();
-  checkOverlap();
-  checkPosition();
-  display();
-}
-
-//====== create state for when they overlap in the middle =====
-function gotHim() {
-  push();
-  textSize(30);
-  fill(255, 50, 50);
-  textAlign(CENTER, CENTER);
-  text(
-    `You got him!
-    Beware...
-    Until next time!`,
+    `He escaped.
+    Let's hope he comes back soon `,
     width / 2,
     height / 2
   );
@@ -181,34 +177,21 @@ function almostEscaped() {
   );
   pop();
 }
-// ===== state for when the cat escaped :( cue sad moment
-function escaped() {
+//====== create state for when they overlap in the middle =====
+function gotHim() {
   push();
   textSize(30);
-  fill(50, 50, 255);
+  fill(255, 50, 50);
   textAlign(CENTER, CENTER);
   text(
-    `He escaped.
-    Let's hope he comes back soon `,
+    `You got him!
+    Until next time...`,
     width / 2,
     height / 2
   );
   pop();
 }
 
-//
-//
-//
-
-//
-// //check if user caught cat
-// function checkOverlap() {
-//   let d = dist(user.x, user.y, cat.x, cat.y);
-//   if (d < user.size / 2 + cat.size / 2) {
-//     state = `gotHim`;
-//   }
-// }
-//
 function display() {
   //display circles
   ellipse(user.x, user.y, user.size);
