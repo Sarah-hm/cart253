@@ -6,7 +6,7 @@ let user = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 4,
+  speed: 2,
 };
 
 let cat = {
@@ -15,7 +15,7 @@ let cat = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 2,
+  speed: 30,
 };
 
 //set background variable
@@ -25,7 +25,7 @@ let bg = {
   b: 255,
 };
 
-let state = `simulation`; // can be simulation, title, gotHim, escaped, almostEscaped
+let state = `title`; // can be simulation, title, gotHim, escaped, almostEscaped
 
 // -----------Set basic canvas, and origin of objects (user and cat)-------------
 function setup() {
@@ -40,9 +40,9 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(bg.r, bg.g, bg.b);
-
-  // }
+  checkState();
 }
+
 function setupObjects() {
   //set origin point of user and cat
   user.x = width / 3;
@@ -143,7 +143,6 @@ function title() {
 // ===== create state for when the simulation is running
 
 function simulation() {
-  checkState();
   userMove();
   catMove();
   checkOffScreen();
@@ -216,8 +215,8 @@ function display() {
   ellipse(cat.x, cat.y, cat.size);
 }
 //
-// function mousePressed() {
-//   if (state === `title`) {
-//     state = `simulation`;
-//   }
-// }
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
+}
