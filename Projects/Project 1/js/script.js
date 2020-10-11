@@ -1,5 +1,5 @@
 /**************************************************
-Project 1
+Project 1; let's save the planet, one rubbish at a time
 Sarah Hontoy-Major
 **************************************************/
 let bg = {
@@ -13,7 +13,7 @@ let user = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 4,
+  speed: 10,
   image: undefined,
 };
 
@@ -25,7 +25,9 @@ let rubbish1 = {
   vy: 0,
   speed: 2,
   image: undefined,
+  state: `activated`, // can be activated or neutral
 };
+
 // ==== Download all images ====
 function preload() {
   user.image = loadImage("assets/images/clown.png");
@@ -40,11 +42,18 @@ function setup() {
   noStroke();
 }
 
-// Description of draw() goes here.
+// ===== set series of functions described ======
 function draw() {
   background(bg.r, bg.g, bg.b);
+  usermove();
+  rubbish1Move();
+  // wait5Secs();
+  displayUser();
+  displayRubbish1();
+}
 
-  // ==== Make user move =====
+// ====== make user move ======
+function usermove() {
   if (keyIsDown(LEFT_ARROW)) {
     user.vx = -user.speed;
   } else if (keyIsDown(RIGHT_ARROW)) {
@@ -61,9 +70,33 @@ function draw() {
   }
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
+}
 
-  // ==== Display user ====
+function rubbish1Move() {
+  rubbish1.vx = random(-rubbish1.speed, rubbish1.speed);
+  rubbish1.vy = random(-rubbish1.speed, rubbish1.speed);
+
+  rubbish1.x += rubbish1.vx;
+  rubbish1.y += rubbish1.vy;
+}
+
+// function checkRubbishState() {
+//   if (rubbish1.state === `activated`) {
+//     displayRubbish1();
+//   }
+// }
+// function wait5Secs() {
+//   //code taken from : https://editor.p5js.org/denaplesk2/sketches/S1OAhXA-M
+//   if (frameCount % 300 === 0 && ) {
+//     checkRubbishState();
+//   }
+// }
+
+// ==================== All Display functions =================
+function displayUser() {
   image(user.image, user.x, user.y, user.size, user.size);
+}
+function displayRubbish1() {
   //Display rubbish 1 =====
   image(rubbish1.image, rubbish1.x, rubbish1.y, rubbish1.size, rubbish1.size);
 }
