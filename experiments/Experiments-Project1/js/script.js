@@ -13,12 +13,22 @@ function preload() {
   userImg = loadImage("assets/images/clown.png");
 }
 
+let trash1;
+let trash2;
+let trash3;
+let trash4;
+
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
   createCanvas(500, 500);
+  noStroke();
   background(0);
+  trash1 = createTrash(random(0, width), random(0, height));
+  trash2 = createTrash(random(0, width), random(0, height));
+  trash3 = createTrash(random(0, width), random(0, height));
+  trash4 = createTrash(random(0, width), random(0, height));
 }
 
 function createTrash(x, y) {
@@ -29,6 +39,7 @@ function createTrash(x, y) {
     vx: 0,
     vy: 0,
     speed: 5,
+    picked: false,
   };
   return trash;
 }
@@ -36,9 +47,12 @@ function createTrash(x, y) {
 // draw()
 //
 // Description of draw() goes here.
-function draw() {}
+function draw() {
+  moveTrash(trash);
+  displayTrash(trash);
+}
 
-function moveTrash() {
+function moveTrash(trash) {
   // ==== to change direction or not to change direction=====
   let change = random();
   if (change < 0.1) {
@@ -56,5 +70,5 @@ function moveTrash() {
 }
 
 function displayTrash(trash) {
-  push();
+  image(trashImg, random(0, width), random(0, height), trash.size, trash.size);
 }
