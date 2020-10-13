@@ -11,24 +11,27 @@ let user = {
   size: 100,
 };
 
-// First food object
-let food1 = {
+// First trash object
+let trash1 = {
   x: 250,
   y: 300,
   size: 50,
-  eaten: false, // We want to track whether the user has eaten the food
+  picked: false, // We want to track whether the user has picked the trash
 };
 
-// Second food object
-let food2 = {
+// Second trash object
+let trash2 = {
   x: 350,
   y: 300,
   size: 50,
-  eaten: false,
+  picked: false,
 };
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //set trash starting point
+  trash1.x = random(0, width);
+  trash1.y = random(0, height);
 }
 
 function draw() {
@@ -37,14 +40,14 @@ function draw() {
   // Move the user (with the mouse)
   moveUser();
 
-  // Check whether the user has eaten either food
-  checkFood(food1);
-  checkFood(food2);
+  // Check whether the user has picked trash
+  checktrash(trash1);
+  checktrash(trash2);
 
-  // Display the user and foods
+  // Display the user and trashs
   displayUser();
-  displayFood(food1);
-  displayFood(food2);
+  displayTrash(trash1);
+  displayTrash(trash2);
 }
 
 // Sets the user position to the mouse position
@@ -53,13 +56,13 @@ function moveUser() {
   user.y = mouseY;
 }
 
-// Checks if the user overlaps the food1 object and eats it if so
-function checkFood(food) {
-  // We only want to check for an overlap if food1 hasn't been eaten yet
-  if (!food.eaten) {
-    let d = dist(user.x, user.y, food.x, food.y);
-    if (d < user.size / 2 + food.size / 2) {
-      food.eaten = true;
+// Checks if the user overlaps the trash1 object and eats it if so
+function checktrash(trash) {
+  // We only want to check for an overlap if trash1 hasn't been picked yet
+  if (!trash.picked) {
+    let d = dist(user.x, user.y, trash.x, trash.y);
+    if (d < user.size / 2 + trash.size / 2) {
+      trash.picked = true;
     }
   }
 }
@@ -71,14 +74,13 @@ function displayUser() {
   ellipse(user.x, user.y, user.size);
   pop();
 }
-// Display the food provided as a parameter
-function displayFood(food) {
-  // Check if the food is still available to be eaten
-  if (!food.eaten) {
-    // Display the food as its position and with its size
+// Display the trash provided as a parameter
+function displayTrash(trash) {
+  // Check if the trash is still available to be picked
+  if (!trash.picked) {
+    // Display the trash as its position and with its size
     push();
-
-    image(trashImg, food.x, food.y, food.size, food.size);
+    image(trashImg, trash.x, trash.y, trash.size, trash.size);
     pop();
   }
 }
