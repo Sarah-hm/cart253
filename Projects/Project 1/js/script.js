@@ -2,6 +2,7 @@
 Project 1; let's save the planet, one rubbish at a time
 Sarah Hontoy-Major
 **************************************************/
+"use strict";
 let bg = {
   r: 0,
   g: 255,
@@ -17,7 +18,9 @@ let user = {
   image: undefined,
 };
 
-let rubbish1 = {
+let rubbishPile = [];
+
+let rubbish = {
   x: 100,
   y: 100,
   size: 100,
@@ -31,7 +34,7 @@ let rubbish1 = {
 // ==== Download all images ====
 function preload() {
   user.image = loadImage("assets/images/clown.png");
-  rubbish1.image = loadImage("assets/images/star.png");
+  rubbish.image = loadImage("assets/images/star.png");
 }
 // ==== Set original background and universal aspects =====
 function setup() {
@@ -46,10 +49,11 @@ function setup() {
 function draw() {
   background(bg.r, bg.g, bg.b);
   usermove();
-  rubbish1Move();
+  rubbishMove();
+  // checkrubbishOverlap();
   // wait5Secs();
   displayUser();
-  displayRubbish1();
+  displayrubbish();
 }
 
 // ====== make user move ======
@@ -72,17 +76,29 @@ function usermove() {
   user.y = user.y + user.vy;
 }
 
-function rubbish1Move() {
-  rubbish1.vx = random(-rubbish1.speed, rubbish1.speed);
-  rubbish1.vy = random(-rubbish1.speed, rubbish1.speed);
+function rubbishMove() {
+  let change = random();
+  if (change < 0.1) {
+    rubbish.vx = random(-rubbish.speed, rubbish.speed);
+    rubbish.vy = random(-rubbish.speed, rubbish.speed);
+  }
 
-  rubbish1.x += rubbish1.vx;
-  rubbish1.y += rubbish1.vy;
+  rubbish.x += rubbish.vx;
+  rubbish.y += rubbish.vy;
+
+  rubbish.x = constrain(rubbish.x, 0, width);
+  rubbish.y = constrain(rubbish.y, 0, height);
 }
-
+// function checkrubbishOverlap() {
+//   let d = dist(user.x, user.y, rubbish.x, rubbish.y);
+//   if (d < user.size / 2 + rubbish.size / 2) {
+//     rubbish.state = `neutral`;
+//   }
+// }
 // function checkRubbishState() {
-//   if (rubbish1.state === `activated`) {
-//     displayRubbish1();
+//   if (rubbish.state === `activated`) {
+//     displayrubbish();
+//   } else if (rubbish.state === `neutral`) {
 //   }
 // }
 // function wait5Secs() {
@@ -96,7 +112,7 @@ function rubbish1Move() {
 function displayUser() {
   image(user.image, user.x, user.y, user.size, user.size);
 }
-function displayRubbish1() {
+function displayrubbish() {
   //Display rubbish 1 =====
-  image(rubbish1.image, rubbish1.x, rubbish1.y, rubbish1.size, rubbish1.size);
+  image(rubbish.image, rubbish.x, rubbish.y, rubbish.size, rubbish.size);
 }
