@@ -1,74 +1,80 @@
-/**************************************************
-Template p5 project
-Pippin Barr
+"use strict";
 
-Here is a description of this template p5 project.
-**************************************************/
-"user strict";
-let trashImg = undefined;
-let userImg = undefined;
+// Our user, to move with the mouse
+let user = {
+  x: 0,
+  y: 0,
+  size: 100,
+};
 
-function preload() {
-  trashImg = loadImage("assets/images/star.png");
-  userImg = loadImage("assets/images/clown.png");
-}
+// First food object
+let food1 = {
+  x: 250,
+  y: 300,
+  size: 50,
+  eaten: false, // We want to track whether the user has eaten the food
+};
 
-let trash1;
-let trash2;
-let trash3;
-let trash4;
+// Second food object
+let food2 = {
+  x: 350,
+  y: 300,
+  size: 50,
+  eaten: false,
+};
 
-// setup()
-//
-// Description of setup() goes here.
 function setup() {
-  createCanvas(500, 500);
-  noStroke();
-  background(0);
-  trash1 = createTrash(random(0, width), random(0, height));
-  trash2 = createTrash(random(0, width), random(0, height));
-  trash3 = createTrash(random(0, width), random(0, height));
-  trash4 = createTrash(random(0, width), random(0, height));
+  createCanvas(windowWidth, windowHeight);
 }
 
-function createTrash(x, y) {
-  let trash = {
-    x: x,
-    y: y,
-    size: 100,
-    vx: 0,
-    vy: 0,
-    speed: 5,
-    picked: false,
-  };
-  return trash;
-}
-
-// draw()
-//
-// Description of draw() goes here.
 function draw() {
-  moveTrash(trash);
-  displayTrash(trash);
+  background(0);
+
+  // Move the user (with the mouse)
+  moveUser();
+
+  // Check whether the user has eaten either food
+  checkFood(food1);
+  checkFood(food2);
+
+  // Display the user and foods
+  displayUser();
+  displayFood(food1);
+  displayFood(food2);
 }
 
-function moveTrash(trash) {
-  // ==== to change direction or not to change direction=====
-  let change = random();
-  if (change < 0.1) {
-    trash.vx = random(-trash.speed, trash.speed);
-    trash.vy = random(-trash.speed, trash.speed);
+// Sets the user position to the mouse position
+function moveUser() {
+  user.x = mouseX;
+  user.y = mouseY;
+}
+
+// Checks if the user overlaps the food1 object and eats it if so
+function checkFood(food) {
+  // We only want to check for an overlap if food1 hasn't been eaten yet
+  if (!food.eaten) {
+    let d = dist(user.x, user.y, food.x, food.y);
+    if (d < user.size / 2 + food.size / 2) {
+      food.eaten = true;
+    }
   }
-  // ==== set trash movement ====
-  trash.x += trash.vx;
-  trash.y += trash.vy;
-
-  // === set limit inside canvas ===
-
-  trash.x = constrain(trash.x, 0, width);
-  trash.y = constrain(trash.y, 0, height);
 }
 
-function displayTrash(trash) {
-  image(trashImg, random(0, width), random(0, height), trash.size, trash.size);
+// Draw the user as a circle
+function displayUser() {
+  push();
+  fill(255);
+  ellipse(user.x, user.y, user.size);
+  pop();
+}
+// Display the food provided as a parameter
+function displayFood(food) {
+  // Check if the food is still available to be eaten
+  if (!food.eaten) {
+    // Display the food as its position and with its size
+    push();
+    fill(255, 100, 100);
+    ellipse(food.x, food.y, food.size);
+    pop();
+  }
 }
