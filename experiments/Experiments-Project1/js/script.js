@@ -1,5 +1,9 @@
 "use strict";
+let trashImg = undefined;
 
+function preload() {
+  trashImg = loadImage("assets/images/star.png");
+}
 // Our user, to move with the mouse
 let user = {
   x: 0,
@@ -73,8 +77,8 @@ function displayFood(food) {
   if (!food.eaten) {
     // Display the food as its position and with its size
     push();
-    fill(255, 100, 100);
-    ellipse(food.x, food.y, food.size);
+
+    image(trashImg, food.x, food.y, food.size, food.size);
     pop();
   }
 }
