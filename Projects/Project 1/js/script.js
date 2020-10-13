@@ -20,54 +20,61 @@ let user = {
   image: undefined,
 };
 
-let rubbishPile = [];
+let trashPile = [];
+let trashPileSize = 8;
 
-let rubbish = {
-  x: 100,
-  y: 100,
-  size: 100,
-  vx: 0,
-  vy: 0,
-  speed: 2,
-  image: undefined,
-  state: `activated`, // can be activated or neutral
-};
+function createTrash(x, y) {
+  let trash = {
+    x: x,
+    y: y,
+    size: 100,
+    vx: 0,
+    vy: 0,
+    speed: 4,
+  };
+  return trash;
+}
 
-// First trash object
-let trash1 = {
-  x: 250,
-  y: 300,
-  size: 50,
-  vx: 0,
-  vy: 0,
-  speed: 5,
-  picked: false, // We want to track whether the user has picked the trash
-};
-
-// Second trash object
-let trash2 = {
-  x: 350,
-  y: 300,
-  size: 50,
-  vx: 0,
-  vy: 0,
-  speed: 5,
-  picked: false,
-};
+// // First trash object
+// let trash1 = {
+//   x: 250,
+//   y: 300,
+//   size: 100,
+//   vx: 0,
+//   vy: 0,
+//   speed: 5,
+//   picked: false, // We want to track whether the user has picked the trash
+// };
+//
+// // Second trash object
+// let trash2 = {
+//   x: 350,
+//   y: 300,
+//   size: 100,
+//   vx: 0,
+//   vy: 0,
+//   speed: 5,
+//   picked: false,
+// };
 
 // ==== Download all images ====
 function preload() {
   user.image = loadImage("assets/images/clown.png");
-  rubbish.image = loadImage("assets/images/star.png");
+  // rubbish.image = loadImage("assets/images/star.png");
   trashImg = loadImage("assets/images/star.png");
 }
 // ==== Set original background and universal aspects =====
 function setup() {
-  createCanvas(windowHeight, windowWidth);
-  trashStartingPoint(trash1);
-  trashStartingPoint(trash2);
+  createCanvas(1000, 1000);
+  imageMode(CENTER);
   rectMode(CENTER);
   noStroke();
+  // Create four trash, positioned randomly
+  for (let i = 0; i < trashPileSize; i++) {
+    trashPile[i] = createTrash(random(0, width), random(0, height));
+  }
+  // trashStartingPoint(trash1);
+  // trashStartingPoint(trash2);
 }
 
 // ===== set series of functions described ======
@@ -75,26 +82,48 @@ function draw() {
   background(bg.r, bg.g, bg.b);
   usermove();
 
+  for (let i = 0; i < trashPileSize; i++) {
+    moveTrash(trashPile[i]);
+    displayTrash(trashPile[i]);
+    checkTrash(trashPile[i]);
+  }
+
   //checking if trash has been picked //
-  checkTrash(trash1);
-  checkTrash(trash2);
-  trashMove(trash1);
-  trashMove(trash2);
-  rubbishMove();
+  // checkTrash(trash1);
+  // checkTrash(trash2);
+  // trashMove(trash1);
+  // trashMove(trash2);
+
   // checkrubbishOverlap();
   // wait5Secs();
   displayUser();
 
   //display trashPile
-  displayTrash(trash1);
-  displayTrash(trash2);
-
-  displayrubbish();
+  // displayTrash(trash1);
+  // displayTrash(trash2);
 }
 
 function trashStartingPoint(trash) {
   trash.x = random(0, width);
   trash.y = random(0, height);
+}
+
+// Chooses whether the provided trash changes direction and moves it
+function moveTrash(trash) {
+  // Choose whether to change direction
+  let change = random(0, 1);
+  if (change < 0.05) {
+    trash.vx = random(-trash.speed, trash.speed);
+    trash.vy = random(-trash.speed, trash.speed);
+  }
+
+  // Move the trash
+  trash.x = trash.x + trash.vx;
+  trash.y = trash.y + trash.vy;
+
+  // Constrain the trash to the canvas
+  trash.x = constrain(trash.x, 0, width);
+  trash.y = constrain(trash.y, 0, height);
 }
 
 // ====== make user move ======
@@ -128,33 +157,20 @@ function checkTrash(trash) {
   }
 }
 
-function trashMove(trash) {
-  let change = random();
-  if (change < 0.1) {
-    trash.vx = random(-trash.speed, trash.speed);
-    trash.vy = random(-trash.speed, trash.speed);
-  }
+// function trashMove(trash) {
+//   let change = random();
+//   if (change < 0.1) {
+//     trash.vx = random(-trash.speed, trash.speed);
+//     trash.vy = random(-trash.speed, trash.speed);
+//   }
+//
+//   trash.x += trash.vx;
+//   trash.y += trash.vy;
+//
+//   trash.x = constrain(trash.x, 0, width);
+//   trash.y = constrain(trash.y, 0, height);
+// }
 
-  trash.x += trash.vx;
-  trash.y += trash.vy;
-
-  trash.x = constrain(trash.x, 0, width);
-  trash.y = constrain(trash.y, 0, height);
-}
-
-function rubbishMove() {
-  let change = random();
-  if (change < 0.1) {
-    rubbish.vx = random(-rubbish.speed, rubbish.speed);
-    rubbish.vy = random(-rubbish.speed, rubbish.speed);
-  }
-
-  rubbish.x += rubbish.vx;
-  rubbish.y += rubbish.vy;
-
-  rubbish.x = constrain(rubbish.x, 0, width);
-  rubbish.y = constrain(rubbish.y, 0, height);
-}
 // function checkrubbishOverlap() {
 //   let d = dist(user.x, user.y, rubbish.x, rubbish.y);
 //   if (d < user.size / 2 + rubbish.size / 2) {
@@ -187,9 +203,4 @@ function displayTrash(trash) {
     image(trashImg, trash.x, trash.y, trash.size, trash.size);
     pop();
   }
-}
-
-function displayrubbish() {
-  //Display rubbish 1 =====
-  image(rubbish.image, rubbish.x, rubbish.y, rubbish.size, rubbish.size);
 }
