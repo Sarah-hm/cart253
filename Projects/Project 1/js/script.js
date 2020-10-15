@@ -4,7 +4,19 @@ Sarah Hontoy-Major
 **************************************************/
 "use strict";
 
-let trashImg = undefined;
+let titleString = `The earth is in a full blown climate crisis.
+Maybe you could help pick up a few flowing rubbish
+before there is too much.
+
+(click on any keyboard key to continue.
+Play with arrow keys)`;
+let winString = `The world is saved and we will never know pollution again`;
+let gameOverString = `Greenhouse gas emission have increased too much.
+Better find another planet soon`;
+
+let trashImg;
+let markerFont;
+
 let bg = {
   r: 0,
   g: 255,
@@ -21,7 +33,7 @@ let user = {
 };
 
 let trashPile = [];
-let trashPileSize = 8;
+let trashPileSize = 4;
 
 function createTrash(x, y) {
   let trash = {
@@ -35,84 +47,121 @@ function createTrash(x, y) {
   return trash;
 }
 
-// // First trash object
-// let trash1 = {
-//   x: 250,
-//   y: 300,
-//   size: 100,
-//   vx: 0,
-//   vy: 0,
-//   speed: 5,
-//   picked: false, // We want to track whether the user has picked the trash
-// };
-//
-// // Second trash object
-// let trash2 = {
-//   x: 350,
-//   y: 300,
-//   size: 100,
-//   vx: 0,
-//   vy: 0,
-//   speed: 5,
-//   picked: false,
-// };
+let state = `simulation`; // can be title, simulation, win, or gameOver
 
 // ==== Download all images ====
 function preload() {
   user.image = loadImage("assets/images/clown.png");
   // rubbish.image = loadImage("assets/images/star.png");
   trashImg = loadImage("assets/images/star.png");
+  markerFont = loadFont("assets/font/PermanentMarker-Regular.ttf");
 }
 // ==== Set original background and universal aspects =====
 function setup() {
+  // === basic set up of canvas ====
   createCanvas(1000, 1000);
   imageMode(CENTER);
   rectMode(CENTER);
   noStroke();
-  // Create four trash, positioned randomly
+
+  // === set typography ===
+  textAlign(CENTER);
+  textSize(32);
+  textFont(markerFont);
+
+  // Create flowing rubbish, at random location
   for (let i = 0; i < trashPileSize; i++) {
     trashPile[i] = createTrash(random(0, width), random(0, height));
   }
-  // trashStartingPoint(trash1);
-  // trashStartingPoint(trash2);
 }
 
-// ===== set series of functions described ======
+// ===== set series of functions for every frame ======
 function draw() {
   background(bg.r, bg.g, bg.b);
-  usermove();
+  addTrash();
+  checkState();
+}
 
+function addTrash() {
+  push()
+  //  ==== add 1 trash every 3.3 seconds ====
+  if (frameCount % 200 === 0) {
+    let trash = createTrash(random(0, width), random(0, height))
+    trashPile.push(trash);
+    trashPileSize++
+  }
+  pop()
+}
+
+
+
+function checkState() {
+  if (state === `title`) {
+    title();
+  } else if (state === `simulation`) {
+    simulation();
+  } else if (state === `win`) {
+    win();
+  } else if (state === "gameOver") {
+    gameOver();
+  }
+}
+
+function title() {
+  push()
+  fill(255);
+  text(titleString, width / 2, height / 2);
+  pop()
+}
+
+function simulation() {
+  push()
+  checkTrashNum();
+  // ===== Trash pile movement and display =====
   for (let i = 0; i < trashPileSize; i++) {
     moveTrash(trashPile[i]);
+    checkTrashPicked(trashPile[i]);
     displayTrash(trashPile[i]);
-    checkTrash(trashPile[i]);
   }
-
-  //checking if trash has been picked //
-  // checkTrash(trash1);
-  // checkTrash(trash2);
-  // trashMove(trash1);
-  // trashMove(trash2);
-
-  // checkrubbishOverlap();
-  // wait5Secs();
+  // ===== user movement and display =====
+  usermove();
   displayUser();
-
-  //display trashPile
-  // displayTrash(trash1);
-  // displayTrash(trash2);
+  pop()
 }
 
-function trashStartingPoint(trash) {
-  trash.x = random(0, width);
-  trash.y = random(0, height);
+// ===== Final states : WIN or GAME OVER =====
+function win() {
+  push();
+  fill(255);
+  text(winString, width / 2, height / 2);
+  console.log(`win`)
+  pop();
 }
 
+function gameOver() {
+  push();
+  fill(255);
+  text(gameOverString, width / 2, height / 2);
+  console.log(`gameOver`)
+  pop();
+}
+//  check number of trash on canvas, state = win if none, state = game over if 10 ===
+function checkTrashNum() {
+  push()
+  if (trashPileSize === 1) {
+    state = `win`;
+  } else if (trashPileSize >= 10) {
+    state = `gameOver`;
+  }
+  console.log(trashPileSize)
+  pop()
+}
 // Chooses whether the provided trash changes direction and moves it
 function moveTrash(trash) {
+  push()
   // Choose whether to change direction
   let change = random(0, 1);
-  if (change < 0.05) {
+  if (change < 0.1) {
     trash.vx = random(-trash.speed, trash.speed);
     trash.vy = random(-trash.speed, trash.speed);
   }
@@ -124,10 +173,12 @@ function moveTrash(trash) {
   // Constrain the trash to the canvas
   trash.x = constrain(trash.x, 0, width);
   trash.y = constrain(trash.y, 0, height);
+  pop()
 }
 
 // ====== make user move ======
 function usermove() {
+  push()
   if (keyIsDown(LEFT_ARROW)) {
     user.vx = -user.speed;
   } else if (keyIsDown(RIGHT_ARROW)) {
@@ -144,63 +195,44 @@ function usermove() {
   }
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
+
+  user.x = constrain(user.x, 0, width);
+  user.y = constrain(user.y, 0, height)
+  pop()
 }
 
 // Checks if the user overlaps the trash1 object and eats it if so
-function checkTrash(trash) {
+function checkTrashPicked(trash) {
   // We only want to check for an overlap if trash1 hasn't been picked yet
   if (!trash.picked) {
     let d = dist(user.x, user.y, trash.x, trash.y);
     if (d < user.size / 2 + trash.size / 2) {
       trash.picked = true;
+      trashPileSize--
     }
   }
 }
 
-// function trashMove(trash) {
-//   let change = random();
-//   if (change < 0.1) {
-//     trash.vx = random(-trash.speed, trash.speed);
-//     trash.vy = random(-trash.speed, trash.speed);
-//   }
-//
-//   trash.x += trash.vx;
-//   trash.y += trash.vy;
-//
-//   trash.x = constrain(trash.x, 0, width);
-//   trash.y = constrain(trash.y, 0, height);
-// }
-
-// function checkrubbishOverlap() {
-//   let d = dist(user.x, user.y, rubbish.x, rubbish.y);
-//   if (d < user.size / 2 + rubbish.size / 2) {
-//     rubbish.state = `neutral`;
-//   }
-// }
-// function checkRubbishState() {
-//   if (rubbish.state === `activated`) {
-//     displayrubbish();
-//   } else if (rubbish.state === `neutral`) {
-//   }
-// }
-// function wait5Secs() {
-//   //code taken from : https://editor.p5js.org/denaplesk2/sketches/S1OAhXA-M
-//   if (frameCount % 300 === 0 && ) {
-//     checkRubbishState();
-//   }
-// }
-
 // ==================== All Display functions =================
 function displayUser() {
+  push()
   image(user.image, user.x, user.y, user.size, user.size);
+  pop()
 }
 
 function displayTrash(trash) {
+  push();
   // Check if the trash is still available to be picked
   if (!trash.picked) {
     // Display the trash as its position and with its size
-    push();
+
     image(trashImg, trash.x, trash.y, trash.size, trash.size);
     pop();
+  }
+}
+
+function keyPressed() {
+  if (state === `title`) {
+    state = `simulation`;
   }
 }
