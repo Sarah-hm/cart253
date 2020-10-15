@@ -43,6 +43,7 @@ function createTrash(x, y) {
     vx: 0,
     vy: 0,
     speed: 4,
+    picked: false,
   };
   return trash;
 }
