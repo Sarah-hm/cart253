@@ -129,22 +129,6 @@ function simulation() {
   pop()
 }
 
-// ===== Final states : WIN or GAME OVER =====
-function win() {
-  push();
-  fill(255);
-  text(winString, width / 2, height / 2);
-  console.log(`win`)
-  pop();
-}
-
-function gameOver() {
-  push();
-  fill(255);
-  text(gameOverString, width / 2, height / 2);
-  console.log(`gameOver`)
-  pop();
-}
 //  check number of trash on canvas, state = win if none, state = game over if 10 ===
 function checkTrashNum() {
   push()
@@ -212,8 +196,23 @@ function checkTrashPicked(trash) {
     }
   }
 }
+// ================ Final states : WIN or GAME OVER ==================
+function win() {
+  push();
+  fill(255);
+  text(winString, width / 2, height / 2);
+  console.log(`win`)
+  pop();
+}
 
-// ==================== All Display functions =================
+function gameOver() {
+  push();
+  fill(255);
+  text(gameOverString, width / 2, height / 2);
+  console.log(`gameOver`)
+  pop();
+}
+// ==================== Display user and remaining trash =================
 function displayUser() {
   push()
   image(user.image, user.x, user.y, user.size, user.size);
@@ -231,6 +230,7 @@ function displayTrash(trash) {
   }
 }
 
+// ===== Change from TITLE to SIMULATION by pressing any key =====
 function keyPressed() {
   if (state === `title`) {
     state = `simulation`;
