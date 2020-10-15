@@ -79,22 +79,8 @@ function setup() {
 // ===== set series of functions for every frame ======
 function draw() {
   background(bg.r, bg.g, bg.b);
-  addTrash();
   checkState();
 }
-
-function addTrash() {
-  push()
-  //  ==== add 1 trash every 3.3 seconds ====
-  if (frameCount % 200 === 0) {
-    let trash = createTrash(random(0, width), random(0, height))
-    trashPile.push(trash);
-    trashPileSize++
-  }
-  pop()
-}
-
-
 
 function checkState() {
   if (state === `title`) {
@@ -117,16 +103,30 @@ function title() {
 
 function simulation() {
   push()
+  addTrash();
   checkTrashNum();
   // ===== Trash pile movement and display =====
-  for (let i = 0; i < trashPileSize; i++) {
-    moveTrash(trashPile[i]);
-    checkTrashPicked(trashPile[i]);
-    displayTrash(trashPile[i]);
+  for (let i = 0; i < trashPile.length; i++) {
+    if (!trashPile[i].picked) {
+      moveTrash(trashPile[i]);
+      checkTrashPicked(trashPile[i]);
+      displayTrash(trashPile[i]);
+    }
   }
   // ===== user movement and display =====
   usermove();
   displayUser();
+  pop()
+}
+
+function addTrash() {
+  push()
+  //  ==== add 1 trash every 3.3 seconds ====
+  if (frameCount % 200 === 0) {
+    let trash = createTrash(random(0, width), random(0, height))
+    trashPile.push(trash);
+    trashPileSize++
+  }
   pop()
 }
 
