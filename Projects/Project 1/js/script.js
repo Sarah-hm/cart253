@@ -94,8 +94,8 @@ function checkState() {
 // ======== function definitions for STATES ========
 function title() {
   push()
-  imageMode(CORNER)
-  image(titleImg, windowWidth, windowHeight)
+
+  image(titleImg, width / 2, height / 2)
   pop()
 }
 
@@ -203,13 +203,13 @@ function checkTrashPicked(trash) {
 // ================ Final states : WIN or GAME OVER ==================
 function win() {
   push();
-  image(winImg, windowWidth, windowHeight)
+  image(winImg, width / 2, height / 2)
   pop();
 }
 
 function gameOver() {
   push();
-  image(gameOverImg, windowWidth, windowHeight)
+  image(gameOverImg, width / 2, height / 2)
   pop();
 }
 // ==================== Display user and remaining trash =================
