@@ -94,7 +94,8 @@ function checkState() {
 // ======== function definitions for STATES ========
 function title() {
   push()
-  image(titleImg, windowWidth / 2, windowHeight / 2)
+  imageMode(CORNER)
+  image(titleImg, windowWidth, windowHeight)
   pop()
 }
 
@@ -116,7 +117,7 @@ function simulation() {
   pop()
 }
 
-//======= function definitions within SIMULATION ======== 
+//======= function definitions within SIMULATION ========
 function addTrash() {
   push()
   //  ==== add 1 trash every 3.3 seconds ====
@@ -202,13 +203,13 @@ function checkTrashPicked(trash) {
 // ================ Final states : WIN or GAME OVER ==================
 function win() {
   push();
-  image(winImg, windowWidth / 2, windowHeight / 2)
+  image(winImg, windowWidth, windowHeight)
   pop();
 }
 
 function gameOver() {
   push();
-  image(gameOverImg, windowWidth / 2, windowHeight / 2)
+  image(gameOverImg, windowWidth, windowHeight)
   pop();
 }
 // ==================== Display user and remaining trash =================
