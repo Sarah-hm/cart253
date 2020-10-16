@@ -15,7 +15,10 @@ let gameOverString = `Greenhouse gas emission have increased too much.
 Better find another planet soon`;
 
 let trashImg;
-let markerFont;
+let bgImg;
+let titleImg;
+let winImg;
+let gameOverImg;
 
 let bg = {
   r: 0,
@@ -28,12 +31,12 @@ let user = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 10,
+  speed: 5,
   image: undefined,
 };
 
 let trashPile = [];
-let trashPileSize = 4;
+let trashPileSize = 6;
 
 function createTrash(x, y) {
   let trash = {
@@ -42,20 +45,24 @@ function createTrash(x, y) {
     size: 100,
     vx: 0,
     vy: 0,
-    speed: 4,
+    speed: 10,
+    angle: 0,
     picked: false,
   };
   return trash;
 }
 
-let state = `simulation`; // can be title, simulation, win, or gameOver
+let state = `title`; // can be title, simulation, win, or gameOver
 
 // ==== Download all images ====
 function preload() {
   user.image = loadImage("assets/images/clown.png");
   // rubbish.image = loadImage("assets/images/star.png");
-  trashImg = loadImage("assets/images/star.png");
-  markerFont = loadFont("assets/font/PermanentMarker-Regular.ttf");
+  trashImg = loadImage("assets/images/trash.png");
+  bgImg = loadImage("assets/images/bg.png")
+  titleImg = loadImage("assets/images/title.png")
+  winImg = loadImage("assets/images/win.png")
+  gameOverImg = loadImage("assets/images/gameOver.png")
 }
 // ==== Set original background and universal aspects =====
 function setup() {
@@ -65,11 +72,6 @@ function setup() {
   rectMode(CENTER);
   noStroke();
 
-  // === set typography ===
-  textAlign(CENTER);
-  textSize(32);
-  textFont(markerFont);
-
   // Create flowing rubbish, at random location
   for (let i = 0; i < trashPileSize; i++) {
     trashPile[i] = createTrash(random(0, width), random(0, height));
@@ -78,8 +80,17 @@ function setup() {
 
 // ===== set series of functions for every frame ======
 function draw() {
-  background(bg.r, bg.g, bg.b);
+  setBackground()
+
   checkState();
+}
+
+function setBackground() {
+  push()
+  imageMode(CORNER)
+  image(bgImg, windowWidth, windowHeight)
+  background(bgImg);
+  pop()
 }
 
 function checkState() {
@@ -96,8 +107,7 @@ function checkState() {
 
 function title() {
   push()
-  fill(255);
-  text(titleString, width / 2, height / 2);
+  image(titleImg, windowWidth / 2, windowHeight / 2)
   pop()
 }
 
@@ -133,7 +143,7 @@ function addTrash() {
 //  check number of trash on canvas, state = win if none, state = game over if 10 ===
 function checkTrashNum() {
   push()
-  if (trashPileSize === 1) {
+  if (trashPileSize === 0) {
     state = `win`;
   } else if (trashPileSize >= 10) {
     state = `gameOver`;
@@ -154,6 +164,10 @@ function moveTrash(trash) {
   // Move the trash
   trash.x = trash.x + trash.vx;
   trash.y = trash.y + trash.vy;
+
+  //rotate the trash
+  rotate(trash.angle);
+  trash.angle++
 
   // Constrain the trash to the canvas
   trash.x = constrain(trash.x, 0, width);
@@ -181,8 +195,8 @@ function usermove() {
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
 
-  user.x = constrain(user.x, 0, width);
-  user.y = constrain(user.y, 0, height)
+  user.x = constrain(user.x, 80, width - 80);
+  user.y = constrain(user.y, 80, height - 80)
   pop()
 }
 
