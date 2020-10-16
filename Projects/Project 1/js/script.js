@@ -4,39 +4,26 @@ Sarah Hontoy-Major
 **************************************************/
 "use strict";
 
-let titleString = `The earth is in a full blown climate crisis.
-Maybe you could help pick up a few flowing rubbish
-before there is too much.
 
-(click on any keyboard key to continue.
-Play with arrow keys)`;
-let winString = `The world is saved and we will never know pollution again`;
-let gameOverString = `Greenhouse gas emission have increased too much.
-Better find another planet soon`;
-
+//  Set all variables (images, user, trash and trash pile array)
 let trashImg;
 let bgImg;
 let titleImg;
 let winImg;
 let gameOverImg;
 
-let bg = {
-  r: 0,
-  g: 255,
-  b: 0,
-};
 let user = {
   x: 250,
   y: 250,
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 5,
+  speed: 7,
   image: undefined,
 };
 
 let trashPile = [];
-let trashPileSize = 6;
+let trashPileSize = 7;
 
 function createTrash(x, y) {
   let trash = {
@@ -54,9 +41,9 @@ function createTrash(x, y) {
 
 let state = `title`; // can be title, simulation, win, or gameOver
 
-// ==== Download all images ====
+// ===================== Download all images ===================
 function preload() {
-  user.image = loadImage("assets/images/clown.png");
+  user.image = loadImage("assets/images/user.png");
   // rubbish.image = loadImage("assets/images/star.png");
   trashImg = loadImage("assets/images/trash.png");
   bgImg = loadImage("assets/images/bg.png")
@@ -64,27 +51,26 @@ function preload() {
   winImg = loadImage("assets/images/win.png")
   gameOverImg = loadImage("assets/images/gameOver.png")
 }
-// ==== Set original background and universal aspects =====
+// =============== Set universal aspects ==============
 function setup() {
   // === basic set up of canvas ====
   createCanvas(1000, 1000);
   imageMode(CENTER);
   rectMode(CENTER);
   noStroke();
-
-  // Create flowing rubbish, at random location
+  // ==Create original trash position, at random location==
   for (let i = 0; i < trashPileSize; i++) {
     trashPile[i] = createTrash(random(0, width), random(0, height));
   }
 }
 
-// ===== set series of functions for every frame ======
+// ===== set background and check if in title, simulation, win or gameOver ======
 function draw() {
   setBackground()
-
   checkState();
 }
 
+// ========= functions definitions for DRAW ========
 function setBackground() {
   push()
   imageMode(CORNER)
@@ -105,6 +91,7 @@ function checkState() {
   }
 }
 
+// ======== function definitions for STATES ========
 function title() {
   push()
   image(titleImg, windowWidth / 2, windowHeight / 2)
@@ -129,10 +116,11 @@ function simulation() {
   pop()
 }
 
+//======= function definitions within SIMULATION ======== 
 function addTrash() {
   push()
   //  ==== add 1 trash every 3.3 seconds ====
-  if (frameCount % 200 === 0) {
+  if (frameCount % 100 === 0) {
     let trash = createTrash(random(0, width), random(0, height))
     trashPile.push(trash);
     trashPileSize++
@@ -195,8 +183,8 @@ function usermove() {
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
 
-  user.x = constrain(user.x, 80, width - 80);
-  user.y = constrain(user.y, 80, height - 80)
+  user.x = constrain(user.x, 0, width);
+  user.y = constrain(user.y, 0, height)
   pop()
 }
 
@@ -214,17 +202,13 @@ function checkTrashPicked(trash) {
 // ================ Final states : WIN or GAME OVER ==================
 function win() {
   push();
-  fill(255);
-  text(winString, width / 2, height / 2);
-  console.log(`win`)
+  image(winImg, windowWidth / 2, windowHeight / 2)
   pop();
 }
 
 function gameOver() {
   push();
-  fill(255);
-  text(gameOverString, width / 2, height / 2);
-  console.log(`gameOver`)
+  image(gameOverImg, windowWidth / 2, windowHeight / 2)
   pop();
 }
 // ==================== Display user and remaining trash =================
