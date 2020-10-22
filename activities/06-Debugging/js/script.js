@@ -75,7 +75,7 @@ function checkFood(food) {
   if (!food.eaten) {
     let d = dist(user.x, user.y, food.x, food.y);
     if (d < user.size / 2 + food.size / 2) {
-      food.eaten === true;
+      food.eaten = true;
     }
   }
 }
@@ -90,7 +90,7 @@ function displayUser() {
 // Draw the food as a circle
 function displayFood(food) {
   // Check if the food is still available to be eaten
-  if (!food.ate) {
+  if (!food.eaten) {
     // Display the food as its position and with its size
     push();
     fill(255, 100, 100);
