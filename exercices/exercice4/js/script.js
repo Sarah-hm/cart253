@@ -2,6 +2,7 @@
 
 let school = [];
 let schoolSize = 4;
+let possibleSizes = [25, 50, 100, 150];
 
 function setup() {
   createCanvas(600, 600);
@@ -22,6 +23,7 @@ function createFish(x, y) {
     vy: 0,
     speed: 2,
   };
+  fish.size = random(possibleSizes)
   return fish;
 }
 
