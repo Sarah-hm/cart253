@@ -10,7 +10,7 @@ let user = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 1,
+  speed: 3,
   fill: {
     r: 255,
     b: 240,
@@ -22,7 +22,7 @@ let user = {
 let state = 'Title' //Can be Title, simulation, win, lose
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
   noStroke();
 
   for (let i = 0; i < schoolSize; i++) {
@@ -51,14 +51,16 @@ function draw() {
 
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
-    moveUser()
+
+    checkEatenFish(school[i])
     displayFish(school[i]);
-    displayUser();
+
   }
+  moveUser();
+  displayUser();
 }
 
-// moveFish(fish)
-// Chooses whether the provided fish changes direction and moves it
+// ========== Move fish in a random, yet smoother way ======
 function moveFish(fish) {
   // Choose whether to change direction
   let change = random(0, 1);
@@ -67,7 +69,7 @@ function moveFish(fish) {
     fish.vy = random(-fish.speed, fish.speed);
   }
 
-  // Move the fish
+  // == move the fish ==
   fish.x = fish.x + fish.vx;
   fish.y = fish.y + fish.vy;
 
@@ -75,6 +77,8 @@ function moveFish(fish) {
   fish.x = constrain(fish.x, 0, width);
   fish.y = constrain(fish.y, 0, height);
 }
+
+// ========== move User based on keyboard arrows =======
 
 function moveUser() {
   push()
@@ -100,15 +104,29 @@ function moveUser() {
   pop()
 }
 
-// displayFish(fish)
-// Displays the provided fish on the canvas
-function displayFish(fish) {
+// ======= Check if you are overlapping (have eaten) a red fish =======
 
+function checkEatenFish(fish) {
+  if (!fish.eaten) {
+    let d = dist(user.x, user.y, fish.x, fish.y);
+    if (d < user.size / 2 + fish.size / 2) {
+      fish.eaten = true
+
+    }
+  }
+}
+
+// ====== Display remaining fish, those that have not been eaten by yours truly =======
+function displayFish(fish) {
+  push()
   if (!fish.eaten) {
     fill(200, 100, 100);
     ellipse(fish.x, fish.y, fish.size);
   }
+  pop()
 }
+
+// ====== Always display user, because you are invicible and will live forever ======
 
 function displayUser() {
   push()
