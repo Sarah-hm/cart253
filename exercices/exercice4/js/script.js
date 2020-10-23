@@ -16,12 +16,12 @@ let user = {
   fill: {
     r: 255,
     b: 240,
-    g: 235
-  }
+    g: 235,
+  },
 };
 
-
-let state = 'title' //Can be Title, simulation, win, lose
+let timer = 7; //seconds
+let state = "title"; //Can be Title, simulation, win, lose
 
 // Set over all look of the simulation
 function setup() {
@@ -43,30 +43,15 @@ function createFish(x, y) {
     speed: 2,
     eaten: false,
   };
-  fish.size = random(possibleSizes)
+  fish.size = random(possibleSizes);
   return fish;
 }
 // ======= draw function ========
 function draw() {
   background(0);
-  checkWinOrLose();
   checkState();
 }
 
-
-// ======= Check if there is no fish left or if time is over ======
-// PROBLEM !!!!! : The goal is to {state = lose} if frameCount >= 800 but only within the
-// simulation state. Unfortunately I was only able to make it start from the very beginning
-// of the simulation (when state = 'title'). How would I go around to make the frameCount
-// (or any sort of timer really) start from the moment state = 'simulation' ?
-function checkWinOrLose() {
-  if (schoolSize === 0) {
-    state = 'win'
-  } else if (schoolSize >= 1 && frameCount >= 800) {
-    state = 'lose'
-  }
-  console.log(school.length)
-}
 // ======= Check the state of the program; send to appropriate function ======
 function checkState() {
   if (state === `title`) {
@@ -81,9 +66,9 @@ function checkState() {
 }
 
 function title() {
-  push()
-  textSize(30)
-  fill(200, 100, 100)
+  push();
+  textSize(30);
+  fill(200, 100, 100);
   textAlign(CENTER, CENTER);
   text(
     `You might not be the biggest
@@ -97,25 +82,26 @@ function title() {
     width / 2,
     height / 2
   );
-  pop()
+  pop();
 }
 
 function simulation() {
+  checkTimer()
+  checkWinOrLose();
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
 
-    checkEatenFish(school[i])
+    checkEatenFish(school[i]);
     displayFish(school[i]);
-
   }
   moveUser();
   displayUser();
 }
 
 function win() {
-  push()
-  textSize(30)
-  fill(200, 100, 100)
+  push();
+  textSize(30);
+  fill(200, 100, 100);
   textAlign(CENTER, CENTER);
   text(
     `You are a fierce competitor
@@ -124,13 +110,13 @@ function win() {
     width / 2,
     height / 2
   );
-  pop()
+  pop();
 }
 
 function lose() {
-  push()
-  textSize(30)
-  fill(200, 100, 100)
+  push();
+  textSize(30);
+  fill(200, 100, 100);
   textAlign(CENTER, CENTER);
   text(
     `So... I don't think
@@ -140,7 +126,28 @@ function lose() {
     width / 2,
     height / 2
   );
-  pop()
+  pop();
+}
+
+// ======== Substract 1 second to timer if all fish have not been eaten ======= 
+
+function checkTimer() {
+  //Code taken from : https://editor.p5js.org/marynotari/sketches/S1T2ZTMp-
+  if (frameCount % 60 === 0 && timer > 0) {
+    timer--;
+  }
+}
+
+
+// ======= Check if there is no fish left or if time is over ======
+
+function checkWinOrLose() {
+  if (schoolSize === 0) {
+    state = "win";
+  } else if (schoolSize >= 1 && timer === 0) {
+    state = "lose";
+  }
+  console.log(school.length);
 }
 
 
@@ -166,7 +173,7 @@ function moveFish(fish) {
 // ========== move User based on keyboard arrows =======
 
 function moveUser() {
-  push()
+  push();
   if (keyIsDown(LEFT_ARROW)) {
     user.vx = -user.speed;
   } else if (keyIsDown(RIGHT_ARROW)) {
@@ -185,8 +192,8 @@ function moveUser() {
   user.y = user.y + user.vy;
 
   user.x = constrain(user.x, 0, width);
-  user.y = constrain(user.y, 0, height)
-  pop()
+  user.y = constrain(user.y, 0, height);
+  pop();
 }
 
 // ======= Check if you are overlapping (have eaten) a red fish =======
@@ -195,30 +202,29 @@ function checkEatenFish(fish) {
   if (!fish.eaten) {
     let d = dist(user.x, user.y, fish.x, fish.y);
     if (d < user.size / 2 + fish.size / 2) {
-      fish.eaten = true
-      schoolSize--
-
+      fish.eaten = true;
+      schoolSize--;
     }
   }
 }
 
 // ====== Display remaining fish, those that have not been eaten by yours truly =======
 function displayFish(fish) {
-  push()
+  push();
   if (!fish.eaten) {
     fill(200, 100, 100);
     ellipse(fish.x, fish.y, fish.size);
   }
-  pop()
+  pop();
 }
 
 // ====== Always display user, because you are invicible and will live forever ======
 
 function displayUser() {
-  push()
-  fill(user.fill.r, user.fill.b, user.fill.g)
+  push();
+  fill(user.fill.r, user.fill.b, user.fill.g);
   ellipse(user.x, user.y, user.size, user.size);
-  pop()
+  pop();
 }
 
 // ===== Change from TITLE to SIMULATION by pressing any key =====
