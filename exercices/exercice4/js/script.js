@@ -19,7 +19,7 @@ let user = {
 };
 
 
-let state = 'Title' //Can be Title, simulation, win, lose
+let state = 'title' //Can be Title, simulation, win, lose
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -48,7 +48,54 @@ function createFish(x, y) {
 
 function draw() {
   background(0);
+  checkWinOrLose();
+  checkState();
 
+
+}
+// ======= Check if there is no fish left or if time
+function checkWinOrLose() {
+  if (schoolSize === 0) {
+    state = 'win'
+  } else if (schoolSize >= 1 && frameCount >= 800) {
+    state = 'lose'
+  }
+  console.log(school.length)
+}
+// ======= Check the state of the program; send to appropriate function ======
+function checkState() {
+  if (state === `title`) {
+    title();
+  } else if (state === `simulation`) {
+    simulation();
+  } else if (state === `win`) {
+    win();
+  } else if (state === "lose") {
+    lose();
+  }
+}
+
+function title() {
+  push()
+  textSize(30)
+  fill(200, 100, 100)
+  textAlign(CENTER, CENTER);
+  text(
+    `You might not be the biggest
+  fish in the pond,but nothing
+  is stopping you from eating
+  all your competition
+
+    Press on any key to begin.
+    Navigate with your keyboard arrows
+    And let see if you can eat that competition`,
+    width / 2,
+    height / 2
+  );
+  pop()
+}
+
+function simulation() {
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
 
@@ -59,6 +106,39 @@ function draw() {
   moveUser();
   displayUser();
 }
+
+function win() {
+  push()
+  textSize(30)
+  fill(200, 100, 100)
+  textAlign(CENTER, CENTER);
+  text(
+    `You are a fierce competitor
+    Too bad you can't enjoy the victory
+    with anyone now...  `,
+    width / 2,
+    height / 2
+  );
+  pop()
+}
+
+function lose() {
+  push()
+  textSize(30)
+  fill(200, 100, 100)
+  textAlign(CENTER, CENTER);
+  text(
+    `So... I don't think
+    the other fish have to
+    fear for you. Keep trying,
+    maybe. I wouldn't be too hopeful. `,
+    width / 2,
+    height / 2
+  );
+  pop()
+}
+
+
 
 // ========== Move fish in a random, yet smoother way ======
 function moveFish(fish) {
@@ -111,6 +191,7 @@ function checkEatenFish(fish) {
     let d = dist(user.x, user.y, fish.x, fish.y);
     if (d < user.size / 2 + fish.size / 2) {
       fish.eaten = true
+      schoolSize--
 
     }
   }
@@ -133,4 +214,11 @@ function displayUser() {
   fill(user.fill.r, user.fill.b, user.fill.g)
   ellipse(user.x, user.y, user.size, user.size);
   pop()
+}
+
+// ===== Change from TITLE to SIMULATION by pressing any key =====
+function keyPressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
 }
