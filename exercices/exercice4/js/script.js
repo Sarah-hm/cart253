@@ -1,8 +1,10 @@
 "use strict";
-
+// ===== Set variables for fish array ======
 let school = [];
 let schoolSize = 4;
 let possibleSizes = [25, 50, 100, 150];
+
+// === Set user variable ===
 
 let user = {
   x: 250,
@@ -21,17 +23,16 @@ let user = {
 
 let state = 'title' //Can be Title, simulation, win, lose
 
+// Set over all look of the simulation
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
-
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
   }
 }
 
-// createFish(x,y)
-// Creates a new JavaScript Object describing a fish and returns it
+// ===== Set object for fish array =====
 function createFish(x, y) {
   let fish = {
     x: x,
@@ -45,15 +46,19 @@ function createFish(x, y) {
   fish.size = random(possibleSizes)
   return fish;
 }
-
+// ======= draw function ========
 function draw() {
   background(0);
   checkWinOrLose();
   checkState();
-
-
 }
-// ======= Check if there is no fish left or if time
+
+
+// ======= Check if there is no fish left or if time is over ======
+// PROBLEM !!!!! : The goal is to {state = lose} if frameCount >= 800 but only within the
+// simulation state. Unfortunately I was only able to make it start from the very beginning
+// of the simulation (when state = 'title'). How would I go around to make the frameCount
+// (or any sort of timer really) start from the moment state = 'simulation' ?
 function checkWinOrLose() {
   if (schoolSize === 0) {
     state = 'win'
