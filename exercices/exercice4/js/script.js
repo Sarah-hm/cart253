@@ -78,7 +78,7 @@ function title() {
 
     Press on any key to begin.
     Navigate with your keyboard arrows
-    And let see if you can eat that competition`,
+    And let's see if you can eat that competition`,
     width / 2,
     height / 2
   );
@@ -121,7 +121,7 @@ function lose() {
   text(
     `So... I don't think
     the other fish have to
-    fear for you. Keep trying,
+    fear you. Keep trying,
     maybe. I wouldn't be too hopeful. `,
     width / 2,
     height / 2
@@ -129,7 +129,7 @@ function lose() {
   pop();
 }
 
-// ======== Substract 1 second to timer if all fish have not been eaten ======= 
+// ======== Substract 1 second to timer if all fish have not been eaten =======
 
 function checkTimer() {
   //Code taken from : https://editor.p5js.org/marynotari/sketches/S1T2ZTMp-
