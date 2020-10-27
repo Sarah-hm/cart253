@@ -44,6 +44,7 @@ class Ball {
       this.y - this.size / 2 < paddle.y + paddle.height / 2) {
 
       //bounce
+      //the closer it is to the edge, the more velocity it is going to add (or subtract) from its original velocity
       // dx = difference in x axis
       let dx = this.x - paddle.x;
       this.vx += map(dx, paddle.width / 2, paddle.width / 2, -2, 2)
