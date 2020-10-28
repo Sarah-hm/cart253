@@ -7,7 +7,7 @@ class Ball {
     this.vy = 0;
     this.ax = 0;
     this.ay = 0;
-    this.maxSpeed = 10;
+    this.maxSpeed = 12;
     this.size = 30;
     this.active = true;
   }
@@ -37,7 +37,6 @@ class Ball {
 
     //Constrain to canvas (except height of canvas to fall)
     this.x = constrain(this.x, 0, width)
-    this.y = constrain(this.y, 0, height + 40)
   }
 
   bounce(paddle) {
