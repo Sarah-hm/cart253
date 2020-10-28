@@ -3,13 +3,28 @@ class Paddle {
   constructor(w, h) {
     this.width = w;
     this.height = h;
-    this.x = 0;
-    this.y = height - this.height / 2
+    this.x = width / 2;
+    this.y = height - this.height / 2;
+    this.vx = 0;
+    this.vy = 0;
+    this.speed = 15
   }
 
-  // User moves only horizontally with the mouse
+  // this moves only horizontally with the mouse
   move() {
-    this.x = mouseX;
+    if (keyIsDown(LEFT_ARROW)) {
+      this.vx = -this.speed;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+      this.vx = this.speed;
+    } else {
+      this.vx = 0;
+    }
+
+    this.x = this.x + this.vx;
+    this.y = this.y + this.vy;
+
+    this.x = constrain(this.x, 0, width);
+    this.y = constrain(this.y, 0, height);
   }
 
 
