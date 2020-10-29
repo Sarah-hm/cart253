@@ -60,7 +60,9 @@ class Ball {
     // this.vy = -this.vy;
     // this.ay = 0;
   }
+  collision(square) {
 
+  }
 
   display() {
     push();

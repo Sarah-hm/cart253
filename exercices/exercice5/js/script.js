@@ -18,10 +18,8 @@ let numBalls = 3;
 let squares = [];
 let numSquares = 20;
 
+// ===== Setting up overall canvas and balls + squares array =====
 
-// setup()
-//
-// Description of setup() goes here.
 function setup() {
   createCanvas(windowWidth, windowHeight)
 
@@ -42,15 +40,15 @@ function setup() {
   }
 }
 
-// draw()
-//
-// Description of draw() goes here.
+// ============ Draw function =============
 function draw() {
   background(0);
 
   paddle.move();
   paddle.display();
 
+
+  // ====== Display balls =======
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i]
     if (ball.active = true) {
@@ -61,20 +59,37 @@ function draw() {
     }
   }
 
-  for (let i = 0; i < squares.length; i++) {
-    let existing = squares[i];
-    let d = dist(square.x, square.y, existing.x, existing.y)
-    if (d < square.width / 2 + existing.width / 2 || d < square.height / 2 + existing.height / 2) {
-      break;
-    } else {
-      existing.display()
+
+  // ====== Display Squares only if they are not overlapping with an already existing square ======
+
+
+
+  for (let i = 0; i < balls.length; i++) {
+    let ball = balls[i];
+    for (let j = 0; j < squares.length; j++) {
+      let square = squares[i];
+      // let existing = squares[i];
+      // let d = dist(square.x, square.y, existing.x, existing.y)
+      // if (d < square.width / 2 + existing.width / 2 || d < square.height / 2 + existing.height / 2) {
+      //   break;
+      // } else {
+      square.collide(ball)
     }
   }
 
-  // for (let i = 0; i < squares.length; i++) {
-  //   let square = squares[i];
-  //   if (square.active = true) {
-  //     square.display()
-  //   }
-  // }
+  for (let i = 0; i < squares.length; i++) {
+    let square = squares[i];
+    square.display();
+  }
+
+
+
 }
+
+function collide(ball) {
+  for (let i = 0; i < squares.length; i++) {
+    let square = squares[i];
+    square.collide(ball);
+  }
+}
+// }

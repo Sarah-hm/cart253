@@ -8,6 +8,18 @@ class Square {
     this.active = true;
   }
 
+  collide(ball) {
+    console.log(ball.x)
+    if (ball.x > this.x - this.width / 2 &&
+      ball.x < this.x + this.width / 2 &&
+      ball.y > this.y - this.height / 2 &&
+      ball.y < this.y + this.height / 2) {
+      this.active = false;
+      console.log("collision")
+    }
+  }
+
+
   display() {
     push()
     fill(255);

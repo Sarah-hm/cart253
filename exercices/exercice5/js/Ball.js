@@ -56,14 +56,7 @@ class Ball {
       this.vy = -this.vy;
       this.ay = 0;
     }
-
-    //if this.y = the center, then adding half its size = bottom of the Ball
-    // if (the bottom of the ball has hit the lower side of the canvas) {bounce off}
-    // if (this.y + this.size / 2 >= height) {
-    // this.vy = -this.vy;
-    // this.ay = 0;
   }
-
 
   display() {
     push();
