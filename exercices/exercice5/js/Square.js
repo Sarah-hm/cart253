@@ -9,7 +9,7 @@ class Square {
   }
 
   collide(ball) {
-    console.log(ball.x)
+
     if (ball.x > this.x - this.width / 2 &&
       ball.x < this.x + this.width / 2 &&
       ball.y > this.y - this.height / 2 &&
@@ -21,11 +21,14 @@ class Square {
 
 
   display() {
-    push()
-    fill(255);
-    noStroke()
-    rectMode(CENTER);
-    rect(this.x, this.y, this.width, this.height)
-    pop()
+    if (this.active === true) {
+      push()
+
+      fill(255);
+      noStroke()
+      rectMode(CENTER);
+      rect(this.x, this.y, this.width, this.height)
+      pop()
+    }
   }
 }

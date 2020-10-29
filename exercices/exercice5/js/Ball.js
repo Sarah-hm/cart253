@@ -34,11 +34,9 @@ class Ball {
     if (this.y - this.size / 2 > height) {
       this.active = false
     }
-
-    //Constrain to canvas (except height of canvas to fall)
-    this.x = constrain(this.x, 0, width)
   }
 
+  //===== Make the balls bounce from the paddle =====
   bounce(paddle) {
     //if (ball is within the left edge of the  paddle and the right edge of the paddle) {bounce}
     if (this.x > paddle.x - paddle.width / 2 &&
@@ -55,6 +53,14 @@ class Ball {
 
       this.vy = -this.vy;
       this.ay = 0;
+    }
+  }
+
+  // ===== Make the balls bounce back from the X walls ======
+  wallBounce() {
+    if (this.x >= width ||
+      this.x <= 0) {
+      this.vx = -this.vx
     }
   }
 

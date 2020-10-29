@@ -55,6 +55,7 @@ function draw() {
       ball.gravity(gravityForce);
       ball.move();
       ball.bounce(paddle);
+      ball.wallBounce();
       ball.display();
     }
   }
@@ -67,7 +68,7 @@ function draw() {
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
     for (let j = 0; j < squares.length; j++) {
-      let square = squares[i];
+      let square = squares[j];
       // let existing = squares[i];
       // let d = dist(square.x, square.y, existing.x, existing.y)
       // if (d < square.width / 2 + existing.width / 2 || d < square.height / 2 + existing.height / 2) {
@@ -81,8 +82,6 @@ function draw() {
     let square = squares[i];
     square.display();
   }
-
-
 
 }
 
