@@ -12,6 +12,15 @@ class Ball {
     this.active = true;
   }
 
+  check() {
+    //If the ball is off the canvas, then it no longer exists
+    if (this.y - this.size / 2 > height) {
+      return true
+    } else {
+      return false
+    };
+  }
+
   gravity(force) {
     // add gravitanional force to make the ball fall
     this.ay += force
@@ -29,11 +38,6 @@ class Ball {
     //add velocity to x, y position
     this.x += this.vx
     this.y += this.vy
-
-    //If the ball is off the canvas, then it no longer exists
-    if (this.y - this.size / 2 > height) {
-      this.active = false
-    }
   }
 
   //===== Make the balls bounce from the paddle =====
