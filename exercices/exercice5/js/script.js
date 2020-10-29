@@ -48,6 +48,7 @@ function draw() {
   checkState();
 }
 
+//======= Check what state we are in, send to appropriate function =====
 function checkState() {
   if (state === `simulation`) {
     simulation();
@@ -58,10 +59,12 @@ function checkState() {
   }
 }
 
+//================== Simulation =================
 function simulation() {
   background(0);
-
   checkWinOrLose();
+
+  // ====== display paddle =====
   paddle.move();
   paddle.display();
 
@@ -77,6 +80,7 @@ function simulation() {
     }
   }
 
+  // ===== Check if balls are still in the canvas, if not; remove from array =====
   for (let i = balls.length - 1; i >= 0; i--) {
     let ball = balls[i];
     if (ball.check()) {
@@ -84,9 +88,10 @@ function simulation() {
     }
   }
 
-  // ====== Display Squares only if they are not overlapping with an already existing square ======
+  // ====== Display Squares if they have not collided with ball ======
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
+
     //remove one from the array if square and ball collide
     for (let j = squares.length - 1; j >= 0; j--) {
       let square = squares[j];
@@ -100,6 +105,7 @@ function simulation() {
     square.display();
   }
 }
+//================= win ===============
 
 function win() {
   push();
@@ -118,6 +124,8 @@ function win() {
   pop();
 }
 
+//================== lose ===============
+
 function lose() {
   push();
   background(255, 0, 0);
@@ -134,6 +142,7 @@ function lose() {
   pop();
 }
 
+// === if there are no squares left = win; if there are no balls left = lose ===
 function checkWinOrLose() {
   if (squares.length === 0) {
     state = `win`;

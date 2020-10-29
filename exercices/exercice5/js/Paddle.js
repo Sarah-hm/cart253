@@ -10,7 +10,7 @@ class Paddle {
     this.speed = 15
   }
 
-  // this moves only horizontally with the mouse
+  // this moves only horizontally with the keyboard arrows within the limit of the canvas
   move() {
     if (keyIsDown(LEFT_ARROW)) {
       this.vx = -this.speed;
@@ -27,7 +27,7 @@ class Paddle {
     this.y = constrain(this.y, 0, height);
   }
 
-
+  // Display the paddle
   display() {
     push()
     fill(255);

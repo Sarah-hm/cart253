@@ -1,5 +1,6 @@
 class Ball {
 
+  // Set ball construction
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -11,9 +12,8 @@ class Ball {
     this.size = 30;
     this.active = true;
   }
-
+  //If the ball is off the canvas, then it no longer exists
   check() {
-    //If the ball is off the canvas, then it no longer exists
     if (this.y - this.size / 2 > height) {
       return true
     } else {
@@ -21,8 +21,8 @@ class Ball {
     };
   }
 
+  // add gravitanional force to make the ball fall
   gravity(force) {
-    // add gravitanional force to make the ball fall
     this.ay += force
   }
 
@@ -67,6 +67,8 @@ class Ball {
       this.vx = -this.vx
     }
   }
+
+  //Displau the balls
 
   display() {
     push();

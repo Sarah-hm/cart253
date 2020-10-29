@@ -1,5 +1,6 @@
 class Square {
 
+  //Set square (that is not a square oops) construction
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -8,6 +9,7 @@ class Square {
 
   }
 
+  // Check to see if square has collided with ball; return true if so.
   collide(ball) {
 
     if (ball.x > this.x - this.width / 2 &&
@@ -20,7 +22,7 @@ class Square {
     };
   }
 
-
+  //Display the square-that-is-not-a-square 
   display() {
 
     push()
