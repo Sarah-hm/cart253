@@ -90,11 +90,11 @@ function setup() {
   });
 
   //Set InstructionPage class attributes
-  let insPopUpX = width / 2
-  let insPopUpY = height / 2
+  let insPopUpX = width / 2;
+  let insPopUpY = height / 2;
 
-  let insBackButtonX = width / 2
-  let insBackButtonY = height / 10 * 9
+  let insBackButtonX = width / 2;
+  let insBackButtonY = height / 10 * 9;
 
   instructionPage = new InstructionPage({
     insPopUpX,
