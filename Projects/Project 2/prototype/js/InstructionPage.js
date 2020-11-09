@@ -25,16 +25,16 @@ class InstructionPage {
   }
 
   displayBackButton() {
-    if (mouseX > this.insBackButtonX - this.insButtonWidth / 2 &&
-      mouseX < this.insBackButtonX + this.insButtonWidth / 2 &&
-      mouseY > this.insBackButtonY - this.insButtonHeight / 2 &&
-      mouseY < this.insBackButtonY + this.insButtonHeight / 2) {
+    if (mouseX > this.insBackButtonX - this.insButtonsWidth / 2 &&
+      mouseX < this.insBackButtonX + this.insButtonsWidth / 2 &&
+      mouseY > this.insBackButtonY - this.insButtonsHeight / 2 &&
+      mouseY < this.insBackButtonY + this.insButtonsHeight / 2) {
       push()
       image(this.insBackButtonHoverImg, this.insBackButtonX, this.insBackButtonY, this.insButtonWidth, this.insButtonHeight)
       pop()
     } else {
       push()
-      image(this.insNeutralImg, this.insX, this.insY, this.insWidth, this.insHeight)
+      image(this.insBackButtonNeutralImg, this.insBackButtonX, this.insBackButtonY, this.insButtonWidth, this.insButtonHeight)
       pop()
     }
   }
