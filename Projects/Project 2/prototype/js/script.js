@@ -61,12 +61,9 @@ function preload() {
 
 }
 
-// setup()
-//
-// Description of setup() goes here.
+//Setting up canvas, universal modes, and Title page, Instruction Page and lvl 1 page classes
 function setup() {
   createCanvas(600, 600);
-
   imageMode(CENTER);
   rectMode(CENTER);
 
@@ -128,16 +125,13 @@ function setup() {
   })
 }
 
-// draw()
-//
-// Description of draw() goes here.
+//Will check state every fram and react accordingly
 function draw() {
   background(230);
   checkState()
 }
 
 //Check which state we are in
-
 function checkState() {
   if (state === `titlePage`) {
     titlePageState();
