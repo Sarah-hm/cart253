@@ -100,8 +100,8 @@ function setup() {
     insPopUpX,
     insPopUpY,
     insBackButtonX,
-    insBackButtonY
-  })
+    insBackButtonY,
+  });
 
   //Set level 1 class attributes;
   let house1X = width / 4 * 3;
