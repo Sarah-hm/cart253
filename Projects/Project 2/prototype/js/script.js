@@ -38,14 +38,17 @@ let boxHoverImg;
 
 
 function preload() {
+  //title Page images
   titleImg = loadImage("assets/images/Title.png");
   insNeutralImg = loadImage("assets/images/insNeutral.png");
   insHoverImg = loadImage("assets/images/insHover.png");
 
+  //instruction Page images
   insPopUpImg = loadImage("assets/images/insPopUpImg.png")
   insBackButtonNeutralImg = loadImage("assets/images/insBackButtonNeutral.png");
   insBackButtonHoverImg = loadImage("assets/images/insBackButtonHover.png")
 
+  //level 1 images
   lvl1bgImg = loadImage("assets/images/lvl1_bg.png");
   house1NeutralImg = loadImage("assets/images/house1Neutral.png")
   house1HoverImg = loadImage("assets/images/house1Hover.png")
@@ -100,7 +103,7 @@ function setup() {
     insBackButtonY
   })
 
-  //Set level 1 attributes;
+  //Set level 1 class attributes;
   let house1X = width / 4 * 3;
   let house1Y = height / 6 * 5;
 
@@ -149,7 +152,7 @@ function checkState() {
   }
 }
 
-// ======== Functions relating to Title Page ========
+// ================= Title Page ===================
 // Display Title Page Class
 
 function titlePageState() {
@@ -175,12 +178,7 @@ function checkInstructionOrStart() {
   }
 }
 
-// Display Instruction Page class , back button, ...
-function instructionPageState() {
-  checkBackButtonPressed();
-  instructionPage.displayInstructionPopUp();
-  instructionPage.displayBackButton();
-}
+// functions to see if 'any' was typed, as seen in Pippin's example
 
 function checkInput() {
   let lowerCaseInput = currentInput.toLowerCase();
@@ -201,6 +199,19 @@ function keyPressed() {
   }
 }
 
+// ============ Instruction Page ============
+
+// Display Instruction Page class , back button, (eventually more info button)
+// (Thinking of putting the instruction page as a semi-opaque pop up over the title Page for cleaner look)
+
+function instructionPageState() {
+  checkBackButtonPressed();
+  instructionPage.displayInstructionPopUp();
+  instructionPage.displayBackButton();
+}
+
+
+
 // ===== function relating to the Instruction page =====
 
 // If 'back' button on instruction page is pressed, go back to Title Page
@@ -215,8 +226,9 @@ function checkBackButtonPressed() {
   }
 }
 
-// ===========Functions relating to LEVEL 1 ============
-//Display Level 1
+// ======================= LEVEL 1 ========================
+
+//Display Level 1 class
 function lvl1State() {
   checkLivingSpaceSelected();
   lvl1.setbackground();
@@ -225,8 +237,9 @@ function lvl1State() {
 }
 
 function checkLivingSpaceSelected() {
-  //Again, this should probably be in an array for efficiency. Will be changed in the actual program.
+  //This should probably be in an array for efficiency. Will be changed in the actual program.
   if (mouseIsPressed) {
+    // function mouseClicked() {
     if (mouseX > lvl1.house1X - lvl1.house1Width / 2 &&
       mouseX < lvl1.house1X + lvl1.house1Width / 2 &&
       mouseY > lvl1.house1Y - lvl1.house1Height / 2 &&
@@ -248,11 +261,11 @@ function checkLivingSpaceSelected() {
       mouseY < lvl1.boxY + lvl1.boxHeight / 2) {
       state = `success`
     }
-
   }
 }
 
 function fail() {
+  push()
   background(255, 0, 0)
   textSize(25)
   fill(0)
@@ -261,9 +274,11 @@ function fail() {
     (In the final game version, this will result in -1 life.
     The string will be presented as
     a 2-3 sec long pop up)`, width / 2, height / 2)
+  pop()
 }
 
 function success() {
+  push()
   background(0, 255, 0)
   textSize(25);
   fill(0);
@@ -273,4 +288,5 @@ function success() {
   (In the final game version, this will result
   in lvl up. The string will be presented
 as a 2-3 sec pop up)`, width / 2, height / 2)
+  pop()
 }

@@ -25,6 +25,7 @@ class TitlePage {
     //Will eventually set a sound when interacting with the instruction button
   }
 
+  //Display the image title 'A millennial's survival guide'
   displayTitle() {
     push();
     image(
@@ -37,6 +38,8 @@ class TitlePage {
     pop();
   }
 
+
+  //display instructions button, make it change color if you hover over it
   displayInstructions() {
     if (mouseX > this.insX - this.insWidth / 2 &&
       mouseX < this.insX + this.insWidth / 2 &&
@@ -52,6 +55,7 @@ class TitlePage {
     }
   }
 
+  //display 'Press any key to start' at the bottom center of the canvas
   displayStartString() {
     push()
     textAlign(CENTER, CENTER);

@@ -1,4 +1,6 @@
 class Lvl1 {
+
+  //Construct a background, 3 houses and box that can be hovered over to change color.
   constructor({
     house1X,
     house1Y,
@@ -9,8 +11,6 @@ class Lvl1 {
     boxX,
     boxY
   }) {
-    this.userX = mouseX;
-    this.userY = mouseY;
 
     this.numLvlString = `#1`;
     this.insString = `Today is the day.
@@ -48,6 +48,8 @@ class Lvl1 {
     this.boxHeight = 38;
   }
 
+
+  // Display road, flowers and 1 tree in a background image (.png)
   setbackground() {
     push()
     imageMode(CORNER);
@@ -56,9 +58,11 @@ class Lvl1 {
     pop()
   }
 
+  //Display 3 houses and 1 box that can be hovered over to change colour to hint at possible interactivity.
+
   setLivingSpaces() {
     push()
-    // I realize now the following could have easily been in an array. Will be changedand set as an array for project 02 (livingSpaces = [])
+    // I realize now the following could have easily been in an array. Will be changed  for project 02 (Neighborhood = [])
 
     //house 1
     if (mouseX > this.house1X - this.house1Width / 2 &&
@@ -117,6 +121,7 @@ class Lvl1 {
     }
   }
 
+  //Display lvl number (#1) and the instructions to pass the level : need to 'buy a house' (select a living space).
 
   setStrings() {
     push();
@@ -127,5 +132,6 @@ class Lvl1 {
     text(this.insString, width / 10 * 4, height / 10)
     pop()
   }
+
 
 }
