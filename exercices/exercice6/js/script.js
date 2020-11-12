@@ -15,19 +15,26 @@ let currentLine = 0
 
 // Set variables
 let rectangle;
+let mic;
+let micLevel;
 
 function setup() {
   createCanvas(600, 600)
+  userStartAudio()
   textAlign(CENTER, CENTER)
+  mic = new p5.AudioIn();
+  mic.start();
 
   //set Rectangle class attributes
 
   let x = width;
-  let y = 50;
+  let y = 0
 
   rectangle = new Rectangle(x, y)
 }
 
+
+// let decNum = map(level,0, stringArray.length)
 // draw()
 
 function draw() {

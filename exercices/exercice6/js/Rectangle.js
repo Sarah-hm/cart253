@@ -16,12 +16,15 @@ class Rectangle {
   }
 
   resize() {
+    micLevel = mic.getLevel();
     this.uCornerX = width;
-    this.uCornerY = mouseY;
+    this.uCornerY = height - micLevel * height;
+    console.log(micLevel)
     // let y = map(height, 0)
   }
 
   displayString() {
+    let string = threshold[i];
 
   }
 
