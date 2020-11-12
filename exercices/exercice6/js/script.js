@@ -7,13 +7,11 @@ The solution is: screaming over a certain threshold. There will be different thr
 (with different strings appearing) to hint at users that this level works with the microphone.
 **************************************************/
 "use strict"
-// setup()
-
 
 //set state
 let state = `simulation` //can also be `level up`
 
-//create array to display different text according to rect height\
+//create array to display different strings according to rect height\
 //the first is deliberately set to '[empty]' so nothing is showing if no sound is created
 let stringArray = [` `, `I don't believe it`, `Let's not pretend, here.`, `Yeah, that's sounds about right`]
 let currentLine = 0
@@ -44,24 +42,11 @@ function setup() {
   rectangle = new Rectangle(x, y)
 }
 
-
-// let decNum = map(level,0, stringArray.length)
-// draw()
-
+// ======== draw() =======
+// Will check if simulation or level up state is true, react accordingly
 function draw() {
   background(204, 231, 227)
-
-  checkRectHeight();
   checkState();
-}
-
-
-function checkRectHeight() {
-  if (rectangle.uCornerY < 0) {
-    state = `level up`
-  } else {
-    state = `simulation`
-  }
 }
 
 function checkState() {
@@ -72,24 +57,37 @@ function checkState() {
   }
 }
 
+// ===== Simulation =====
 function simulation() {
   displayQuestion();
+  checkRectHeight();
   rectangle.display();
   rectangle.resize();
   rectangle.displayString();
 }
 
+// If orange rect's corner is at top of canvas = level up. If not, keep going.
+function checkRectHeight() {
+  if (rectangle.uCornerY < 0) {
+    state = `level up`
+  } else {
+    state = `simulation`
+  }
+}
+
+//Display the #lvl and the riddle to find the solution to.
 function displayQuestion() {
   push();
-  textAlign(CENTER, CENTER);
-  textSize(32);
+  textAlign(LEFT, CENTER);
+  textSize(28);
   fill(255);
-  text(`lvl #2`, width / 10, height / 20);
+  text(`lvl #2`, width / 20, height / 20);
   text(`On a scale from 'I got this' to 'AAAAAAH',
-how confident are you about the future?`, width / 2, height / 10 * 2)
+how confident do you feel about the future?`, width / 20, height / 10 * 2)
   pop()
 }
 
+//Displays a text instead of what would otherwise be the next level
 function levelUp() {
   push()
   textAlign(CENTER, CENTER)
