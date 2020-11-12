@@ -21,7 +21,7 @@ class TitlePage {
     this.titleImg = titleImg;
     this.insNeutralImg = insNeutralImg;
     this.insHoverImg = insHoverImg;
-    this.startString = `Press any key to start`;
+    this.startString = `Press any keys to start`;
     //Will eventually set a sound when interacting with the instruction button
   }
 
