@@ -15,19 +15,18 @@ class Rectangle {
 
   }
 
+  //==== Resizing the orange rectangle based on mic level input ====
+  // The louder the sound, the bigger the height of the rect
   resize() {
-    micLevel = mic.getLevel();
+    micLevel = mic.getLevel(1);
     this.uCornerX = width;
-    this.uCornerY = height - micLevel * height;
+    //start at 20 lower the bottom line to exempt small noises from environment
+    //micLevel of .5 will get to top of canvas (miclevel = 2 * the height of canvas)
+    this.uCornerY = height + 20 - micLevel * (height * 2);
     console.log(micLevel)
-    // let y = map(height, 0)
   }
 
-  displayString() {
-    let string = threshold[i];
-
-  }
-
+  //==== display the orange rectangle =====
   display() {
     push()
     rectMode(CORNERS)
@@ -36,4 +35,20 @@ class Rectangle {
     rect(this.bCornerX, this.bCornerY, this.uCornerX, this.uCornerY)
     pop()
   }
+
+  // ==== Display String ====
+  //Decide what string is going to display based on rect height
+  displayString() {
+    decimalIndex = map(this.uCornerY, height, 0, 0, stringArray.length);
+    currentLine = int(decimalIndex);
+
+    //Display the string
+    push()
+    textAlign(CENTER, CENTER)
+    textSize(32)
+    text(stringArray[currentLine], width / 2, height / 2)
+    pop()
+  }
+
+
 }
