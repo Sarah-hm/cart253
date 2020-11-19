@@ -15,7 +15,7 @@ let currentState;
 
 
 //Title page variables
-let titlePage;
+// let titlePage;
 let titleImg;
 let insNeutralImg;
 let insHoverImg;
@@ -24,13 +24,13 @@ let insHoverImg;
 // let correct = checkInput();
 
 // Instruction page variables
-let instructionPage;
+// let instructionPage;
 let insPopUpImg;
 let insBackButtonNeutralImg;
 let insBackButtonHoverImg;
 
 //Level 1 variables;
-let lvl1;
+// let lvl1;
 let lvl1bgImg;
 let house1NeutralImg;
 let house1HoverImg;
@@ -42,7 +42,7 @@ let boxNeutralImg;
 let boxHoverImg;
 
 //level 2 variables
-let lvl2;
+// let lvl2;
 let candycaneNeutralImg;
 let candycaneHoverImg;
 let snowflakeNeutralImg;
@@ -53,12 +53,12 @@ let xmasBallNeutralImg;
 let xmasBallHoverImg;
 
 // level 3 variables;
-let lvl3;
-let lvl3StringArray = [` `, `I don't believe it`, `Let's not pretend, here.`, `Yeah, that's sounds about right`]
-let lvl3CurrentLine = 0;
-let lvl3DecimalIndex = 0;
+// let lvl3;
+// let lvl3StringArray = [` `, `I don't believe it`, `Let's not pretend, here.`, `Yeah, that's sounds about right`]
+// let lvl3CurrentLine = 0;
+// let lvl3DecimalIndex = 0;
 
-let lvl3Rectangle;
+// let lvl3Rectangle;
 let mic;
 let micLevel;
 
@@ -279,190 +279,190 @@ function keyTyped() {
 // Display Instruction Page class , back button, (eventually more info button)
 // (Thinking of putting the instruction page as a semi-opaque pop up over the title Page for cleaner look)
 
-function instructionPageState() {
-  checkBackButtonPressed();
-  instructionPage.displayInstructionPopUp();
-  instructionPage.displayBackButton();
-}
+// function instructionPageState() {
+//   checkBackButtonPressed();
+//   instructionPage.displayInstructionPopUp();
+//   instructionPage.displayBackButton();
+// }
 
 
 
 // ===== function relating to the Instruction page =====
 
 // If 'back' button on instruction page is pressed, go back to Title Page
-function checkBackButtonPressed() {
-  if (mouseIsPressed) {
-    if (mouseX > instructionPage.insBackButtonX - instructionPage.insButtonsWidth / 2 &&
-      mouseX < instructionPage.insBackButtonX + instructionPage.insButtonsWidth / 2 &&
-      mouseY > instructionPage.insBackButtonY - instructionPage.insButtonsHeight / 2 &&
-      mouseY < instructionPage.insBackButtonY + instructionPage.insButtonsHeight / 2) {
-      state = `titlePage`
-    }
-  }
-}
+// function checkBackButtonPressed() {
+//   if (mouseIsPressed) {
+//     if (mouseX > instructionPage.insBackButtonX - instructionPage.insButtonsWidth / 2 &&
+//       mouseX < instructionPage.insBackButtonX + instructionPage.insButtonsWidth / 2 &&
+//       mouseY > instructionPage.insBackButtonY - instructionPage.insButtonsHeight / 2 &&
+//       mouseY < instructionPage.insBackButtonY + instructionPage.insButtonsHeight / 2) {
+//       state = `titlePage`
+//     }
+//   }
+// }
 
 // ======================= LEVEL 1 ========================
-
-//Display Level 1 class
-function lvl1State() {
-  checkLivingSpaceSelected();
-  lvl1.setbackground();
-  lvl1.setLivingSpaces();
-  lvl1.setStrings();
-}
-
-function checkLivingSpaceSelected() {
-  // How would I go about putting this in an array?
-  if (mouseIsPressed) {
-    // function mouseClicked() {
-    if (mouseX > lvl1.house1X - lvl1.house1Width / 2 &&
-      mouseX < lvl1.house1X + lvl1.house1Width / 2 &&
-      mouseY > lvl1.house1Y - lvl1.house1Height / 2 &&
-      mouseY < lvl1.house1Y + lvl1.house1Height / 2) {
-      state = `fail`
-    } else if (mouseX > lvl1.house2X - lvl1.house2Width / 2 &&
-      mouseX < lvl1.house2X + lvl1.house2Width / 2 &&
-      mouseY > lvl1.house2Y - lvl1.house2Height / 2 &&
-      mouseY < lvl1.house2Y + lvl1.house2Height / 2) {
-      state = `fail`
-    } else if (mouseX > lvl1.house3X - lvl1.house3Width / 2 &&
-      mouseX < lvl1.house3X + lvl1.house3Width / 2 &&
-      mouseY > lvl1.house3Y - lvl1.house3Height / 2 &&
-      mouseY < lvl1.house3Y + lvl1.house3Height / 2) {
-      state = `fail`
-    } else if (mouseX > lvl1.boxX - lvl1.boxWidth / 2 &&
-      mouseX < lvl1.boxX + lvl1.boxWidth / 2 &&
-      mouseY > lvl1.boxY - lvl1.boxHeight / 2 &&
-      mouseY < lvl1.boxY + lvl1.boxHeight / 2) {
-      state = `lvl1Success`
-      lvl1.successFrameStart = frameCount;
-      // console.log(lvl1.successFrameStart)
-    }
-  }
-}
-
-function lvl1Success() {
-  push()
-  imageMode(CORNER);
-  image(lvl1.backgroundImg, width, height);
-  background(lvl1.backgroundImg)
-  textSize(25);
-  fill(0);
-  textAlign(CENTER, CENTER);
-  text(`Isn't nice? At this rate,
-  you might be able to afford a
-  second one soon`, width / 2, height / 5)
-  pop()
-
-  if (mouseIsPressed &&
-    frameCount > lvl1.successFrameStart + lvl1.successMessageMinLength) {
-    state = `lvl2`;
-  }
-}
-
-
-function lvl2State() {
-  checkXmasDecoSelected();
-  lvl2.setbackground();
-  lvl2.displayAssets();
-  lvl2.setStrings();
-
-}
-
-function checkXmasDecoSelected() {
-  if (mouseIsPressed) {
-    // function mouseClicked() {
-    if (mouseX > lvl2.candycaneX - lvl2.size / 2 &&
-      mouseX < lvl2.candycaneX + lvl2.size / 2 &&
-      mouseY > lvl2.candycaneY - lvl2.size / 2 &&
-      mouseY < lvl2.candycaneY + lvl2.size / 2) {
-      state = `fail`
-    } else if (mouseX > lvl2.snowglobeX - lvl2.size / 2 &&
-      mouseX < lvl2.snowglobeX + lvl2.size / 2 &&
-      mouseY > lvl2.snowglobeY - lvl2.size / 2 &&
-      mouseY < lvl2.snowglobeY + lvl2.size / 2) {
-      state = `fail`
-    } else if (mouseX > lvl2.xmasBallX - lvl2.size / 2 &&
-      mouseX < lvl2.xmasBallX + lvl2.size / 2 &&
-      mouseY > lvl2.xmasBallY - lvl2.size / 2 &&
-      mouseY < lvl2.xmasBallY + lvl2.size / 2) {
-      state = `fail`
-    } else if (mouseX > lvl2.snowflakeX - lvl2.size / 2 &&
-      mouseX < lvl2.snowflakeX + lvl2.size / 2 &&
-      mouseY > lvl2.snowflakeY - lvl2.size / 2 &&
-      mouseY < lvl2.snowflakeY + lvl2.size / 2) {
-      state = `lvl2Success`
-      lvl2.successFrameStart = frameCount;
-    }
-  }
-}
-
-function lvl2Success() {
-  push()
-  lvl2.setbackground();
-  lvl2.displayAssets();
-  fill(239, 122, 98)
-  noStroke();
-  rect(width / 2, height / 2, 300, 200)
-  textSize(25);
-  fill(0);
-  textAlign(CENTER, CENTER);
-  text(`That's right,
-  you precious snowflake`, width / 2, height / 2)
-  pop()
-
-  if (mouseIsPressed &&
-    frameCount > lvl2.successFrameStart + lvl2.successMessageMinLength) {
-    state = `lvl3`;
-  }
-}
-
-function lvl3State() {
-  checklvl3RectHeight();
-  lvl3.setBackground();
-  lvl3.resize();
-  lvl3.displayRectangle();
-  lvl3.displayMicLevelStrings();
-  lvl3.setStrings();
-}
-
-// If orange rect's corner is at top of canvas = level up. If not, keep going.
-function checklvl3RectHeight() {
-  if (lvl3.uCornerY < 0) {
-    state = `lvl3Success`
-  } else {
-    state = `lvl3`
-  }
-}
-
-function lvl3Success() {
-  push()
-  background(lvl3.fill.r, lvl3.fill.g, lvl3.fill.b)
-  textSize(25);
-  fill(lvl3.bgFill.r, lvl3.bgFill.g, lvl3.bgFill.b);
-  textAlign(CENTER, CENTER);
-  text(`I'd like to scream into
-  the void more often, too.
-  Anyhoo, let's keep going.`, width / 2, height / 2)
-  pop()
-}
-
-function lvl4() {
-
-}
-
-function lvl4Success() {
-
-}
-
-function fail() {
-  push()
-  background(255, 0, 0)
-  textSize(25)
-  fill(0)
-  textAlign(CENTER, CENTER)
-  text(`This will result in -1 life.
-    But until that is put in place...
-    ya dead.`, width / 2, height / 2)
-  pop()
-}
+//
+// //Display Level 1 class
+// function lvl1State() {
+//   checkLivingSpaceSelected();
+//   lvl1.setbackground();
+//   lvl1.setLivingSpaces();
+//   lvl1.setStrings();
+// }
+//
+// function checkLivingSpaceSelected() {
+//   // How would I go about putting this in an array?
+//   if (mouseIsPressed) {
+//     // function mouseClicked() {
+//     if (mouseX > lvl1.house1X - lvl1.house1Width / 2 &&
+//       mouseX < lvl1.house1X + lvl1.house1Width / 2 &&
+//       mouseY > lvl1.house1Y - lvl1.house1Height / 2 &&
+//       mouseY < lvl1.house1Y + lvl1.house1Height / 2) {
+//       state = `fail`
+//     } else if (mouseX > lvl1.house2X - lvl1.house2Width / 2 &&
+//       mouseX < lvl1.house2X + lvl1.house2Width / 2 &&
+//       mouseY > lvl1.house2Y - lvl1.house2Height / 2 &&
+//       mouseY < lvl1.house2Y + lvl1.house2Height / 2) {
+//       state = `fail`
+//     } else if (mouseX > lvl1.house3X - lvl1.house3Width / 2 &&
+//       mouseX < lvl1.house3X + lvl1.house3Width / 2 &&
+//       mouseY > lvl1.house3Y - lvl1.house3Height / 2 &&
+//       mouseY < lvl1.house3Y + lvl1.house3Height / 2) {
+//       state = `fail`
+//     } else if (mouseX > lvl1.boxX - lvl1.boxWidth / 2 &&
+//       mouseX < lvl1.boxX + lvl1.boxWidth / 2 &&
+//       mouseY > lvl1.boxY - lvl1.boxHeight / 2 &&
+//       mouseY < lvl1.boxY + lvl1.boxHeight / 2) {
+//       state = `lvl1Success`
+//       lvl1.successFrameStart = frameCount;
+//       // console.log(lvl1.successFrameStart)
+//     }
+//   }
+// }
+//
+// function lvl1Success() {
+//   push()
+//   imageMode(CORNER);
+//   image(lvl1.backgroundImg, width, height);
+//   background(lvl1.backgroundImg)
+//   textSize(25);
+//   fill(0);
+//   textAlign(CENTER, CENTER);
+//   text(`Isn't nice? At this rate,
+//   you might be able to afford a
+//   second one soon`, width / 2, height / 5)
+//   pop()
+//
+//   if (mouseIsPressed &&
+//     frameCount > lvl1.successFrameStart + lvl1.successMessageMinLength) {
+//     state = `lvl2`;
+//   }
+// }
+//
+//
+// function lvl2State() {
+//   checkXmasDecoSelected();
+//   lvl2.setbackground();
+//   lvl2.displayAssets();
+//   lvl2.setStrings();
+//
+// }
+//
+// function checkXmasDecoSelected() {
+//   if (mouseIsPressed) {
+//     // function mouseClicked() {
+//     if (mouseX > lvl2.candycaneX - lvl2.size / 2 &&
+//       mouseX < lvl2.candycaneX + lvl2.size / 2 &&
+//       mouseY > lvl2.candycaneY - lvl2.size / 2 &&
+//       mouseY < lvl2.candycaneY + lvl2.size / 2) {
+//       state = `fail`
+//     } else if (mouseX > lvl2.snowglobeX - lvl2.size / 2 &&
+//       mouseX < lvl2.snowglobeX + lvl2.size / 2 &&
+//       mouseY > lvl2.snowglobeY - lvl2.size / 2 &&
+//       mouseY < lvl2.snowglobeY + lvl2.size / 2) {
+//       state = `fail`
+//     } else if (mouseX > lvl2.xmasBallX - lvl2.size / 2 &&
+//       mouseX < lvl2.xmasBallX + lvl2.size / 2 &&
+//       mouseY > lvl2.xmasBallY - lvl2.size / 2 &&
+//       mouseY < lvl2.xmasBallY + lvl2.size / 2) {
+//       state = `fail`
+//     } else if (mouseX > lvl2.snowflakeX - lvl2.size / 2 &&
+//       mouseX < lvl2.snowflakeX + lvl2.size / 2 &&
+//       mouseY > lvl2.snowflakeY - lvl2.size / 2 &&
+//       mouseY < lvl2.snowflakeY + lvl2.size / 2) {
+//       state = `lvl2Success`
+//       lvl2.successFrameStart = frameCount;
+//     }
+//   }
+// }
+//
+// function lvl2Success() {
+//   push()
+//   lvl2.setbackground();
+//   lvl2.displayAssets();
+//   fill(239, 122, 98)
+//   noStroke();
+//   rect(width / 2, height / 2, 300, 200)
+//   textSize(25);
+//   fill(0);
+//   textAlign(CENTER, CENTER);
+//   text(`That's right,
+//   you precious snowflake`, width / 2, height / 2)
+//   pop()
+//
+//   if (mouseIsPressed &&
+//     frameCount > lvl2.successFrameStart + lvl2.successMessageMinLength) {
+//     state = `lvl3`;
+//   }
+// }
+//
+// function lvl3State() {
+//   checklvl3RectHeight();
+//   lvl3.setBackground();
+//   lvl3.resize();
+//   lvl3.displayRectangle();
+//   lvl3.displayMicLevelStrings();
+//   lvl3.setStrings();
+// }
+//
+// // If orange rect's corner is at top of canvas = level up. If not, keep going.
+// function checklvl3RectHeight() {
+//   if (lvl3.uCornerY < 0) {
+//     state = `lvl3Success`
+//   } else {
+//     state = `lvl3`
+//   }
+// }
+//
+// function lvl3Success() {
+//   push()
+//   background(lvl3.fill.r, lvl3.fill.g, lvl3.fill.b)
+//   textSize(25);
+//   fill(lvl3.bgFill.r, lvl3.bgFill.g, lvl3.bgFill.b);
+//   textAlign(CENTER, CENTER);
+//   text(`I'd like to scream into
+//   the void more often, too.
+//   Anyhoo, let's keep going.`, width / 2, height / 2)
+//   pop()
+// }
+//
+// function lvl4() {
+//
+// }
+//
+// function lvl4Success() {
+//
+// }
+//
+// function fail() {
+//   push()
+//   background(255, 0, 0)
+//   textSize(25)
+//   fill(0)
+//   textAlign(CENTER, CENTER)
+//   text(`This will result in -1 life.
+//     But until that is put in place...
+//     ya dead.`, width / 2, height / 2)
+//   pop()
+// }

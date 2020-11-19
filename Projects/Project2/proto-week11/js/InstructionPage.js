@@ -1,18 +1,13 @@
 class InstructionPage extends State {
 
   // Construct an image of a text(instructions), frame and button to go back to title page.
-  constructor({
-    insPopUpX,
-    insPopUpY,
-    insBackButtonX,
-    insBackButtonY
-  }) {
+  constructor() {
     super();
-    this.insPopUpX = insPopUpX;
-    this.insPopUpY = insPopUpY;
+    this.insPopUpX = width / 2;
+    this.insPopUpY = height / 2;
     this.insPopUpSize = 407;
-    this.insBackButtonX = insBackButtonX;
-    this.insBackButtonY = insBackButtonY;
+    this.insBackButtonX = width / 2;
+    this.insBackButtonY = height / 10 * 9;
     this.insButtonsWidth = 147;
     this.insButtonsHeight = 44;
     this.insPopUpImg = insPopUpImg;
@@ -21,6 +16,8 @@ class InstructionPage extends State {
   }
 
   update() {
+    this.displayInstructionPopUp();
+    this.displayBackButton();
 
   }
 
@@ -45,6 +42,15 @@ class InstructionPage extends State {
       push()
       image(this.insBackButtonNeutralImg, this.insBackButtonX, this.insBackButtonY, this.insButtonWidth, this.insButtonHeight)
       pop()
+    }
+  }
+
+  mousePressed() {
+    if (mouseX > this.insBackButtonX - this.insButtonsWidth / 2 &&
+      mouseX < this.insBackButtonX + this.insButtonsWidth / 2 &&
+      mouseY > this.insBackButtonY - this.insButtonsHeight / 2 &&
+      mouseY < this.insBackButtonY + this.insButtonsHeight / 2) {
+      currentState = new TitlePage();
     }
   }
 

@@ -1,14 +1,5 @@
 class Lvl2 extends State {
-  constructor({
-    candycaneX,
-    candycaneY,
-    snowflakeX,
-    snowflakeY,
-    snowglobeX,
-    snowglobeY,
-    xmasBallX,
-    xmasBallY
-  }) {
+  constructor() {
     super();
     //set instruction and lvl number
     this.numLvlString = `#2`;
@@ -27,36 +18,40 @@ class Lvl2 extends State {
     // set all 4 assets' variables (x, y, neutral image, hover image)
     this.candycaneNeutralImg = candycaneNeutralImg;
     this.candycaneHoverImg = candycaneHoverImg;
-    this.candycaneX = candycaneX;
-    this.candycaneY = candycaneY;
+    this.candycaneX = width / 4;
+    this.candycaneY = height / 5 * 2;
 
     this.snowflakeNeutralImg = snowflakeNeutralImg;
     this.snowflakeHoverImg = snowflakeHoverImg;
-    this.snowflakeX = snowflakeX;
-    this.snowflakeY = snowflakeY;
+    this.snowflakeX = width / 4 * 3;
+    this.snowflakeY = height / 5 * 2;
 
     this.snowglobeNeutralImg = snowglobeNeutralImg;
     this.snowglobeHoverImg = snowglobeHoverImg;
-    this.snowglobeX = snowglobeX;
-    this.snowglobeY = snowglobeY;
+    this.snowglobeX = width / 4;
+    this.snowglobeY = height / 5 * 4;
 
     this.xmasBallNeutralImg = xmasBallNeutralImg;
     this.xmasBallHoverImg = xmasBallHoverImg;
-    this.xmasBallX = xmasBallX;
-    this.xmasBallY = xmasBallY
+    this.xmasBallX = width / 4 * 3;
+    this.xmasBallY = height / 5 * 4;
 
     //Set the minimum time one should be in the 'success' state of the level
 
     this.successFrameStart = 0;
     this.successMessageMinLength = 60;
+
+
   }
 
   update() {
-
+    this.setBackground();
+    this.displayAssets();
+    this.setStrings();
   }
 
 
-  setbackground() {
+  setBackground() {
     background(this.bgFill.r, this.bgFill.g, this.bgFill.b)
   }
 
@@ -127,5 +122,50 @@ class Lvl2 extends State {
     text(this.numLvlString, width / 10, height / 20);
     text(this.insString, width / 10 * 4, height / 10)
     pop()
+  }
+
+  mousePressed() {
+    if (mouseX > this.candycaneX - this.size / 2 &&
+      mouseX < this.candycaneX + this.size / 2 &&
+      mouseY > this.candycaneY - this.size / 2 &&
+      mouseY < this.candycaneY + this.size / 2) {
+      currentState = new GameOver();
+    } else if (mouseX > this.snowglobeX - this.size / 2 &&
+      mouseX < this.snowglobeX + this.size / 2 &&
+      mouseY > this.snowglobeY - this.size / 2 &&
+      mouseY < this.snowglobeY + this.size / 2) {
+      currentState = new GameOver();
+    } else if (mouseX > this.xmasBallX - this.size / 2 &&
+      mouseX < this.xmasBallX + this.size / 2 &&
+      mouseY > this.xmasBallY - this.size / 2 &&
+      mouseY < this.xmasBallY + this.size / 2) {
+      currentState = new GameOver();
+    } else if (mouseX > this.snowflakeX - this.size / 2 &&
+      mouseX < this.snowflakeX + this.size / 2 &&
+      mouseY > this.snowflakeY - this.size / 2 &&
+      mouseY < this.snowflakeY + this.size / 2) {
+      this.success()
+      this.successFrameStart = frameCount;
+    }
+
+  }
+
+  success() {
+    this.setBackground();
+    this.displayAssets();
+    fill(239, 122, 98)
+    noStroke();
+    rect(width / 2, height / 2, 300, 200)
+    textSize(25);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text(`That's right,
+    you precious snowflake`, width / 2, height / 2)
+    pop()
+
+    if (mouseIsPressed &&
+      frameCount > this.successFrameStart + this.successMessageMinLength) {
+      currentState = new Lvl3
+    }
   }
 }
