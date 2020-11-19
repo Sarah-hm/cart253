@@ -18,10 +18,16 @@ class Lvl3 {
       g: 122,
       b: 98
     };
+
+    this.bgFill = {
+      r: 204,
+      g: 231,
+      b: 98
+    }
   }
 
   setBackground() {
-    background(204, 231, 227)
+    background(this.bgFill.r, this.bgFill.g, this.bgFill.b)
   }
 
   //==== Resizing the orange rectangle based on mic level input ====

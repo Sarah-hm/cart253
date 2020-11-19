@@ -3,14 +3,14 @@ Sarah Hontoy-Major - Project 02 Proposal;
 
 This is my prototype to "A millenial's survival guide", my final project.
 
-level 1 : buying a house;
-level 2 : christmas deco (snowflake);
-level 3:
+level 1 : buying a house (being able to afford the box);
+level 2 : christmas deco (snowflake gen);
+level 3: Confidence about future ('AAAH' mic input)
 
 **************************************************/
 "use strict";
 
-let state = `titlePage`; //Can be titlePage, instructionPage, lvl1, lvl1Success, lvl2, lvl2Success, lvl3, lvl3Success, fail
+let state = `lvl3`; //Can be titlePage, instructionPage, lvl1, lvl1Success, lvl2, lvl2Success, lvl3, lvl3Success, fail
 
 //Title page variables
 let titlePage;
@@ -410,6 +410,7 @@ function lvl2Success() {
 }
 
 function lvl3State() {
+  checklvl3RectHeight();
   lvl3.setBackground();
   lvl3.resize();
   lvl3.displayRectangle();
@@ -417,8 +418,25 @@ function lvl3State() {
   lvl3.setStrings();
 }
 
-function lvl3Success() {
+// If orange rect's corner is at top of canvas = level up. If not, keep going.
+function checklvl3RectHeight() {
+  if (lvl3.uCornerY < 0) {
+    state = `lvl3Success`
+  } else {
+    state = `lvl3`
+  }
+}
 
+function lvl3Success() {
+  push()
+  background(lvl3.fill.r, lvl3.fill.g, lvl3.fill.b)
+  textSize(25);
+  fill(lvl3.bgFill.r, lvl3.bgFill.g, lvl3.bgFill.b);
+  textAlign(CENTER, CENTER);
+  text(`I'd like to scream into
+  the void more often. Anyhoo,
+  let's keep going.`, width / 2, height / 2)
+  pop()
 }
 
 function fail() {
