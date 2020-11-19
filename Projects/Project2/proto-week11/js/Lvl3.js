@@ -1,5 +1,6 @@
-class Lvl3 {
+class Lvl3 extends State {
   constructor(x, y) {
+    super();
     //set instruction and lvl number
     this.numLvlString = `#3`;
     this.insString = `On a scale from 'I got this' to
@@ -24,6 +25,10 @@ class Lvl3 {
       g: 231,
       b: 98
     }
+  }
+
+  update() {
+
   }
 
   setBackground() {

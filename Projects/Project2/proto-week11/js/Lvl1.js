@@ -1,4 +1,4 @@
-class Lvl1 {
+class Lvl1 extends State {
 
   //Construct a background, 3 houses and box that can be hovered over to change color.
   constructor({
@@ -11,6 +11,8 @@ class Lvl1 {
     boxX,
     boxY
   }) {
+    super();
+
     //set instruction and lvl number
     this.numLvlString = `#1`;
     this.insString = `Today is the day.
@@ -46,6 +48,14 @@ class Lvl1 {
     this.boxY = boxY;
     this.boxWidth = 49;
     this.boxHeight = 38;
+
+    //Set the minimum time one should be in the 'success' state of the level
+    this.successFrameStart = 0;
+    this.successMessageMinLength = 60;
+  }
+
+  update() {
+
   }
 
 

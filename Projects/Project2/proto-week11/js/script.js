@@ -10,16 +10,18 @@ level 3: Confidence about future ('AAAH' mic input)
 **************************************************/
 "use strict";
 
-let state = `lvl3`; //Can be titlePage, instructionPage, lvl1, lvl1Success, lvl2, lvl2Success, lvl3, lvl3Success, fail
+let state = `lvl1`; //Can be titlePage, instructionPage, lvl1, lvl1Success, lvl2, lvl2Success, lvl3, lvl3Success, fail
+let currentState;
+
 
 //Title page variables
 let titlePage;
 let titleImg;
 let insNeutralImg;
 let insHoverImg;
-let magicWord = `any`
-let currentInput = ``;
-let correct = checkInput();
+// let magicWord = `any`
+// let currentInput = ``;
+// let correct = checkInput();
 
 // Instruction page variables
 let instructionPage;
@@ -103,93 +105,76 @@ function setup() {
   rectMode(CENTER);
   userStartAudio();
 
+  currentState = new TitlePage()
 
-  //Set TitlePage class attributes
-  let titleX = width / 2;
-  let titleY = height / 5;
 
-  let insX = width / 2;
-  let insY = height / 2;
+  // //Set InstructionPage class attributes
+  // let insPopUpX = width / 2;
+  // let insPopUpY = height / 2;
+  //
+  // let insBackButtonX = width / 2;
+  // let insBackButtonY = height / 10 * 9;
+  //
+  // instructionPage = new InstructionPage({
+  //   insPopUpX,
+  //   insPopUpY,
+  //   insBackButtonX,
+  //   insBackButtonY,
+  // });
+  //
+  // //Set level 1 class attributes;
+  // let house1X = width / 4 * 3;
+  // let house1Y = height / 6 * 5;
+  //
+  // let house2X = width / 5;
+  // let house2Y = height / 16 * 7;
+  //
+  // let house3X = width / 7 * 6;
+  // let house3Y = height / 10 * 3;
+  //
+  // let boxX = width / 2;
+  // let boxY = height / 10 * 4.75;
+  //
+  // lvl1 = new Lvl1({
+  //   house1X,
+  //   house1Y,
+  //   house2X,
+  //   house2Y,
+  //   house3X,
+  //   house3Y,
+  //   boxX,
+  //   boxY
+  // })
+  //
+  // //Set level 2 class attributes;
+  // let candycaneX = width / 4
+  // let candycaneY = height / 5 * 2;
+  //
+  // let snowflakeX = width / 4 * 3;
+  // let snowflakeY = height / 5 * 2;
+  //
+  // let snowglobeX = width / 4;
+  // let snowglobeY = height / 5 * 4;
+  //
+  // let xmasBallX = width / 4 * 3;
+  // let xmasBallY = height / 5 * 4;
+  //
+  // lvl2 = new Lvl2({
+  //   candycaneX,
+  //   candycaneY,
+  //   snowflakeX,
+  //   snowflakeY,
+  //   snowglobeX,
+  //   snowglobeY,
+  //   xmasBallX,
+  //   xmasBallY
+  // })
+  //
+  // //Set level 3 class attributes AND start mic
+  // let x = width;
+  // let y = 0
 
-  let startX = width / 2;
-  let startY = (height / 5) * 4;
-
-  titlePage = new TitlePage({
-    titleX,
-    titleY,
-    insX,
-    insY,
-    startX,
-    startY,
-  });
-
-  //Set InstructionPage class attributes
-  let insPopUpX = width / 2;
-  let insPopUpY = height / 2;
-
-  let insBackButtonX = width / 2;
-  let insBackButtonY = height / 10 * 9;
-
-  instructionPage = new InstructionPage({
-    insPopUpX,
-    insPopUpY,
-    insBackButtonX,
-    insBackButtonY,
-  });
-
-  //Set level 1 class attributes;
-  let house1X = width / 4 * 3;
-  let house1Y = height / 6 * 5;
-
-  let house2X = width / 5;
-  let house2Y = height / 16 * 7;
-
-  let house3X = width / 7 * 6;
-  let house3Y = height / 10 * 3;
-
-  let boxX = width / 2;
-  let boxY = height / 10 * 4.75;
-
-  lvl1 = new Lvl1({
-    house1X,
-    house1Y,
-    house2X,
-    house2Y,
-    house3X,
-    house3Y,
-    boxX,
-    boxY
-  })
-
-  //Set level 2 class attributes;
-  let candycaneX = width / 4
-  let candycaneY = height / 5 * 2;
-
-  let snowflakeX = width / 4 * 3;
-  let snowflakeY = height / 5 * 2;
-
-  let snowglobeX = width / 4;
-  let snowglobeY = height / 5 * 4;
-
-  let xmasBallX = width / 4 * 3;
-  let xmasBallY = height / 5 * 4;
-
-  lvl2 = new Lvl2({
-    candycaneX,
-    candycaneY,
-    snowflakeX,
-    snowflakeY,
-    snowglobeX,
-    snowglobeY,
-    xmasBallX,
-    xmasBallY
-  })
-
-  //Set level 3 class attributes AND start mic
-  let x = width;
-  let y = 0
-
-  lvl3 = new Lvl3(x, y)
+  // lvl3 = new Lvl3(x, y)
   mic = new p5.AudioIn();
   mic.start();
 
@@ -197,79 +182,97 @@ function setup() {
 
 //Will check state every fram and react accordingly
 function draw() {
-  background(230);
-  checkState()
+  // background(230);
+  // checkState()
+  currentState.update()
+}
+
+function mousePressed() {
+  currentState.mousePressed();
+
+}
+
+function keyPressed() {
+  currentState.keyPressed();
+}
+
+function keyTyped() {
+  currentState.keyTyped()
 }
 
 //Check which state we are in
-function checkState() {
-  if (state === `titlePage`) {
-    titlePageState();
-  } else if (state === `instructionPage`) {
-    instructionPageState();
-  } else if (state === `lvl1`) {
-    lvl1State();
-  } else if (state === `lvl1Success`) {
-    lvl1Success();
-  } else if (state === `lvl2`) {
-    lvl2State();
-  } else if (state === `lvl2Success`) {
-    lvl2Success();
-  } else if (state === `lvl3`) {
-    lvl3State();
-  } else if (state === `lvl3Success`) {
-    lvl3Success();
-  } else if (state === `fail`) {
-    fail();
-  }
-}
+// function checkState() {
+//   if (state === `titlePage`) {
+//     titlePageState();
+//   } else if (state === `instructionPage`) {
+//     instructionPageState();
+//   } else if (state === `lvl1`) {
+//     lvl1State();
+//   } else if (state === `lvl1Success`) {
+//     lvl1Success();
+//   } else if (state === `lvl2`) {
+//     lvl2State();
+//   } else if (state === `lvl2Success`) {
+//     lvl2Success();
+//   } else if (state === `lvl3`) {
+//     lvl3State();
+//   } else if (state === `lvl3Success`) {
+//     lvl3Success();
+//   } else if (state === `lvl4`) {
+//     lvl3State();
+//   } else if (state === `lvl4Success`) {
+//     lvl3Success();
+//   } else if (state === `fail`) {
+//     fail();
+//   }
+// }
 
 // ================= Title Page ===================
 // Display Title Page Class
 
-function titlePageState() {
-  checkInstructionOrStart()
-  titlePage.displayTitle();
-  titlePage.displayInstructions();
-  titlePage.displayStartString();
-}
+// function titlePageState() {
+//   checkInstructionOrStart()
+//   titlePage.displayTitle();
+//   titlePage.displayInstructions();
+//   titlePage.displayStartString();
+// }
 
 // Check if Instructions button has been pressed or 'any' has been typed
-
-function checkInstructionOrStart() {
-
-  if (mouseIsPressed) {
-    if (mouseX > titlePage.insX - titlePage.insWidth / 2 &&
-      mouseX < titlePage.insX + titlePage.insWidth / 2 &&
-      mouseY > titlePage.insY - titlePage.insHeight / 2 &&
-      mouseY < titlePage.insY + titlePage.insHeight / 2) {
-      state = `instructionPage`
-    }
-  } else if (checkInput()) {
-    state = `lvl1`
-  }
-}
+//
+// function checkInstructionOrStart() {
+//
+//   if (mouseIsPressed) {
+//     if (mouseX > titlePage.insX - titlePage.insWidth / 2 &&
+//       mouseX < titlePage.insX + titlePage.insWidth / 2 &&
+//       mouseY > titlePage.insY - titlePage.insHeight / 2 &&
+//       mouseY < titlePage.insY + titlePage.insHeight / 2) {
+//       state = `instructionPage`
+//     }
+//   } else if (checkInput()) {
+//     state = `lvl1`
+//   }
+// }
 
 // functions to see if 'any' was typed, as seen in Pippin's example
-
-function checkInput() {
-  let lowerCaseInput = currentInput.toLowerCase();
-  if (lowerCaseInput === magicWord) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function keyTyped() {
-  currentInput += key;
-}
-
-function keyPressed() {
-  if (keyCode === BACKSPACE) {
-    currentInput = ``;
-  }
-}
+//
+// function checkInput() {
+//   let lowerCaseInput = currentInput.toLowerCase();
+//   if (lowerCaseInput === magicWord) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+//
+// function keyTyped() {
+//   currentInput += key;
+// }
+//
+// function keyPressed() {
+//   if (keyCode === BACKSPACE) {
+//     currentInput = ``;
+//   }
+// }
 
 // ============ Instruction Page ============
 
@@ -332,6 +335,8 @@ function checkLivingSpaceSelected() {
       mouseY > lvl1.boxY - lvl1.boxHeight / 2 &&
       mouseY < lvl1.boxY + lvl1.boxHeight / 2) {
       state = `lvl1Success`
+      lvl1.successFrameStart = frameCount;
+      // console.log(lvl1.successFrameStart)
     }
   }
 }
@@ -349,7 +354,8 @@ function lvl1Success() {
   second one soon`, width / 2, height / 5)
   pop()
 
-  if (mouseIsPressed) {
+  if (mouseIsPressed &&
+    frameCount > lvl1.successFrameStart + lvl1.successMessageMinLength) {
     state = `lvl2`;
   }
 }
@@ -386,6 +392,7 @@ function checkXmasDecoSelected() {
       mouseY > lvl2.snowflakeY - lvl2.size / 2 &&
       mouseY < lvl2.snowflakeY + lvl2.size / 2) {
       state = `lvl2Success`
+      lvl2.successFrameStart = frameCount;
     }
   }
 }
@@ -401,10 +408,11 @@ function lvl2Success() {
   fill(0);
   textAlign(CENTER, CENTER);
   text(`That's right,
-  you little snowflake`, width / 2, height / 2)
+  you precious snowflake`, width / 2, height / 2)
   pop()
 
-  if (mouseIsPressed) {
+  if (mouseIsPressed &&
+    frameCount > lvl2.successFrameStart + lvl2.successMessageMinLength) {
     state = `lvl3`;
   }
 }
@@ -434,9 +442,17 @@ function lvl3Success() {
   fill(lvl3.bgFill.r, lvl3.bgFill.g, lvl3.bgFill.b);
   textAlign(CENTER, CENTER);
   text(`I'd like to scream into
-  the void more often. Anyhoo,
-  let's keep going.`, width / 2, height / 2)
+  the void more often, too.
+  Anyhoo, let's keep going.`, width / 2, height / 2)
   pop()
+}
+
+function lvl4() {
+
+}
+
+function lvl4Success() {
+
 }
 
 function fail() {

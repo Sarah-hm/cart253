@@ -1,4 +1,4 @@
-class InstructionPage {
+class InstructionPage extends State {
 
   // Construct an image of a text(instructions), frame and button to go back to title page.
   constructor({
@@ -7,6 +7,7 @@ class InstructionPage {
     insBackButtonX,
     insBackButtonY
   }) {
+    super();
     this.insPopUpX = insPopUpX;
     this.insPopUpY = insPopUpY;
     this.insPopUpSize = 407;
@@ -19,6 +20,10 @@ class InstructionPage {
     this.insBackButtonHoverImg = insBackButtonHoverImg;
   }
 
+  update() {
+
+  }
+
   //Display image of a framed rounded rectangle with text explaining the goal of the game.
   displayInstructionPopUp() {
     push();
@@ -27,7 +32,7 @@ class InstructionPage {
   }
 
   //Display the button to go back to the title page.
-  //(There will eventually have another button for 'more info' if needed. If not needed, it'll just be a joke of some kind. :)  ) 
+  //(There will eventually have another button for 'more info' if needed. If not needed, it'll just be a joke of some kind. :)  )
   displayBackButton() {
     if (mouseX > this.insBackButtonX - this.insButtonsWidth / 2 &&
       mouseX < this.insBackButtonX + this.insButtonsWidth / 2 &&

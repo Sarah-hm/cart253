@@ -1,4 +1,4 @@
-class Lvl2 {
+class Lvl2 extends State {
   constructor({
     candycaneX,
     candycaneY,
@@ -9,6 +9,7 @@ class Lvl2 {
     xmasBallX,
     xmasBallY
   }) {
+    super();
     //set instruction and lvl number
     this.numLvlString = `#2`;
     this.insString = `Choose a christmas
@@ -43,6 +44,15 @@ class Lvl2 {
     this.xmasBallHoverImg = xmasBallHoverImg;
     this.xmasBallX = xmasBallX;
     this.xmasBallY = xmasBallY
+
+    //Set the minimum time one should be in the 'success' state of the level
+
+    this.successFrameStart = 0;
+    this.successMessageMinLength = 60;
+  }
+
+  update() {
+
   }
 
 
