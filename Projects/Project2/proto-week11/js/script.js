@@ -10,7 +10,7 @@ level 3:
 **************************************************/
 "use strict";
 
-let state = `lvl2`; //Can be titlePage, instructionPage, lvl1, fail, lvl1Success
+let state = `titlePage`; //Can be titlePage, instructionPage, lvl1, lvl1Success, lvl2, lvl2Success, lvl3, lvl3Success, fail
 
 //Title page variables
 let titlePage;
@@ -50,6 +50,16 @@ let snowglobeHoverImg;
 let xmasBallNeutralImg;
 let xmasBallHoverImg;
 
+// level 3 variables;
+let lvl3;
+let lvl3StringArray = [` `, `I don't believe it`, `Let's not pretend, here.`, `Yeah, that's sounds about right`]
+let lvl3CurrentLine = 0;
+let lvl3DecimalIndex = 0;
+
+let lvl3Rectangle;
+let mic;
+let micLevel;
+
 
 function preload() {
   //title Page images
@@ -84,11 +94,15 @@ function preload() {
   xmasBallHoverImg = loadImage("assets/images/xmasBallHover.png");
 }
 
+// (no images for level 3)
+
 //Setting up canvas, universal modes, and Title page, Instruction Page and lvl 1 page classes
 function setup() {
   createCanvas(600, 600);
   imageMode(CENTER);
   rectMode(CENTER);
+  userStartAudio();
+
 
   //Set TitlePage class attributes
   let titleX = width / 2;
@@ -170,6 +184,14 @@ function setup() {
     xmasBallX,
     xmasBallY
   })
+
+  //Set level 3 class attributes AND start mic
+  let x = width;
+  let y = 0
+
+  lvl3 = new Lvl3(x, y)
+  mic = new p5.AudioIn();
+  mic.start();
 
 }
 
@@ -388,7 +410,11 @@ function lvl2Success() {
 }
 
 function lvl3State() {
-  background(0)
+  lvl3.setBackground();
+  lvl3.resize();
+  lvl3.displayRectangle();
+  lvl3.displayMicLevelStrings();
+  lvl3.setStrings();
 }
 
 function lvl3Success() {
