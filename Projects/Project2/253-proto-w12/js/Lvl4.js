@@ -15,22 +15,24 @@ class Lvl4 extends State {
 
     //The baby
     this.babyNeutralImg = lvl4babyNeutralImg;
-    this.babyhoverImg = lvl4babyHoverImg;
-    this.babyX = width / 3;
+    this.babyHoverImg = lvl4babyHoverImg;
+    this.babyX = width / 7 * 2;
+    this.babyY = height / 5 * 2;
 
     //The plant
     this.plantNeutralImg = lvl4plantNeutralImg;
     this.plantHoverImg = lvl4plantHoverImg;
     this.plantX = width / 2;
+    this.plantY = height / 7 * 5;
 
     //The cat
     this.catNeutralImg = lvl4catNeutralImg;
     this.catHoverImg = lvl4catHoverImg;
-    this.catX = width / 3 * 2
+    this.catX = width / 7 * 5;
+    this.catY = height / 5 * 2;
 
-    //All assets have a universal Y position (in the middle)
-    this.y = height / 2;
 
+    // assets size are universal for all 3
     this.sizeX = 200;
     this.sizeY = 253;
     this.scale = 0.5;
@@ -47,45 +49,54 @@ class Lvl4 extends State {
   }
 
   displayAssets() {
-    //candycane
-    if (mouseX > this.candycaneX - this.size / 2 &&
-      mouseX < this.candycaneX + this.size / 2 &&
-      mouseY > this.y - this.size / 2 &&
-      mouseY < this.y + this.size / 2) {
+    //baby
+    if (mouseX > this.babyX - this.sizeX / 2 &&
+      mouseX < this.babyX + this.sizeX / 2 &&
+      mouseY > this.babyY - this.sizeY / 2 &&
+      mouseY < this.babyY + this.sizeY / 2) {
       push()
-      image(this.candycaneHoverImg, this.candycaneX, this.y, this.sizeX, this.sizeY)
+      scale(1.1)
+      translate(-this.sizeX / 10, -this.sizeY / 10)
+      image(this.babyHoverImg, this.babyX, this.babyY, this.sizeX, this.sizeY)
       pop()
     } else {
       push()
-      image(this.candycaneNeutralImg, this.candycaneX, this.y, this.sizeX, this.sizeY)
+      image(this.babyNeutralImg, this.babyX, this.babyY, this.sizeX, this.sizeY)
       pop()
     }
 
-    //snowflake;
-    if (mouseX > this.snowflakeX - this.size / 2 &&
-      mouseX < this.snowflakeX + this.size / 2 &&
-      mouseY > this.y - this.size / 2 &&
-      mouseY < this.y + this.size / 2) {
+    //plant
+    if (mouseX > this.plantX - this.sizeX / 2 &&
+      mouseX < this.plantX + this.sizeX / 2 &&
+      mouseY > this.plantY - this.sizeY / 2 &&
+      mouseY < this.plantY + this.sizeY / 2) {
       push()
-      image(this.snowflakeHoverImg, this.snowflakeX, this.y, this.sizeX, this.sizeY)
+      imageMode(CENTER)
+      scale(1.1)
+      translate(-this.sizeX / 10, -this.sizeY / 10 * 2)
+      image(this.plantHoverImg, this.plantX, this.plantY, this.sizeX, this.sizeY)
+
       pop()
     } else {
       push()
-      image(this.snowflakeNeutralImg, this.snowflakeX, this.y, this.sizeX, this.sizeY)
+      imageMode(CENTER)
+      image(this.plantNeutralImg, this.plantX, this.plantY, this.sizeX, this.sizeY)
       pop()
     }
 
-    //snowglobe;
-    if (mouseX > this.snowglobeX - this.size / 2 &&
-      mouseX < this.snowglobeX + this.size / 2 &&
-      mouseY > this.y - this.size / 2 &&
-      mouseY < this.y + this.size / 2) {
+    //cat
+    if (mouseX > this.catX - this.sizeX / 2 &&
+      mouseX < this.catX + this.sizeX / 2 &&
+      mouseY > this.catY - this.sizeY / 2 &&
+      mouseY < this.catY + this.sizeY / 2) {
       push()
-      image(this.snowglobeHoverImg, this.snowglobeX, this.y, this.sizeX, this.sizeY)
+      scale(1.1)
+      translate(-this.sizeX / 10 * 2, -this.sizeY / 10)
+      image(this.catHoverImg, this.catX, this.catY, this.sizeX, this.sizeY)
       pop()
     } else {
       push()
-      image(this.snowglobeNeutralImg, this.snowglobeX, this.y, this.sizeX, this.sizeY)
+      image(this.catNeutralImg, this.catX, this.catY, this.sizeX, this.sizeY)
       pop()
     }
   }
