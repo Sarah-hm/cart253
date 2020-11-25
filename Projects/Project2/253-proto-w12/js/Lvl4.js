@@ -110,6 +110,28 @@ class Lvl4 extends State {
   }
 
   mousePressed() {
+    if (mouseX > this.babyX - this.sizeX / 2 &&
+      mouseX < this.babyX + this.sizeX / 2 &&
+      mouseY > this.babyY - this.sizeY / 2 &&
+      mouseY < this.babyY + this.sizeY / 2) {
+      currentState = new GameOver();
+    } else if (mouseX > this.catX - this.sizeX / 2 &&
+      mouseX < this.catX + this.sizeX / 2 &&
+      mouseY > this.catY - this.sizeY / 2 &&
+      mouseY < this.catY + this.sizeY / 2) {
+      currentState = new GameOver();
+    } else if (mouseX > this.plantX - this.sizeX / 2 &&
+      mouseX < this.plantX + this.sizeX / 2 &&
+      mouseY > this.plantY - this.sizeY / 2 &&
+      mouseY < this.plantY + this.sizeY / 2) {
+      this.success()
+      // this.successFrameStart = frameCount;
+    }
 
   }
+
+  success() {
+
+  }
+
 }
