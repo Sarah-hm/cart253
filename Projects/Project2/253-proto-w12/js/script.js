@@ -117,7 +117,7 @@ function setup() {
   mic.start();
 
   //Set the current State to :
-  currentState = new Lvl1(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new titlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
 
   let x = 50;
   let y = (height / 15) * 14;
