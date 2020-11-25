@@ -1,5 +1,7 @@
 class State {
-  constructor() {}
+  constructor() {
+
+  }
 
   update() {
 

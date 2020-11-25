@@ -45,6 +45,7 @@ class Lvl1 extends State {
   }
 
   update() {
+
     this.setbackground();
     this.setLivingSpaces();
     this.setStrings();
@@ -134,6 +135,7 @@ class Lvl1 extends State {
     text(this.insString, width / 10 * 4, height / 10)
     pop()
   }
+
 
   mousePressed() {
     if (mouseX > this.house1X - this.house1Width / 2 &&
