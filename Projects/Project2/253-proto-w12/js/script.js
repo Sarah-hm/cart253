@@ -116,9 +116,10 @@ function setup() {
   mic = new p5.AudioIn();
   mic.start();
 
-  //Set the current State to :
-  currentState = new titlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  // Set the current State to :
+  currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
 
+  //I added a new comment
   let x = 50;
   let y = (height / 15) * 14;
   let life = new Life(x, y);
