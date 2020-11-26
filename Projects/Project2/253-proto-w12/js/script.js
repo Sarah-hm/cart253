@@ -6,6 +6,9 @@ This is my prototype to "A millenial's survival guide", my final project.
 level 1 : buying a house (being able to afford the box);
 level 2 : christmas deco (snowflake gen);
 level 3: Confidence about future ('AAAH' mic input)
+level 4: Getting something because you're lonely (plant)
+level 5: having to get to work on time;
+
 
 **************************************************/
 "use strict";
@@ -119,26 +122,22 @@ function setup() {
   // Set the current State to :
   currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
 
-  //I added a new comment
-  let x = 50;
-  let y = (height / 15) * 14;
-  let life = new Life(x, y);
-
-  // //Set life array :
-  for (let i = 0; i < numLives; i++) {
-    let life = new Life(x, y);
-    x = x + 80;
-    lives.push(life);
-    life.display();
-  }
+  // let x = 50;
+  // let y = (height / 15) * 14;
+  // let life = new Life(x, y);
+  //
+  // // //Set life array :
+  // for (let i = 0; i < numLives; i++) {
+  //   // let life = new Life(x, y);
+  //   x = x + 80;
+  //   lives.push(life);
+  // }
 }
 
 //Will check state every fram and react accordingly
 function draw() {
-  // background(230);
-  // checkState()
   currentState.update();
-  // life.update();
+  // life.display();
 }
 
 function mousePressed() {

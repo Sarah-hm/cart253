@@ -36,6 +36,9 @@ class Lvl4 extends State {
     this.sizeX = 200;
     this.sizeY = 253;
     this.scale = 0.5;
+
+    this.successFrameStart = 0;
+    this.successMessageMinLength = 60;
   }
 
   update() {
@@ -131,7 +134,22 @@ class Lvl4 extends State {
   }
 
   success() {
+    this.setBackground();
+    this.displayAssets();
+    fill(239, 122, 98)
+    noStroke();
+    rect(width / 2, height / 2, 300, 200)
+    textSize(25);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text(`You can definitely find more
+      space on the shelf for that one`, width / 2, height / 2)
+    pop()
 
+    if (mouseIsPressed &&
+      frameCount > this.successFrameStart + this.successMessageMinLength) {
+      currentState = new Lvl5
+    }
   }
 
 }
