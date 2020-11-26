@@ -5,13 +5,13 @@ class Lvl5 extends State {
     this.userX = width / 2;
     this.userY = height - 10;
 
-    this.width = 10
-    this.height = 30
+    this.width = 30
+    this.height = 10
 
     this.speed = 0;
-    this.maxSpeed = 4;
+    this.maxSpeed = 3;
     this.angle = 0;
-    this.turnMax = 0.1;
+    this.turnMax = 0.08;
 
     this.fill = {
       r: 255,

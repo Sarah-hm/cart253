@@ -100,12 +100,12 @@ function preload() {
   xmasBallHoverImg = loadImage("assets/images/xmasBallHover.png");
 
   //level 4 images
-  lvl4babyNeutralImg = loadImage("assets/images/lvl4BabyNeutral.png")
+  lvl4babyNeutralImg = loadImage("assets/images/lvl4BabyNeutral.png");
   lvl4babyHoverImg = loadImage("assets/images/lvl4BabyHover.png");
   lvl4plantNeutralImg = loadImage("assets/images/lvl4PlantNeutral.png");
   lvl4plantHoverImg = loadImage("assets/images/lvl4PlantHover.png");
   lvl4catNeutralImg = loadImage("assets/images/lvl4CatNeutral.png");
-  lvl4catHoverImg = loadImage("assets/images/lvl4CatHover.png")
+  lvl4catHoverImg = loadImage("assets/images/lvl4CatHover.png");
 }
 
 // (no images for level 3)
@@ -120,28 +120,38 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new Lvl1(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  let x = 50;
 
-  // let x = 50;
-  // let y = (height / 15) * 14;
-  // let life = new Life(x, y);
-  //
-  // // //Set life array :
-  // for (let i = 0; i < numLives; i++) {
-  //   // let life = new Life(x, y);
-  //   x = x + 80;
-  //   lives.push(life);
-  // }
+
+  // //Set life array :
+  for (let i = 0; i < numLives; i++) {
+    let y = (height / 15) * 14;
+    let life = new Life(x, y);
+    x += 70;
+    lives.push(life);
+
+  }
 }
 
 //Will check state every fram and react accordingly
 function draw() {
   currentState.update();
-  // life.display();
+
+  for (let i = 0; i < lives.length; i++) {
+    let life = lives[i]
+    life.update();
+
+
+    // life.x += 80;
+  }
 }
 
 function mousePressed() {
   currentState.mousePressed();
+
+  //remove one life from array with :
+  lives.pop()
 }
 
 function keyPressed() {
