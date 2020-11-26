@@ -13,6 +13,8 @@ class InstructionPage extends State {
     this.insPopUpImg = insPopUpImg;
     this.insBackButtonNeutralImg = insBackButtonNeutralImg;
     this.insBackButtonHoverImg = insBackButtonHoverImg;
+
+
   }
 
   update() {

@@ -120,7 +120,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl1(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
 
@@ -142,8 +142,6 @@ function draw() {
     let life = lives[i]
     life.update();
 
-
-    // life.x += 80;
   }
 }
 

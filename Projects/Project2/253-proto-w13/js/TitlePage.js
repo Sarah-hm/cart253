@@ -21,6 +21,7 @@ class TitlePage extends State {
 
     this.currentInput = ``;
     this.magicWord = `any`
+
   }
 
   update() {
