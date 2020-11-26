@@ -31,7 +31,6 @@ class Lvl3 extends State {
       b: 98
     }
 
-
   }
 
   update() {
@@ -41,6 +40,7 @@ class Lvl3 extends State {
     this.displayMicLevelStrings();
     this.setStrings();
     this.checkRectHeight();
+    this.success();
   }
 
   setBackground() {
@@ -95,24 +95,27 @@ class Lvl3 extends State {
 
   checkRectHeight() {
     if (this.uCornerY < 0) {
-      currentState = new Lvl4();
+      this.lvlWon = true;
+      this.successFrameStart = frameCount;
     }
   }
 
   success() {
-    push()
-    background(this.fill.r, this.fill.g, this.fill.b)
-    textSize(25);
-    fill(this.bgFill.r, this.bgFill.g, this.bgFill.b);
-    textAlign(CENTER, CENTER);
-    text(`I'd like to scream into
+    if (this.lvlWon) {
+      push()
+      background(this.fill.r, this.fill.g, this.fill.b)
+      textSize(25);
+      fill(this.bgFill.r, this.bgFill.g, this.bgFill.b);
+      textAlign(CENTER, CENTER);
+      text(`I'd like to scream into
     the void more often, too.
     Anyhoo, let's keep going.`, width / 2, height / 2)
-    pop()
+      pop()
 
-    if (mouseIsPressed &&
-      frameCount > this.successFrameStart + this.successMessageMinLength) {
-      currentState = new Lvl4();
+      if (mouseIsPressed &&
+        frameCount > this.successFrameStart + this.successMessageMinLength) {
+        currentState = new Lvl4();
+      }
     }
   }
 }

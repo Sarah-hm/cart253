@@ -36,18 +36,13 @@ class Lvl2 extends State {
     this.xmasBallX = width / 4 * 3;
     this.xmasBallY = height / 5 * 4;
 
-    //Set the minimum time one should be in the 'success' state of the level
-
-    this.successFrameStart = 0;
-    this.successMessageMinLength = 60;
-
-
   }
 
   update() {
     this.setBackground();
     this.displayAssets();
     this.setStrings();
+    this.success();
   }
 
 
@@ -144,28 +139,30 @@ class Lvl2 extends State {
       mouseX < this.snowflakeX + this.size / 2 &&
       mouseY > this.snowflakeY - this.size / 2 &&
       mouseY < this.snowflakeY + this.size / 2) {
-      this.success()
+      this.lvlWon = true;
       this.successFrameStart = frameCount;
     }
 
   }
 
   success() {
-    this.setBackground();
-    this.displayAssets();
-    fill(239, 122, 98)
-    noStroke();
-    rect(width / 2, height / 2, 300, 200)
-    textSize(25);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(`That's right,
+    if (this.lvlWon) {
+      this.setBackground();
+      this.displayAssets();
+      fill(239, 122, 98)
+      noStroke();
+      rect(width / 2, height / 2, 300, 200)
+      textSize(25);
+      fill(0);
+      textAlign(CENTER, CENTER);
+      text(`That's right,
     you precious snowflake`, width / 2, height / 2)
-    pop()
+      pop()
 
-    if (mouseIsPressed &&
-      frameCount > this.successFrameStart + this.successMessageMinLength) {
-      currentState = new Lvl3
+      if (mouseIsPressed &&
+        frameCount > this.successFrameStart + this.successMessageMinLength) {
+        currentState = new Lvl3
+      }
     }
   }
 }

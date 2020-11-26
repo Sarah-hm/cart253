@@ -71,4 +71,26 @@ class Lvl5 extends State {
     rect(0, 0, this.width, this.height);
     pop()
   }
+
+  success() {
+    if (this.lvlWon) {
+      this.setBackground();
+      this.displayAssets();
+      fill(239, 122, 98)
+      noStroke();
+      rect(width / 2, height / 2, 300, 200)
+      textSize(25);
+      fill(0);
+      textAlign(CENTER, CENTER);
+      text(`Well... You could have still came
+        a bit early. It's like you don't
+        even care about this company?`, width / 2, height / 2)
+      pop()
+
+      if (mouseIsPressed &&
+        frameCount > this.successFrameStart + this.successMessageMinLength) {
+        currentState = new Lvl5
+      }
+    }
+  }
 }

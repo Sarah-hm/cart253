@@ -39,9 +39,7 @@ class Lvl1 extends State {
     this.boxWidth = 49;
     this.boxHeight = 38;
 
-    //Set the minimum time one should be in the 'success' state of the level
-    this.successFrameStart = 0;
-    this.successMessageMinLength = 60;
+
   }
 
   update() {
@@ -49,6 +47,7 @@ class Lvl1 extends State {
     this.setbackground();
     this.setLivingSpaces();
     this.setStrings();
+    this.success();
   }
 
 
@@ -157,29 +156,30 @@ class Lvl1 extends State {
       mouseX < this.boxX + this.boxWidth / 2 &&
       mouseY > this.boxY - this.boxHeight / 2 &&
       mouseY < this.boxY + this.boxHeight / 2) {
-      this.success()
+      this.lvlWon = true;
       this.successFrameStart = frameCount;
       // console.log(this.successFrameStart)
     }
   }
 
   success() {
-    push()
-    imageMode(CORNER);
-    image(this.backgroundImg, width, height);
-    background(this.backgroundImg)
-    textSize(25);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(`Isn't nice? At this rate,
+    if (this.lvlWon) {
+      push()
+      imageMode(CORNER);
+      image(this.backgroundImg, width, height);
+      background(this.backgroundImg)
+      textSize(25);
+      fill(0);
+      textAlign(CENTER, CENTER);
+      text(`Isn't nice? At this rate,
   you might be able to afford a
   second one soon`, width / 2, height / 5)
-    pop()
+      pop()
 
-    if (mouseIsPressed &&
-      frameCount > this.successFrameStart + this.successMessageMinLength) {
-      currentState = new Lvl2();
+      if (mouseIsPressed &&
+        frameCount > this.successFrameStart + this.successMessageMinLength) {
+        currentState = new Lvl2();
+      }
     }
   }
-
 }

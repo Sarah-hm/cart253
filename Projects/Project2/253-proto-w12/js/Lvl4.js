@@ -42,9 +42,10 @@ class Lvl4 extends State {
   }
 
   update() {
-    this.setBackground()
-    this.displayAssets()
-    this.setStrings()
+    this.setBackground();
+    this.displayAssets();
+    this.setStrings();
+    this.success();
   }
 
   setBackground() {
@@ -127,29 +128,31 @@ class Lvl4 extends State {
       mouseX < this.plantX + this.sizeX / 2 &&
       mouseY > this.plantY - this.sizeY / 2 &&
       mouseY < this.plantY + this.sizeY / 2) {
-      this.success()
-      // this.successFrameStart = frameCount;
+      this.lvlWon = true;
+      this.successFrameStart = frameCount;
     }
 
   }
 
   success() {
-    this.setBackground();
-    this.displayAssets();
-    fill(239, 122, 98)
-    noStroke();
-    rect(width / 2, height / 2, 300, 200)
-    textSize(25);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(`You can definitely find more
-      space on the shelf for that one`, width / 2, height / 2)
-    pop()
+    if (this.lvlWon) {
+      this.setBackground();
+      this.displayAssets();
+      fill(239, 122, 98)
+      noStroke();
+      rect(width / 2, height / 2, 300, 200)
+      textSize(25);
+      fill(0);
+      textAlign(CENTER, CENTER);
+      text(`You can definitely find
+      more space on the shelf
+      for this one`, width / 2, height / 2)
+      pop()
 
-    if (mouseIsPressed &&
-      frameCount > this.successFrameStart + this.successMessageMinLength) {
-      currentState = new Lvl5
+      if (mouseIsPressed &&
+        frameCount > this.successFrameStart + this.successMessageMinLength) {
+        currentState = new Lvl5
+      }
     }
   }
-
 }
