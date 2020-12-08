@@ -1,3 +1,4 @@
-# Sounds folder
+# Sounds Attribution
 
-This is the folder where you would keep all the sound files associated with your project, such as `.mp3`, `.wav`, and other formats. An example sound, `bark.wav`, is here in case you need something to play around with.
+fart.wav : http://soundbible.com/80-Another-Fart.html
+sadTrombone.wav : http://soundbible.com/tags-you-suck.html

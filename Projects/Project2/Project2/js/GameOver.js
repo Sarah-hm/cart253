@@ -25,7 +25,9 @@ Click to go back to title page`
   }
 
   mousePressed() {
+    lives.length = 5
     currentState = new TitlePage();
+
   }
 
 }

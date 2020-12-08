@@ -4,14 +4,17 @@ class Lvl2 extends State {
     //set instruction and lvl number
     this.numLvlString = `#2`;
     this.insString = `Choose a christmas
-    decoration that best suit you`
+decoration that best suit you`
+
+    this.stringFill = {
+      r: 255,
+      g: 0,
+      b: 0
+    }
 
     //set background colour variables (very light green-ish blue)
-    this.bgFill = {
-      r: 205,
-      g: 231,
-      b: 227,
-    }
+    this.backgroundImg = lvl2bgImg
+
     //Fix universal size because it's a lot easier (all assets are 200x200px)
     this.size = 200;
 
@@ -19,22 +22,22 @@ class Lvl2 extends State {
     this.candycaneNeutralImg = candycaneNeutralImg;
     this.candycaneHoverImg = candycaneHoverImg;
     this.candycaneX = width / 4;
-    this.candycaneY = height / 5 * 2;
+    this.candycaneY = height / 5 * 1.75;
 
     this.snowflakeNeutralImg = snowflakeNeutralImg;
     this.snowflakeHoverImg = snowflakeHoverImg;
     this.snowflakeX = width / 4 * 3;
-    this.snowflakeY = height / 5 * 2;
+    this.snowflakeY = height / 5 * 1.75;
 
     this.snowglobeNeutralImg = snowglobeNeutralImg;
     this.snowglobeHoverImg = snowglobeHoverImg;
     this.snowglobeX = width / 4;
-    this.snowglobeY = height / 5 * 4;
+    this.snowglobeY = height / 5 * 3.5;
 
     this.xmasBallNeutralImg = xmasBallNeutralImg;
     this.xmasBallHoverImg = xmasBallHoverImg;
     this.xmasBallX = width / 4 * 3;
-    this.xmasBallY = height / 5 * 4;
+    this.xmasBallY = height / 5 * 3.5;
 
   }
 
@@ -47,7 +50,11 @@ class Lvl2 extends State {
 
 
   setBackground() {
-    background(this.bgFill.r, this.bgFill.g, this.bgFill.b)
+    push()
+    imageMode(CORNER);
+    image(this.backgroundImg, width, height);
+    background(this.backgroundImg)
+    pop()
   }
 
   displayAssets() {
@@ -111,11 +118,12 @@ class Lvl2 extends State {
 
   setStrings() {
     push();
-    textAlign(CENTER, CENTER);
+    textAlign(TOP, LEFT);
+    textFont(atkinsonBold)
     textSize(32);
-    fill(255);
-    text(this.numLvlString, width / 10, height / 20);
-    text(this.insString, width / 10 * 4, height / 10)
+    fill(this.stringFill.r, this.stringFill.g, this.stringFill.b);
+    text(this.numLvlString, width / 20, height / 20);
+    text(this.insString, width / 20, height / 10)
     pop()
   }
 
@@ -147,12 +155,13 @@ class Lvl2 extends State {
 
   success() {
     if (this.lvlWon) {
+      push();
       this.setBackground();
-      this.displayAssets();
       fill(239, 122, 98)
       noStroke();
       rect(width / 2, height / 2, 300, 200)
       textSize(25);
+      textFont(atkinsonBold)
       fill(0);
       textAlign(CENTER, CENTER);
       text(`That's right,

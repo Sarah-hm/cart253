@@ -17,6 +17,15 @@ let currentState;
 let mic;
 let micLevel;
 
+//Fonts
+let atkinsonNormal;
+let atkinsonItalic
+let atkinsonBold
+let atkinsonBoldItalic;
+
+// Sound effects
+let fartSFX
+
 //Title page variables
 let titleImg;
 let insNeutralImg;
@@ -45,6 +54,7 @@ let boxNeutralImg;
 let boxHoverImg;
 
 //level 2 variables
+let lvl2bgImg;
 let candycaneNeutralImg;
 let candycaneHoverImg;
 let snowflakeNeutralImg;
@@ -65,6 +75,15 @@ let lvl4catNeutralImg;
 let lvl4catHoverImg;
 
 function preload() {
+  //Fonts
+  atkinsonNormal = loadFont("assets/fonts/Atkinson-Hyperlegible-Regular-102.ttf")
+  atkinsonItalic = loadFont("assets/fonts/Atkinson-Hyperlegible-Italic-102.ttf")
+  atkinsonBold = loadFont("assets/fonts/Atkinson-Hyperlegible-Bold-102.ttf")
+  atkinsonBoldItalic = loadFont("assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.ttf")
+
+  // sounds
+  fartSFX = loadSound("assets/sounds/fart.wav")
+
   //title Page images
   titleImg = loadImage("assets/images/Title.png");
   insNeutralImg = loadImage("assets/images/insNeutral.png");
@@ -90,6 +109,7 @@ function preload() {
   boxHoverImg = loadImage("assets/images/boxHover.png");
 
   //level 2 images
+  lvl2bgImg = loadImage("assets/images/lvl2_bg.jpg");
   candycaneNeutralImg = loadImage("assets/images/candycaneNeutral.png");
   candycaneHoverImg = loadImage("assets/images/candycaneHover.png");
   snowflakeNeutralImg = loadImage("assets/images/snowflakeNeutral.png");
@@ -120,7 +140,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new Lvl2(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
 
@@ -138,11 +158,17 @@ function setup() {
 function draw() {
   currentState.update();
 
+  //Restore lives if you went through gameover and start the game again
+  if (currentState === new TitlePage) {
+    live.length = 5;
+  }
+
   for (let i = 0; i < lives.length; i++) {
     let life = lives[i]
-    life.update();
-
+    life.update()
   }
+
+
 }
 
 function mousePressed() {

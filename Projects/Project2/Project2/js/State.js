@@ -17,6 +17,7 @@ class State {
   //If you had one life left, it will disappear and you go to 'Game Over' page
   fail() {
     if (lives.length > 1) {
+      fartSFX.play();
       lives.pop()
     } else if (lives.length === 1) {
       lives.pop();

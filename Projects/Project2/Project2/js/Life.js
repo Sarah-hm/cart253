@@ -13,6 +13,7 @@ class Life {
 
   update() {
     this.display()
+
   }
 
   display() {
@@ -21,5 +22,6 @@ class Life {
     pop();
 
   }
+
 
 }
