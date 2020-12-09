@@ -137,6 +137,7 @@ class Lvl4 extends State {
   success() {
     if (this.lvlWon) {
       this.setBackground();
+      this.playWinSFX();
       this.displayAssets();
       fill(239, 122, 98)
       noStroke();

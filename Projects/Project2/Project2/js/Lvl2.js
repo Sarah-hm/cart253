@@ -157,6 +157,7 @@ decoration that best suit you`
     if (this.lvlWon) {
       push();
       this.setBackground();
+      this.playWinSFX();
       fill(239, 122, 98)
       noStroke();
       rect(width / 2, height / 2, 300, 200)

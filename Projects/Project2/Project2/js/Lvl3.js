@@ -103,6 +103,7 @@ class Lvl3 extends State {
   success() {
     if (this.lvlWon) {
       push()
+      this.playWinSFX();
       background(this.fill.r, this.fill.g, this.fill.b)
       textSize(25);
       fill(this.bgFill.r, this.bgFill.g, this.bgFill.b);

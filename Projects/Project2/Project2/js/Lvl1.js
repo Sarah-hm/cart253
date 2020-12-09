@@ -166,6 +166,7 @@ class Lvl1 extends State {
   success() {
     if (this.lvlWon) {
       push()
+      this.playWinSFX();
       imageMode(CORNER);
       image(this.backgroundImg, width, height);
       background(this.backgroundImg)

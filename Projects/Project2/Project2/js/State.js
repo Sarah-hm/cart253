@@ -7,6 +7,8 @@ class State {
     this.lvlWon = false;
     this.successFrameStart = 0;
     this.successMessageMinLength = 60;
+
+    this.winSFXplaying = false;
   }
 
   update() {
@@ -23,6 +25,13 @@ class State {
       lives.pop();
       gameOverSFX.play();
       currentState = new GameOver();
+    }
+  }
+
+  playWinSFX() {
+    if (this.winSFXplaying === false) {
+      partyHornSFX.play();
+      this.winSFXplaying = true;
     }
   }
 

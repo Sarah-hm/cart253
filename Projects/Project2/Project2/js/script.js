@@ -25,6 +25,7 @@ let atkinsonBoldItalic;
 
 // Sound effects
 let fartSFX;
+let partyHornSFX;
 let gameOverSFX;
 
 //Title page variables
@@ -89,6 +90,7 @@ function preload() {
   // sounds
   fartSFX = loadSound("assets/sounds/fart.wav")
   gameOverSFX = loadSound("assets/sounds/sadTrombone.wav")
+  partyHornSFX = loadSound("assets/sounds/partyHorn.mp3")
 
   //title Page images
   titleImg = loadImage("assets/images/Title.png");
@@ -151,7 +153,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new GameOver(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new Lvl1(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
 
