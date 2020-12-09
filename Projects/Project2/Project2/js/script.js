@@ -19,12 +19,13 @@ let micLevel;
 
 //Fonts
 let atkinsonNormal;
-let atkinsonItalic
-let atkinsonBold
+let atkinsonItalic;
+let atkinsonBold;
 let atkinsonBoldItalic;
 
 // Sound effects
-let fartSFX
+let fartSFX;
+let gameOverSFX;
 
 //Title page variables
 let titleImg;
@@ -74,6 +75,10 @@ let lvl4plantHoverImg;
 let lvl4catNeutralImg;
 let lvl4catHoverImg;
 
+
+//gameOver variables
+let gameOverGIF;
+
 function preload() {
   //Fonts
   atkinsonNormal = loadFont("assets/fonts/Atkinson-Hyperlegible-Regular-102.ttf")
@@ -83,6 +88,7 @@ function preload() {
 
   // sounds
   fartSFX = loadSound("assets/sounds/fart.wav")
+  gameOverSFX = loadSound("assets/sounds/sadTrombone.wav")
 
   //title Page images
   titleImg = loadImage("assets/images/Title.png");
@@ -126,9 +132,14 @@ function preload() {
   lvl4plantHoverImg = loadImage("assets/images/lvl4PlantHover.png");
   lvl4catNeutralImg = loadImage("assets/images/lvl4CatNeutral.png");
   lvl4catHoverImg = loadImage("assets/images/lvl4CatHover.png");
+
+  // (no images for level 3)
+
+  //game Over
+  gameOverGIF = loadImage("assets/images/unimpressedKid.gif")
 }
 
-// (no images for level 3)
+
 
 //Setting up canvas, universal modes, and Title page, Instruction Page and lvl 1 page classes
 function setup() {
@@ -140,7 +151,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl2(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new GameOver(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
 

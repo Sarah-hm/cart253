@@ -21,6 +21,7 @@ class State {
       lives.pop()
     } else if (lives.length === 1) {
       lives.pop();
+      gameOverSFX.play();
       currentState = new GameOver();
     }
   }
