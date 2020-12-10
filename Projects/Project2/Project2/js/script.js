@@ -80,6 +80,8 @@ let lvl4catHoverImg;
 let lvl5bgImg;
 let lvl5startBgImg;
 let lvl5AmbianceSounds;
+let lvl5DemonstrationImg;
+let lvl5CrowdSounds;
 
 
 //gameOver variables
@@ -147,6 +149,8 @@ function preload() {
   lvl5bgImg = loadImage("assets/images/lvl5_bg.jpg")
   lvl5startBgImg = loadImage("assets/images/lvl5_bgStart.jpg")
   lvl5AmbianceSounds = loadSound("assets/sounds/citySounds.wav")
+  lvl5DemonstrationImg = loadImage("assets/images/lvl5Demonstration.png")
+  lvl5CrowdSounds = loadSound("assets/sounds/CrowdBoos.wav")
 
   //game Over
   gameOverGIF = loadImage("assets/images/unimpressedKid.gif")
