@@ -8,11 +8,11 @@ class Lvl3 extends State {
     about the future?`
 
     //bottom corner will never change
-    this.bCornerX = 0;
-    this.bCornerY = height;
+    this.buttomCornerX = 0;
+    this.buttomCornerY = height;
     //upper corner is responsive to sound input
-    this.uCornerX = width;
-    this.uCornerY = 0;
+    this.upperCornerX = width;
+    this.upperCornerY = 0;
     //
     // Mic Level Strings related parameters (array, current line, decimal index)
     this.stringArray = [` `, `I don't believe it`, `Let's not pretend, here`, `Yeah, that sounds about right`]
@@ -52,10 +52,10 @@ class Lvl3 extends State {
 
   resize() {
     micLevel = mic.getLevel(1);
-    this.uCornerX = width;
+    this.upperCornerX = width;
     //start at 20 lower the bottom line to exempt small noises from environment
     //micLevel of .5 will get to top of canvas (miclevel = 2 * the height of canvas)
-    this.uCornerY = height + 20 - micLevel * (height * 2);
+    this.upperCornerY = map(micLevel, 0, 0.75, height, 0)
     console.log(micLevel)
   }
 
@@ -65,14 +65,14 @@ class Lvl3 extends State {
     rectMode(CORNERS)
     noStroke();
     fill(this.fill.r, this.fill.g, this.fill.b);
-    rect(this.bCornerX, this.bCornerY, this.uCornerX, this.uCornerY)
+    rect(this.buttomCornerX, this.buttomCornerY, this.upperCornerX, this.upperCornerY)
     pop()
   }
 
   // ==== Display Strings ====
   //check which specific strings should appear based on the rectangle's height
   displayMicLevelStrings() {
-    this.decimalIndex = map(this.uCornerY, height, 0, 0, this.stringArray.length);
+    this.decimalIndex = map(this.upperCornerY, height, 0, 0, this.stringArray.length);
     this.currentLine = int(this.decimalIndex);
 
     //Display the string
@@ -95,7 +95,7 @@ class Lvl3 extends State {
   }
 
   checkRectHeight() {
-    if (this.uCornerY < 0) {
+    if (this.upperCornerY < 0) {
       this.lvlWon = true;
       this.successFrameStart = frameCount;
     }

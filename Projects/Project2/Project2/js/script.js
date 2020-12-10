@@ -174,7 +174,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl3(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new Lvl2(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
   // //Set life array :
