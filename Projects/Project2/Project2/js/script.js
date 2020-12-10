@@ -83,21 +83,26 @@ let lvl5AmbianceSounds;
 let lvl5DemonstrationImg;
 let lvl5CrowdSounds;
 
-
 //gameOver variables
 let gameOverGIF;
 
 function preload() {
   //Fonts
-  atkinsonNormal = loadFont("assets/fonts/Atkinson-Hyperlegible-Regular-102.ttf")
-  atkinsonItalic = loadFont("assets/fonts/Atkinson-Hyperlegible-Italic-102.ttf")
-  atkinsonBold = loadFont("assets/fonts/Atkinson-Hyperlegible-Bold-102.ttf")
-  atkinsonBoldItalic = loadFont("assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.ttf")
+  atkinsonNormal = loadFont(
+    "assets/fonts/Atkinson-Hyperlegible-Regular-102.ttf"
+  );
+  atkinsonItalic = loadFont(
+    "assets/fonts/Atkinson-Hyperlegible-Italic-102.ttf"
+  );
+  atkinsonBold = loadFont("assets/fonts/Atkinson-Hyperlegible-Bold-102.ttf");
+  atkinsonBoldItalic = loadFont(
+    "assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.ttf"
+  );
 
   // sounds
-  fartSFX = loadSound("assets/sounds/fart.wav")
-  gameOverSFX = loadSound("assets/sounds/sadTrombone.wav")
-  partyHornSFX = loadSound("assets/sounds/partyHorn.mp3")
+  fartSFX = loadSound("assets/sounds/fart.wav");
+  gameOverSFX = loadSound("assets/sounds/sadTrombone.wav");
+  partyHornSFX = loadSound("assets/sounds/partyHorn.mp3");
 
   //title Page images
   titleImg = loadImage("assets/images/Title.png");
@@ -144,19 +149,16 @@ function preload() {
   lvl4catNeutralImg = loadImage("assets/images/lvl4CatNeutral.png");
   lvl4catHoverImg = loadImage("assets/images/lvl4CatHover.png");
 
-
   //level 5 images
-  lvl5bgImg = loadImage("assets/images/lvl5_bg.jpg")
-  lvl5startBgImg = loadImage("assets/images/lvl5_bgStart.jpg")
-  lvl5AmbianceSounds = loadSound("assets/sounds/citySounds.wav")
-  lvl5DemonstrationImg = loadImage("assets/images/lvl5Demonstration.png")
-  lvl5CrowdSounds = loadSound("assets/sounds/CrowdBoos.wav")
+  lvl5bgImg = loadImage("assets/images/lvl5_bg.jpg");
+  lvl5startBgImg = loadImage("assets/images/lvl5_bgStart.jpg");
+  lvl5AmbianceSounds = loadSound("assets/sounds/citySounds.wav");
+  lvl5DemonstrationImg = loadImage("assets/images/lvl5Demonstration.png");
+  lvl5CrowdSounds = loadSound("assets/sounds/CrowdBoos.wav");
 
   //game Over
-  gameOverGIF = loadImage("assets/images/unimpressedKid.gif")
+  gameOverGIF = loadImage("assets/images/unimpressedKid.gif");
 }
-
-
 
 //Setting up canvas, universal modes, and Title page, Instruction Page and lvl 1 page classes
 function setup() {
@@ -168,9 +170,8 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl5(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
-
 
   // //Set life array :
   for (let i = 0; i < numLives; i++) {
@@ -178,7 +179,6 @@ function setup() {
     let life = new Life(x, y);
     x += 70;
     lives.push(life);
-
   }
 }
 
@@ -187,16 +187,14 @@ function draw() {
   currentState.update();
 
   //Restore lives if you went through gameover and start the game again
-  if (currentState === new TitlePage) {
+  if (currentState === new TitlePage()) {
     live.length = 5;
   }
 
   for (let i = 0; i < lives.length; i++) {
-    let life = lives[i]
-    life.update()
+    let life = lives[i];
+    life.update();
   }
-
-
 }
 
 function mousePressed() {

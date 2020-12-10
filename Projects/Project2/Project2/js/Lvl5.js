@@ -26,7 +26,7 @@ class Lvl5 extends State {
     this.vx = 0;
     this.vy = 0;
     this.speed = 0;
-    this.maxSpeed = 3;
+    this.maxSpeed = 2;
     this.angle = 0;
     this.turnMax = 0.08;
 
@@ -54,7 +54,7 @@ class Lvl5 extends State {
   update() {
     //setting level assets
     this.setBackground();
-    // this.setAmbianceSound();
+    this.setAmbianceSound();
 
     //setting user
     this.steer();
