@@ -41,6 +41,7 @@ class Lvl4 extends State {
     this.successMessageMinLength = 60;
   }
 
+  //Contain all functions that should loop during the entire level
   update() {
     this.setBackground();
     this.displayAssets();
@@ -48,6 +49,7 @@ class Lvl4 extends State {
     this.success();
   }
 
+  //Set the background
   setBackground() {
     background(this.bgFill.r, this.bgFill.g, this.bgFill.b)
   }

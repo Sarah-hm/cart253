@@ -40,7 +40,7 @@ decoration that best suit you`
     this.xmasBallY = height / 5 * 3.5;
 
   }
-
+  //Contain all functions that should loop during the entire level
   update() {
     this.setBackground();
     this.displayAssets();
@@ -48,7 +48,7 @@ decoration that best suit you`
     this.success();
   }
 
-
+  //Set the background
   setBackground() {
     push()
     imageMode(CORNER);
@@ -57,8 +57,8 @@ decoration that best suit you`
     pop()
   }
 
+  // Display all four assets in an aligned 2x2 square way : line 1:  a candycane, snowflake, line2: snowglobe, christmas tree ornament(xmasBall)
   displayAssets() {
-
     //candycane
     if (mouseX > this.candycaneX - this.size / 2 &&
       mouseX < this.candycaneX + this.size / 2 &&
@@ -116,6 +116,7 @@ decoration that best suit you`
     }
   }
 
+  //Display lvl number and the instructions to succeed
   setStrings() {
     push();
     textAlign(TOP, LEFT);

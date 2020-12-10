@@ -65,6 +65,8 @@ class Lvl5 extends State {
 
   }
 
+
+  //Contain all functions that should loop during the entire level
   update() {
     //setting level assets
     this.setBackground();
@@ -88,8 +90,8 @@ class Lvl5 extends State {
     this.success();
   }
 
+  //Set the background
   setBackground() {
-
     if (this.userX === width / 2 && this.userY === height - 10) {
       push()
       imageMode(CORNER);
@@ -153,6 +155,8 @@ class Lvl5 extends State {
 
   }
 
+  //Make the user move and rotate in a natural looking way.
+  //ATTRIBUTION: This is from Pippin Barr's traffic inferno:
   move() {
     this.vx = this.speed * cos(this.angle);
     this.vy = this.speed * sin(this.angle);
@@ -161,6 +165,7 @@ class Lvl5 extends State {
     this.userY += this.vy;
   }
 
+  //Display user as a white rectangle (this is a bike. Use your imagination.)
   displayUser() {
     push()
     rectMode(CENTER);
@@ -172,6 +177,8 @@ class Lvl5 extends State {
     pop()
   }
 
+
+  //display the demonstration (img), make it move from top to bottom, and then bottom to top when it hits the limits of the canvas
   demonstration() {
     //set demonstration in motion
     this.demonstrationX += this.demonstrationVx;

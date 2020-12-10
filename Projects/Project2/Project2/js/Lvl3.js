@@ -30,9 +30,9 @@ class Lvl3 extends State {
       g: 231,
       b: 98
     }
-
   }
 
+  //Contain all functions that should loop during the entire level
   update() {
     this.setBackground();
     this.resize();
@@ -43,12 +43,13 @@ class Lvl3 extends State {
     this.success();
   }
 
+  //Set the background
   setBackground() {
     background(this.bgFill.r, this.bgFill.g, this.bgFill.b)
   }
 
-  //==== Resizing the orange rectangle based on mic level input ====
-  // The louder the sound, the bigger the height of the rect
+  //Resizing the orange rectangle based on mic level input (The louder the sound, the bigger the height of the rect)
+
   resize() {
     micLevel = mic.getLevel(1);
     this.uCornerX = width;
@@ -58,7 +59,7 @@ class Lvl3 extends State {
     console.log(micLevel)
   }
 
-  //==== display the orange rectangle =====
+  //Display orange rectangle from the (0, height) corner to (width, [variable based on audio input)])
   displayRectangle() {
     push()
     rectMode(CORNERS)
@@ -68,8 +69,8 @@ class Lvl3 extends State {
     pop()
   }
 
-  // ==== Display String ====
-  //Decide what string is going to display based on rect height
+  // ==== Display Strings ====
+  //check which specific strings should appear based on the rectangle's height
   displayMicLevelStrings() {
     this.decimalIndex = map(this.uCornerY, height, 0, 0, this.stringArray.length);
     this.currentLine = int(this.decimalIndex);
@@ -82,7 +83,7 @@ class Lvl3 extends State {
     pop()
   }
 
-
+  //Display lvl number and the instructions to succeed
   setStrings() {
     push();
     textAlign(CENTER, CENTER);
