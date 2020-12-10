@@ -142,7 +142,7 @@ class Lvl1 extends State {
     pop()
   }
 
-
+  //If you click on any houses, you fail (-1 life), if you click on the box you win (but do you WIN, though? hmm...)
   mousePressed() {
     if (mouseX > this.house1X - this.house1Width / 2 &&
       mouseX < this.house1X + this.house1Width / 2 &&
@@ -170,6 +170,7 @@ class Lvl1 extends State {
     }
   }
 
+  //A success string will appear and you'll be able to get to the next level after a set amount of seconds.
   success() {
     if (this.lvlWon) {
       push()

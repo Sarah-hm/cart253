@@ -82,7 +82,8 @@ let lvl5startBgImg;
 let lvl5AmbianceSounds;
 let lvl5DemonstrationImg;
 let lvl5CrowdSounds;
-let lvl5DriverTowardsRImg;
+let lvl5DriverTowardsRightImg;
+let lvl5DriverTowardsLeftImg;
 let lvl5HonkSound
 
 //gameOver variables
@@ -157,7 +158,8 @@ function preload() {
   lvl5AmbianceSounds = loadSound("assets/sounds/citySounds.wav");
   lvl5DemonstrationImg = loadImage("assets/images/lvl5Demonstration.png");
   lvl5CrowdSounds = loadSound("assets/sounds/CrowdBoos.mp3");
-  lvl5DriverTowardsRImg = loadImage("assets/images/lvl5driverTowardsR.png")
+  lvl5DriverTowardsRightImg = loadImage("assets/images/lvl5driverTowardsR.png")
+  lvl5DriverTowardsLeftImg = loadImage("assets/images/lvl5driverTowardsL.png")
   lvl5HonkSound = loadSound("assets/sounds/honk.wav")
 
   //game Over
@@ -174,7 +176,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl2(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new Lvl5(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
   // //Set life array :

@@ -107,6 +107,7 @@ class Lvl4 extends State {
     }
   }
 
+  //Display lvl number and the instructions to succeed
   setStrings() {
     textAlign(CENTER, CENTER);
     textSize(32);
@@ -115,6 +116,8 @@ class Lvl4 extends State {
     text(this.insString, width / 5 * 2, height / 10)
   }
 
+
+  //If you click on either the baby or the cat, you fail (-1 life), if you click on the plant, you succeed.
   mousePressed() {
     if (mouseX > this.babyX - this.sizeX / 2 &&
       mouseX < this.babyX + this.sizeX / 2 &&
@@ -136,6 +139,7 @@ class Lvl4 extends State {
 
   }
 
+  //A success string will appear and you'll be able to get to the next level after a set amount of seconds.
   success() {
     if (this.lvlWon) {
       this.setBackground();

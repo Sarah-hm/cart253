@@ -49,7 +49,6 @@ class Lvl3 extends State {
   }
 
   //Resizing the orange rectangle based on mic level input (The louder the sound, the bigger the height of the rect)
-
   resize() {
     micLevel = mic.getLevel(1);
     this.upperCornerX = width;
@@ -101,6 +100,7 @@ class Lvl3 extends State {
     }
   }
 
+  //A success string will appear and you'll be able to get to the next level after a set amount of seconds.
   success() {
     if (this.lvlWon) {
       push()
