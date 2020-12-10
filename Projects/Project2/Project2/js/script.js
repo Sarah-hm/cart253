@@ -76,6 +76,11 @@ let lvl4plantHoverImg;
 let lvl4catNeutralImg;
 let lvl4catHoverImg;
 
+//level 5 variables
+let lvl5bgImg;
+let lvl5startBgImg;
+let lvl5AmbianceSounds;
+
 
 //gameOver variables
 let gameOverGIF;
@@ -127,6 +132,8 @@ function preload() {
   xmasBallNeutralImg = loadImage("assets/images/xmasBallNeutral.png");
   xmasBallHoverImg = loadImage("assets/images/xmasBallHover.png");
 
+  // (no images for level 3)
+
   //level 4 images
   lvl4babyNeutralImg = loadImage("assets/images/lvl4BabyNeutral.png");
   lvl4babyHoverImg = loadImage("assets/images/lvl4BabyHover.png");
@@ -135,7 +142,11 @@ function preload() {
   lvl4catNeutralImg = loadImage("assets/images/lvl4CatNeutral.png");
   lvl4catHoverImg = loadImage("assets/images/lvl4CatHover.png");
 
-  // (no images for level 3)
+
+  //level 5 images
+  lvl5bgImg = loadImage("assets/images/lvl5_bg.jpg")
+  lvl5startBgImg = loadImage("assets/images/lvl5_bgStart.jpg")
+  lvl5AmbianceSounds = loadSound("assets/sounds/citySounds.wav")
 
   //game Over
   gameOverGIF = loadImage("assets/images/unimpressedKid.gif")
@@ -153,7 +164,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl1(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new Lvl5(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
 
