@@ -40,7 +40,13 @@ class GameOver extends State {
   }
 
   mousePressed() {
-    lives.length = 5
+    let x = 50;
+    for (let i = 0; i < numLives; i++) {
+      let y = (height / 15) * 14;
+      let life = new Life(x, y);
+      x += 70;
+      lives.push(life);
+    }
     currentState = new TitlePage();
 
   }

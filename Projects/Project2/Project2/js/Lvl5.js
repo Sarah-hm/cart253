@@ -38,7 +38,7 @@ class Lvl5 extends State {
     }
 
     // === Variables for obstacles ===
-
+    //Vertical descending demonstration
     this.demonstrationImg = lvl5DemonstrationImg
     this.demonstrationX = width / 2 - 70;
     this.demonstrationY = 0;
@@ -47,26 +47,43 @@ class Lvl5 extends State {
     this.demonstrationVx = 0;
     this.demonstrationVy = 1.5;
     this.demonstrationSound = lvl5CrowdSounds;
+    this.demonstrationVolume = 0.5
+    this.demonstrationMaxVolume = 1;
+    this.demonstrationMinVolume = 0
 
+
+    //Driver driving on horizontal street from left to right
+    //TowardsR means Towards Right direction
+    this.driverTowardsRImg = lvl5DriverTowardsRImg;
+    this.driverTowardsRx = 0;
+    this.driverTowardsRy = height / 2 + 40;
+    this.driverTowardsRwidth = 98;
+    this.driverTowardsRheight = 84;
+    this.driverTowardsRvx = 3;
+    this.driverTowardsRvy = 0;
+    this.honkSound = lvl5HonkSound;
 
   }
 
   update() {
     //setting level assets
     this.setBackground();
-    this.setAmbianceSound();
+    // this.setAmbianceSound();
 
     //setting user
     this.steer();
-    this.constrainOnHorizontalStreet();
+    this.constrainOnStreet();
     this.move();
     this.displayUser()
 
     //setting obstacles
     this.demonstration();
+    // this.driverTowardsR();
 
     //check if impact
-    this.checkForImpact();
+    // this.checkForImpactWithUser();
+    this.checkDemonstrationDistance();
+    // this.checkForImpactWithObstacles();
     this.checkForWin();
     this.success();
   }
@@ -117,18 +134,19 @@ class Lvl5 extends State {
   }
 
   //constrain the biker (user) to be on the streets and not on the buildings (which could be cool but somewhat unrealistic)
-  constrainOnHorizontalStreet() {
+  constrainOnStreet() {
 
     //if userX is on the horizontal street, constrain it between the lower and upper leftBlocks
-    if (this.userX < this.leftBlocksX || this.userX > this.rightBlocksX) {
-      this.userY = constrain(this.userY, this.upperBlocksY, this.lowerBlocksY);
+    if (this.userY > this.lowerBlocksY || this.userY < this.upperBlocksY) {
+      this.userX = constrain(this.userX, this.leftBlocksX + 10, this.rightBlocksX - 10)
     }
     //if userY is under the lower blocks or over the upper blocks, user is constrain to the vertical street
-    else if (this.userY > this.lowerBlocksY || this.userY < this.upperBlocksY) {
-      this.userX = constrain(this.userX, this.leftBlocksX, this.rightBlocksX)
-      // console.log(this.userY)
+    else if (this.userX < this.leftBlocksX || this.userX > this.rightBlocksX) {
+      this.userY = constrain(this.userY, this.upperBlocksY + 10, this.lowerBlocksY - 10);
+    }
+    // console.log(this.userY)
 
-    } //Otherwise, user is constrain to the width of the map
+    //Otherwise, user is constrain to the width of the map
     else {
       this.userX = constrain(this.userX, 0, width)
     }
@@ -170,17 +188,67 @@ class Lvl5 extends State {
     }
   }
 
-  checkForImpact() {
-    // let d = int(dist(this.userX, this.userY, this.demonstrationX, this.demonstrationY))
-    // if (d < )
+  driverTowardsR() {
+    //set car in demonstration
+    this.driverTowardsRx += this.driverTowardsRvx;
+    this.driverTowardsRy += this.driverTowardsRvy;
 
+    //display car
+    push();
+    image(this.driverTowardsRImg, this.driverTowardsRx, this.driverTowardsRy, this.driverTowardsRwidth, this.driverTowardsRheight)
+    pop();
 
+    //Make the care loop if it hits canvas' limits
+    if (this.driverTowardsRx > width) {
+      this.driverTowardsRx = 0
+    }
+  }
+
+  //Check to see how far demonstration is and make its sound play louder if closer, lower if farther
+  checkDemonstrationDistance() {
+    let d = int(dist(this.userX, this.userY, this.demonstrationX, this.demonstrationY));
+
+    this.demonstrationVolume = map(d, 0, 500, 0, 1)
+    if (!this.demonstrationSound.isPlaying()) {
+      this.demonstrationSound.setVolume(this.demonstrationVolume)
+      this.demonstrationSound.play();
+    }
+  }
+
+  checkForImpactWithUser() {
+    //Impact with demonstration will result in people screaming
     if (this.userX > this.demonstrationX - this.demonstrationWidth / 2 &&
       this.userX < this.demonstrationX + this.demonstrationWidth / 2 &&
       this.userY > this.demonstrationY - this.demonstrationHeight / 2 &&
       this.userY < this.demonstrationY + this.demonstrationHeight / 2 &&
-      !this.demonstrationSound.isPlaying()) {
-      this.demonstrationSound.play();
+      !fartSFX.isPlaying()) {
+      this.fail();
+    }
+
+    //Impact with car will result in honking
+    if (this.userX > this.driverTowardsRx - this.driverTowardsRwidth / 2 &&
+      this.userX < this.driverTowardsRx + this.driverTowardsRwidth / 2 &&
+      this.userY > this.driverTowardsRy - this.driverTowardsRheight / 2 &&
+      this.userY < this.driverTowardsRy + this.driverTowardsRheight / 2 &&
+      !this.honkSound.isPlaying()) {
+      this.honkSound.play();
+      this.fail();
+    }
+
+  }
+  //Make the cars stop if the demonstration is passing. Y'know. To not kill people. But they're not stopping for you. Nay-nay
+  checkForImpactWithObstacles() {
+    let d = int(dist(this.demonstrationX, this.demonstrationY, this.driverTowardsRx, this.driverTowardsRy))
+    if (d < this.demonstrationWidth / 2 + this.driverTowardsRwidth / 2 ||
+      d < this.demonstrationHeight / 2 + this.driverTowardsRheight / 2) {
+      this.driverTowardsRvx = 0;
+      this.driverTowardsRvy = 0;
+      if (!this.honkSound.isPlaying()) {
+        this.honkSound.play();
+      }
+    } else {
+      this.driverTowardsRvx = 4;
+      this.driverTowardsRvy = 0;
     }
   }
 
