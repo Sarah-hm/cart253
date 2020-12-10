@@ -68,7 +68,7 @@ class Lvl5 extends State {
   update() {
     //setting level assets
     this.setBackground();
-    // this.setAmbianceSound();
+    this.setAmbianceSound();
 
     //setting user
     this.steer();
@@ -78,12 +78,12 @@ class Lvl5 extends State {
 
     //setting obstacles
     this.demonstration();
-    // this.driverTowardsR();
+    this.driverTowardsR();
 
     //check if impact
-    // this.checkForImpactWithUser();
+    this.checkForImpactWithUser();
     this.checkDemonstrationDistance();
-    // this.checkForImpactWithObstacles();
+    this.checkForImpactWithObstacles();
     this.checkForWin();
     this.success();
   }
@@ -208,9 +208,9 @@ class Lvl5 extends State {
   checkDemonstrationDistance() {
     let d = int(dist(this.userX, this.userY, this.demonstrationX, this.demonstrationY));
 
-    this.demonstrationVolume = map(d, 0, 500, 0, 1)
+    this.demonstrationVolume = map(d, 500, 0, 0, .8)
+    this.demonstrationSound.setVolume(this.demonstrationVolume)
     if (!this.demonstrationSound.isPlaying()) {
-      this.demonstrationSound.setVolume(this.demonstrationVolume)
       this.demonstrationSound.play();
     }
   }
