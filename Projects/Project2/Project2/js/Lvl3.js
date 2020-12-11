@@ -1,3 +1,7 @@
+//Level 3 is asking you on a level from 'i got this' to 'AAAAH' how much you feel prepared for the future
+// No choices or 'how to guides', but the moving rectangle based on sound input might hint at the solution
+// Nothing will trigger loss of life in this level, but might trigger loss of patience. TBD.
+// The solution is to scream loud enough to reach the top of the canvas, because if that is not how you feel about the future, you are not really a millenial.
 class Lvl3 extends State {
   constructor() {
     super();
@@ -34,6 +38,13 @@ class Lvl3 extends State {
       g: 231,
       b: 98
     }
+
+    //success Variables
+    this.successString = `I'd like to scream into
+  the void more often, too.
+  Anyhoo, let's keep going.`;
+    this.successStringX = width / 2;
+    this.successStringY = height / 2;
   }
 
   //Contain all functions that should loop during the entire level
@@ -113,9 +124,8 @@ class Lvl3 extends State {
       textSize(25);
       fill(this.bgFill.r, this.bgFill.g, this.bgFill.b);
       textAlign(CENTER, CENTER);
-      text(`I'd like to scream into
-    the void more often, too.
-    Anyhoo, let's keep going.`, width / 2, height / 2)
+
+      text(this.successString, this.successStringX, this.successStringY)
       pop()
 
       if (mouseIsPressed &&

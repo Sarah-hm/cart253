@@ -1,3 +1,6 @@
+// This is the title page and first page of the game. It will get you to the (useless) instruction pages.
+//To start the game, you have to press the keys : a-n-y. 
+
 class TitlePage extends State {
   //Three main objects (+credits, eventually) : Title, Instruction button, 'start' string
   constructor() {

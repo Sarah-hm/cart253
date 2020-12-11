@@ -1,3 +1,8 @@
+//Level 4 is asking you to choose between things to make you feel less lonely
+// 3 choices are available and can be hovered and will scale them a bit bigger with visual effects.
+// Choosing the baby (how can you afford that) or cat (you're either allergic or you already have 4) will result in -1 life
+// The solution is to choose the plant, because you always have more space on the shelf for one more plant.
+// (my goal was to make those snarky comments about not being able to afford baby or already have too many cats in game but by lack of time, will have to be added in the future)
 class Lvl4 extends State {
   constructor() {
     super();
@@ -42,6 +47,22 @@ class Lvl4 extends State {
 
     this.successFrameStart = 0;
     this.successMessageMinLength = 60;
+
+    //success Variables
+    this.successString = `You can definitely find
+more space on the shelf
+for this one`;
+    this.successStringX = width / 2;
+    this.successStringY = height / 2;
+    this.successRectX = width / 2;
+    this.successRectY = height / 2;
+    this.successRectWidth = 300;
+    this.successRectHeight = 200;
+    this.successRectFill = {
+      r: 239,
+      g: 122,
+      b: 98
+    }
   }
 
   //Contain all functions that should loop during the entire level
@@ -149,15 +170,14 @@ class Lvl4 extends State {
       this.setBackground();
       this.playWinSFX();
       this.displayAssets();
-      fill(239, 122, 98)
+      fill(this.successRectFill.r, this.successRectFill.g, this.successRectFill.b)
       noStroke();
-      rect(width / 2, height / 2, 300, 200)
+      rect(this.successRectX, this.successRectY, this.successRectWidth, this.successRectHeight)
       textSize(25);
+      textFont(atkinsonBold)
       fill(0);
       textAlign(CENTER, CENTER);
-      text(`You can definitely find
-  more space on the shelf
-  for this one`, width / 2, height / 2)
+      text(this.successString, this.successStringX, this.successStringY)
       pop()
 
       if (mouseIsPressed &&

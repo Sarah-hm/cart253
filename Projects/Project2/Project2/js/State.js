@@ -1,3 +1,6 @@
+//This is the super class for all other states.
+//Has the success frame start and message min length to avoid the glitch of clicking while entering the success() method, hence going straight to the next level (minimum 1 sec of success() method before currentState can change)
+//Sets fail() and playWinSFX() for all other child states
 class State {
   constructor() {
 

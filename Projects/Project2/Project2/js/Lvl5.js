@@ -1,3 +1,11 @@
+//Level 5 is asking you to get to work
+// In a 'crossy roads' kind of platform, you have to go through the city on a 'bike' and avoid obstacles such as demonstrations and angry drivers.
+// Colliding with demonstration or drivers will result in them being very upset with you and -1 life.
+// The solution is to get to the top of the canvas, preferably in one piece. Your boss is still mad at you because you were not there earlier, making more efforts for the company.
+//(My goal was to put a timer counting down the minutes (by seconds*) to 9 o'clock and having -1 life if you don't reach in time. No matter what, your boss is dissapointed.
+//From lack of time, this will be added in the future)
+
+
 class Lvl5 extends State {
   constructor() {
     super();
@@ -85,6 +93,21 @@ on time.`
     this.honkSound = lvl5HonkSound;
 
     //success Variables
+    this.successString = `Well...
+  You could have still be there
+  early. It's like you don't
+  even care about this company?`;
+    this.successStringX = width / 2;
+    this.successStringY = height / 2;
+    this.successRectX = width / 2;
+    this.successRectY = height / 2;
+    this.successRectWidth = 400;
+    this.successRectHeight = 200;
+    this.successRectFill = {
+      r: 239,
+      g: 122,
+      b: 98
+    }
     this.bossImg = lvl5BossImg;
     this.bossImgX = width / 5 * 3;
     this.bossImgY = height;
@@ -432,20 +455,14 @@ on time.`
     if (this.lvlWon) {
       push();
       this.playWinSFX();
-      fill(239, 122, 98);
+      fill(this.successRectFill.r, this.successRectFill.g, this.successRectFill.b)
       noStroke();
-      rect(width / 2, height / 2, 400, 200);
+      rect(this.successRectX, this.successRectY, this.successRectWidth, this.successRectHeight)
       textSize(25);
+      textFont(atkinsonBold)
       fill(0);
       textAlign(CENTER, CENTER);
-      text(
-        `Well...
-    You could have still be there
-    early. It's like you don't
-    even care about this company?`,
-        width / 2,
-        height / 2
-      );
+      text(this.successString, this.successStringX, this.successStringY)
       image(this.bossImg, this.bossImgX, this.bossImgY, this.bossImgWidth, this.bossImgHeight)
       pop();
 

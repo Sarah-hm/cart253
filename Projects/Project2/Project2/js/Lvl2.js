@@ -1,3 +1,7 @@
+//Level 2 is asking you to choose between christmas decoration that best suit you
+// 4 choices are available and can be hovered and will change for a plain color for effect
+// Choosing the candycane, snowglobe or christmas ornament will result in -1 life
+// The solution is to choose the snowflake, because millenials are known to be the 'snowflake generation', being offended by everything. Do you feel offended by that joke? You might be a millenial.
 class Lvl2 extends State {
   constructor() {
     super();
@@ -47,6 +51,21 @@ decoration that best suit you`
     this.xmasBallHoverImg = xmasBallHoverImg;
     this.xmasBallX = width / 4 * 3;
     this.xmasBallY = height / 5 * 3.5;
+
+    //success Variables
+    this.successString = `That's right,
+you precious snowflake`;
+    this.successStringX = width / 2;
+    this.successStringY = height / 2;
+    this.successRectX = width / 2;
+    this.successRectY = height / 2;
+    this.successRectWidth = 300;
+    this.successRectHeight = 200;
+    this.successRectFill = {
+      r: 239,
+      g: 122,
+      b: 98
+    }
   }
 
 
@@ -171,15 +190,14 @@ decoration that best suit you`
       push();
       this.setBackground();
       this.playWinSFX();
-      fill(239, 122, 98)
+      fill(this.successRectFill.r, this.successRectFill.g, this.successRectFill.b)
       noStroke();
-      rect(width / 2, height / 2, 300, 200)
+      rect(this.successRectX, this.successRectY, this.successRectWidth, this.successRectHeight)
       textSize(25);
       textFont(atkinsonBold)
       fill(0);
       textAlign(CENTER, CENTER);
-      text(`That's right,
-  you precious snowflake`, width / 2, height / 2)
+      text(this.successString, this.successStringX, this.successStringY)
       pop()
 
       if (mouseIsPressed &&

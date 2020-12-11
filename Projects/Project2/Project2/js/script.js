@@ -1,7 +1,15 @@
 /**************************************************
-Sarah Hontoy-Major - Project 02 Proposal;
+Sarah Hontoy-Major - Project 02;
 
-This is my prototype to "A millenial's survival guide", my final project.
+This is 'A millenial's survival guide'. Based on the 'Impossible quiz' game's basis, the game asks tricky questions
+about how a millennial can 'survive' in this world. This is meant to critique how the current climate (economical, political, social, historical, ...)
+has basically set us to fail from the start. It is also a way to get a laugh at the stereotypical jokes that are made by older generations towards us as well as some good old
+self-deprecating humour, because we are really good at that.
+
+Tasks and questions will be asked of you to do in order to level up.
+
+Fail to answer correctly, and 1 life will be taken off your total 5. Lose all 5 lives, and this will trigger Game Over, and show everyone that you could not
+make it as a millennial in the outside world.
 
 level 1 : buying a house (being able to afford the box);
 level 2 : christmas deco (snowflake gen);
@@ -184,7 +192,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new WinGame(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new TitlePage(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
   // //Set life array :

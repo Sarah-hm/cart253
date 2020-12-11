@@ -53,7 +53,12 @@ class Lvl1 extends State {
     this.boxWidth = 49;
     this.boxHeight = 38;
 
-
+    //success Variables
+    this.successString = `Isn't nice? At this rate,
+you might be able to afford a
+second one soon`;
+    this.successStringX = width / 2;
+    this.successStringY = height / 5;
   }
 
   //Contain all functions that should loop during the entire level
@@ -185,9 +190,7 @@ class Lvl1 extends State {
       textSize(25);
       fill(0);
       textAlign(CENTER, CENTER);
-      text(`Isn't nice? At this rate,
-  you might be able to afford a
-  second one soon`, width / 2, height / 5)
+      text(this.successString, this.successStringX, this.successStringY)
       pop()
 
       if (mouseIsPressed &&

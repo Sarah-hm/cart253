@@ -1,3 +1,6 @@
+//This is the Game Over state where, you guessed it, the game is, well, over.
+//An unimpressed kid blinks at you because he doesn't have anything to say about your lack of skills
+//You can try again by clicking anywhere (brings you back to Title Page). 
 class GameOver extends State {
   constructor() {
     super()

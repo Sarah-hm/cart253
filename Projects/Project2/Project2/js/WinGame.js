@@ -1,3 +1,6 @@
+//This is the WinGame state where, you guessed it, the game states that you won. But to what price?
+//An annoyed Jake Peralta (Andy Samberg) tells you you won
+//You can try again by clicking anywhere (brings you back to Title Page).
 class WinGame extends State {
   constructor() {
     super()

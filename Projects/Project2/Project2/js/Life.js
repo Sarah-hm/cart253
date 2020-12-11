@@ -1,3 +1,4 @@
+//'tis the Life Class, displaying pixelated hearts (5) in an array positioned at the left bottom corner of the screen.
 class Life {
   constructor(x, y) {
     //position
