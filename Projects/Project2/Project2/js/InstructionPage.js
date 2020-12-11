@@ -7,7 +7,7 @@ class InstructionPage extends State {
     this.insPopUpY = height / 2;
     this.insPopUpSize = 407;
     this.insBackButtonX = width / 2;
-    this.insBackButtonY = height / 10 * 9;
+    this.insBackButtonY = height / 10;
     this.insButtonsWidth = 147;
     this.insButtonsHeight = 44;
     this.insPopUpImg = insPopUpImg;

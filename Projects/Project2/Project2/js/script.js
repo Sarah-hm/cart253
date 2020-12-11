@@ -90,6 +90,9 @@ let lvl5BossImg;
 //gameOver variables
 let gameOverGIF;
 
+//WinGame Variables
+let winGameGIF;
+
 function preload() {
   //Fonts
   atkinsonNormal = loadFont(
@@ -166,6 +169,9 @@ function preload() {
 
   //game Over
   gameOverGIF = loadImage("assets/images/unimpressedKid.gif");
+
+  //win game
+  winGameGIF = loadImage("assets/images/win.gif")
 }
 
 //Setting up canvas, universal modes, and Title page, Instruction Page and lvl 1 page classes
@@ -178,7 +184,7 @@ function setup() {
   mic.start();
 
   // Set the current State to :
-  currentState = new Lvl5(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
+  currentState = new WinGame(); // Can be TitlePage, InstructionPage, Lvl1, Lvl2, ..., Lvl4.
   let x = 50;
 
   // //Set life array :

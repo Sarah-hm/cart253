@@ -1,7 +1,7 @@
 class WinGame extends State {
   constructor() {
     super()
-    this.string = `Life is so simply for this generation.
+    this.string = `Life is so simple for this generation.
 Back in my days there would have be HUNDREDS
 of these levels. But I guess you win.
 You might be ready for the real world after all.`
@@ -9,7 +9,7 @@ You might be ready for the real world after all.`
     this.stringX = width / 2;
     this.stringY = height / 3 * 2.1;
 
-    this.GIF = gameOverGIF
+    this.GIF = winGameGIF
     this.GIFx = width / 2
     this.GIFy = height / 3
   }

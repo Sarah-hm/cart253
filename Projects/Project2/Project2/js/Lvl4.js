@@ -156,8 +156,8 @@ class Lvl4 extends State {
       fill(0);
       textAlign(CENTER, CENTER);
       text(`You can definitely find
-      more space on the shelf
-      for this one`, width / 2, height / 2)
+  more space on the shelf
+  for this one`, width / 2, height / 2)
       pop()
 
       if (mouseIsPressed &&
