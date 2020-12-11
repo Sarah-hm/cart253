@@ -1,10 +1,14 @@
 class Lvl4 extends State {
   constructor() {
     super();
-
-    this.numLvlString = '#3'
+    //set instruction and lvl number
+    this.numLvlString = '#4'
+    this.numLvlStringX = width / 10;
+    this.numLvlStringY = height / 20;
     this.insString = `You feel lonely.
     What do you get?`
+    this.insStringX = width / 2;
+    this.insStringY = height / 10 * 2;
 
     //set background colour
     this.bgFill = {
@@ -31,8 +35,7 @@ class Lvl4 extends State {
     this.catX = width / 7 * 5;
     this.catY = height / 5 * 2;
 
-
-    // assets size are universal for all 3
+    // assets size are universal for all 3 because life is too short to create them separately
     this.sizeX = 200;
     this.sizeY = 253;
     this.scale = 0.5;

@@ -3,9 +3,13 @@ class Lvl3 extends State {
     super();
     //set instruction and lvl number
     this.numLvlString = `#3`;
+    this.numLvlStringX = width / 10;
+    this.numLvlStringY = height / 20;
     this.insString = `On a scale from 'I got this' to
     'AAAAAAH', how confident do you feel
-    about the future?`
+    about the future?`;
+    this.insStringX = width / 2;
+    this.insStringY = height / 10 * 2;
 
     //bottom corner will never change
     this.buttomCornerX = 0;

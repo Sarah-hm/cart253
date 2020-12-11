@@ -11,8 +11,12 @@ class Lvl1 extends State {
 
     //set instruction and lvl number
     this.numLvlString = `#1`;
+    this.numLvlStringX = width / 10
+    this.numLvlStringY = height / 20
     this.insString = `Today is the day.
      Go buy yourself a house.`
+    this.insStringX = width / 10 * 4
+    this.insStringY = height / 10
 
     //Background Variables
     this.backgroundImg = lvl1bgImg

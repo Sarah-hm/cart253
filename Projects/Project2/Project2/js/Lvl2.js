@@ -3,8 +3,12 @@ class Lvl2 extends State {
     super();
     //set instruction and lvl number
     this.numLvlString = `#2`;
+    this.numLvlStringX = width / 20
+    this.numLvlStringY = height / 20
     this.insString = `Choose a christmas
 decoration that best suit you`
+    this.insStringX = width / 20
+    this.insStringY = height / 10
 
     //Set the instruction's string color
     this.stringFill = {
@@ -19,7 +23,7 @@ decoration that best suit you`
     //Fix universal size because it's a lot easier and life is hard(all assets are 200x200px)
     this.size = 200;
 
-    // == set all 4 assets' variables (position, neutral image, hover image) == 
+    // == set all 4 assets' variables (position, neutral image, hover image) ==
     //candycane
     this.candycaneNeutralImg = candycaneNeutralImg;
     this.candycaneHoverImg = candycaneHoverImg;
@@ -175,7 +179,7 @@ decoration that best suit you`
       fill(0);
       textAlign(CENTER, CENTER);
       text(`That's right,
-    you precious snowflake`, width / 2, height / 2)
+  you precious snowflake`, width / 2, height / 2)
       pop()
 
       if (mouseIsPressed &&

@@ -85,6 +85,7 @@ let lvl5CrowdSounds;
 let lvl5DriverTowardsRightImg;
 let lvl5DriverTowardsLeftImg;
 let lvl5HonkSound
+let lvl5BossImg;
 
 //gameOver variables
 let gameOverGIF;
@@ -161,6 +162,7 @@ function preload() {
   lvl5DriverTowardsRightImg = loadImage("assets/images/lvl5driverTowardsR.png")
   lvl5DriverTowardsLeftImg = loadImage("assets/images/lvl5driverTowardsL.png")
   lvl5HonkSound = loadSound("assets/sounds/honk.wav")
+  lvl5BossImg = loadImage("assets/images/lvl5Boss.png")
 
   //game Over
   gameOverGIF = loadImage("assets/images/unimpressedKid.gif");
