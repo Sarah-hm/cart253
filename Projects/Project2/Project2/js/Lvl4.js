@@ -145,6 +145,7 @@ class Lvl4 extends State {
   //A success string will appear and you'll be able to get to the next level after a set amount of seconds.
   success() {
     if (this.lvlWon) {
+      push();
       this.setBackground();
       this.playWinSFX();
       this.displayAssets();

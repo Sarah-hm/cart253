@@ -90,6 +90,9 @@ on time.`
     this.bossImgY = height;
     this.bossImgWidth = 349;
     this.bossImgHeight = 464;
+
+    this.successFrameStart = 0;
+    this.successMessageMinLength = 60;
   }
 
   //Contain all functions that should loop during the entire level
@@ -433,6 +436,7 @@ on time.`
   success() {
     if (this.lvlWon) {
       push();
+      this.playWinSFX();
       fill(239, 122, 98);
       noStroke();
       rect(width / 2, height / 2, 400, 200);
@@ -449,12 +453,10 @@ on time.`
       );
       image(this.bossImg, this.bossImgX, this.bossImgY, this.bossImgWidth, this.bossImgHeight)
       pop();
-
-      if (
-        mouseIsPressed &&
-        frameCount > this.successFrameStart + this.successMessageMinLength
-      ) {
-        currentState = new WinGame();
+      console.log('here')
+      if (mouseIsPressed &&
+        frameCount > this.successFrameStart + this.successMessageMinLength) {
+        currentState = new WinGame
       }
     }
   }

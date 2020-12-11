@@ -1,4 +1,4 @@
-class GameOver extends State {
+class WinGame extends State {
   constructor() {
     super()
     this.string = `Life is so simply for this generation.
